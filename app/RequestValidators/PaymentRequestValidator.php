@@ -33,7 +33,7 @@ class PaymentRequestValidator implements RequestValidatorInterface
         $v->rule('required', 'paid')->message('Please check this value');
         $v->rule(
             function ($field, $value, $params, $fields) use (&$data) {
-            $id = (int) $value;
+                $id = (int) $data['job'];
 
                 if (!$id) {
                     return false;

@@ -66,6 +66,7 @@ function handleValidationErrors(errors, domElement) {
         const errorDiv = document.createElement('div')
 
         errorDiv.classList.add('invalid-feedback')
+        errorDiv.textContent = errors[name][0]
 
         element.parentNode.append(errorDiv)
     }
