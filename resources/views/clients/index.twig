@@ -1,0 +1,39 @@
+{% extends 'layout.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('clients') }}
+{% endblock %}
+
+{% block title %}Clients{% endblock %}
+
+{% block content %}
+    <div class="Clients container content-body">
+        <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Clients</h2>
+            <div class="text-end mb-4">
+                <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#newClientModal">
+                <i class="bi bi-plus-circle me-1"></i>
+                New Client
+                </button>
+            </div>
+{% include 'clients/client_modal.twig' with {modal: {title: 'Create Client', id: 'newClientModal', isEdit: false}} %}
+{% include 'clients/client_modal.twig' with {modal: {title: 'Edit Client', id: 'editClientModal', isEdit: true}} %}
+{% include 'clients/details_client_modal.twig' with {modal: {title: 'Details', id: 'detailsClientModal' }} %}
+
+            <table id="clientsTable" class="row-border hover compact order-column stripe " style="vw: 80%;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone No.</th>
+                        <th>Email</th>
+                        <th>City</th>
+                        <th>Jobs</th>
+                        <th>Paid</th>
+                        <th>Created at</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'auth/layout.twig' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+    <section class="vh-100">
+        <div class="container  h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100 px-5">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5 px-5">
+                    <div class="card bg-light text-white" style="border-radius: 1rem;">
+                        <div class="card-body text-center px-4">
+                            <div class="mb-2 mt-4">
+                                <h2 class="bold mb-4 text-primary d-flex justify-content-center align-items-center">
+                                    Sign in
+                                </h2>
+                                <form method="post" action="/login">
+                                    {{ csrf.fields | raw }}
+
+                                    <div class="form-outline form-white mb-3">
+                                        <input type="email" name="email" class="form-control form-control-md {{ errors.email ? 'is-invalid' : '' }}"
+                                            value="{{ old.email }}"
+                                            placeholder="Email"
+                                            required />
+                                        <div class="invalid-feedback">
+                                            {{ errors.email | first }}
+                                        </div>
+                                    </div>
+                                    <div class="form-outline form-white mb-3">
+                                        <input type="password" name="password" class="form-control form-control-md {{ errors.password ? 'is-invalid' : '' }}"
+                                            placeholder="Password" required />
+                                        <div class="invalid-feedback">
+                                            {{ errors.password | first }}
+                                        </div>
+                                    </div>
+                                    <p class="mb-4 text-end"><a class="text-secondary fw-semibold text-decoration-none" href="#">Forgot
+                                            password? Contact Admin</a></p>
+                                    <button class="btn btn-primary bg-gradient text-white btn-lg px-5 mb-4" type="submit">Log
+                                        In
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

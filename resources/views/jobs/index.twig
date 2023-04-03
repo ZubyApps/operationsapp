@@ -1,0 +1,41 @@
+{% extends 'layout.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('jobs') }}
+{% endblock %}
+
+{% block title %}Jobs{% endblock %}
+
+{% block content %}
+    <div class="Jobs container content-body">
+    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Jobs</h2>
+
+        <div class="text-end mb-4">
+            <button type="button" class="btn btn-primary text-white add-list" data-bs-toggle="modal" data-bs-target="#newJobModal">
+                <i class="bi bi-plus-circle me-1"></i>
+                New Job
+            </button>
+        </div>
+{% include 'jobs/job_modal.twig' with {modal: {title: 'Create Job', id: 'newJobModal', isEdit: false}} %}
+{% include 'jobs/job_modal.twig' with {modal: {title: 'Edit Job', id: 'editJobModal', isEdit: true}} %}
+{% include 'jobs/details_job_modal.twig' with {modal: {title: 'Details', id: 'detailsJobModal' }} %}
+
+            <table id="jobsTable" class="row-border hover compact order-column stripe ">
+                <thead>
+                    <tr>
+                        {# <th>Created</th> #}
+                        <th>Client</th>
+                        <th>No.</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Duedate</th>
+                        <th>Bill</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+    </div>
+{% endblock %}

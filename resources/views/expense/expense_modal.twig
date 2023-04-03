@@ -1,0 +1,59 @@
+<div class="modal fade px-5" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog px-5">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ modal.title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                            <label for="basic-url" class="form-label fs-5">Date</label>
+                            <div class="form-outline form-white mb-3">
+                                <input type="date" name="date" id="expenseDate" 
+                                class="form-control form-control-md"
+                                placeholder="Date" />
+                            </div>
+                            <div class="form-outline form-white mb-2">
+                            <label for="basic-url" class="form-label fs-5">Sponsor<span class="text-danger">*</span></label>
+                                <select class="form-select form-select-md" aria-label="Sponsor" name="sponsor">
+                                    <option value="">Select Sponsor</option>
+                                        {% for sponsor in sponsors %}
+                                    <option value="{{ sponsor.id }}">{{ sponsor.name }}</option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-outline form-white mb-2">
+                            <label for="basic-url" class="form-label fs-5">Category<span class="text-danger">*</span></label>
+                                <select class="form-select form-select-md" aria-label="Category" name="category">
+                                    <option value="">Select Category</option>
+                                        {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-outline form-white mb-3">
+                            <label for="basic-url" class="form-label fs-5">Description
+                            <span class="text-danger">*</span></label>
+                                <input type="text" name="description"
+                                class="form-control form-control-md"
+                                placeholder="Description" />
+                            </div>
+                            <div class="form-outline form-white mb-3">
+                            <label for="basic-url" class="form-label fs-5">Amount<span class="text-danger">*</span></label>
+                                <input type="number" name="amount"
+                                class="form-control form-control-md"
+                                placeholder="Amount" />
+                            </div>
+                        </div>
+            <div class="modal-footer px-5">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i>
+                    Close
+                </button>
+                <button type="button" class="btn bg-primary text-white {{ modal.isEdit ? 'save' : 'record' }}-expense-btn">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ modal.isEdit ? 'Save' : 'Record' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

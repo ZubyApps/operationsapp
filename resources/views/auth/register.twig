@@ -1,0 +1,87 @@
+{% extends 'layout.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <section class="vh-auto bg-gradient">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100 p-5">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5 px-5">
+                    <div class="card bg-light text-white p-2" style="border-radius: 1rem;">
+                        <div class="card-body text-center">
+                            <div class="mb-2 ">
+                                <h2 class="fw-bold mb-3 text-primary d-flex justify-content-center align-items-center">
+                                    Staff SignUp
+                                </h2>
+                                <form method="post" action="/register">
+                                    {{ csrf.fields | raw }}
+
+                                    <div class="form-outline form-white mb-3 px-2">
+                                        <input type="text" name="firstname" 
+                                            value="{{ old.firstname }}"
+                                            class="form-control form-control-md {{ errors.firstname ? 'is-invalid' : '' }}"
+                                            placeholder="Firstname" required/>
+                                        <div class="invalid-feedback">
+                                            {{ errors.firstname | first }}
+                                        </div>
+                                    </div>
+                                    <div class="form-outline form-white mb-3 px-2">
+                                        <input type="text" name="lastname" 
+                                            value="{{ old.lastname }}"
+                                            class="form-control form-control-md {{ errors.lastname ? 'is-invalid' : '' }}"
+                                            placeholder="Lastname" required/>
+                                        <div class="invalid-feedback">
+                                            {{ errors.lastname | first }}
+                                        </div>
+                                    </div>
+                                    <div class="form-outline form-white mb-3 px-2">
+                                        <input type="email" name="email" 
+                                            value="{{ old.email }}"
+                                            class="form-control form-control-md {{ errors.email ? 'is-invalid' : '' }}"
+                                            placeholder="Email" required/>
+                                        <div class="invalid-feedback">
+                                            {{ errors.email | first }}
+                                        </div>
+                                    </div>
+                                    <div class="form-outline form-white mb-3 px-2">
+                                        <input type="tel" name="phonenumber" 
+                                            value="{{ old.phonenumber }}"
+                                            class="form-control form-control-md {{ errors.phonenumber ? 'is-invalid' : '' }}"
+                                            placeholder="Phone No." required/>
+                                        <div class="invalid-feedback">
+                                            {{ errors.phonenumber | first }}
+                                        </div>
+                                    </div>
+                                    <div class="form-outline form-white mb-3 px-2">
+                                        <input type="password" name="password" 
+                                            class="form-control form-control-md {{ errors.password ? 'is-invalid' : '' }}"
+                                            placeholder="Password" required/>
+                                        <div class="invalid-feedback">
+                                            {{ errors.password | first }}
+                                        </div>
+                                    </div>
+                                    <div class="form-outline form-white mb-3 px-2">
+                                        <input type="password" name="conpassword" 
+                                            class="form-control form-control-md {{ errors.conpassword ? 'is-invalid' : '' }}"
+                                            placeholder="Confirm Password" />
+                                        <div class="invalid-feedback">
+                                            {{ errors.conpassword | first }}
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary bg-gradient text-white btn-lg px-5" type="submit">
+                                        Sign Up
+                                    </button>
+                                </form>
+                            </div>
+                            <div>
+                                <p class="mb-0 text-dark">Back to 
+                                    <a href="/settings/users" class="text-primary fw-bold">Users</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

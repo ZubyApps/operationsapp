@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+    <head>
+        <meta charset="UTF-8">
+        <meta id="csrfName" name="{{ csrf.keys.name }}" content="{{ csrf.name }}">
+        <meta id="csrfValue" name="{{ csrf.keys.value }}" content="{{ csrf.value }}">
+        <title>{% block title %}TrippleAapp{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+            rel="stylesheet">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            
+                <a href="/" class="navbar-brand">
+                    <img src="{{ asset('build/images/tripple a logo.jpg') }}" width="64" height="64" alt="OperationsApp Logo" />
+                    <span class="fs-1 text-secondary fw-bold">Operations<span class="text-primary">App</span></span>
+                </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link fw-bold fs-5" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/clients" class="nav-link fw-bold fs-5" aria-current="page">Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/jobs" class="nav-link fw-bold fs-5" aria-current="page">Jobs</a>
+                    </li>
+                
+                    
+                    <div class="dropdown payment-dropdown-menu ">
+                        <a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false">
+                        Payments
+                        </a>
+                        <ul class="dropdown-menu p-0 bg-dark" aria-labelledby="paymentDropDownMenu">
+                            <li class="nav-item p-0 ">
+                                <a href="/payments/paystatus" class="nav-link fw-bold fs-6" aria-current="page">Payment Status</a>
+                            </li>
+                            <li class="nav-item p-0">
+                                <a href="/payments/paydetails" class="nav-link fw-bold fs-6" aria-current="page">Payments Table</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown payment-dropdown-menu">
+                        <a href="" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false">
+                        Settings
+                        </a>
+                        <ul class="dropdown-menu p-0 bg-dark" aria-labelledby="paymentDropDownMenu">
+                            <li class="nav-item p-0 ">
+                                <a href="/settings/jobtype" class="nav-link fw-bold fs-6" aria-current="page">Job Type</a>
+                            </li>
+                            <li class="nav-item p-0 ">
+                                <a href="/settings/department" class="nav-link fw-bold fs-6" aria-current="page">Department</a>
+                            </li>
+                            <li class="nav-item p-0 ">
+                                <a href="/settings/paymethod" class="nav-link fw-bold fs-6" aria-current="page">Pay Methods</a>
+                            </li>
+                            <li class="nav-item p-0 ">
+                                <a href="/settings/users" class="nav-link fw-bold fs-6" aria-current="page">Staff</a>
+                            </li>
+                            <li class="nav-item p-0 ">
+                                <a href="/expenses" class="nav-link fw-bold fs-6" aria-current="page">Expenses</a>
+                            </li>
+                        </ul>
+                    </div>
+    
+
+                    <div class="dropdown user-dropdown-menu ">
+                        <a href="#" class="text-decoration-none d-flex align-items-center mt-2" id="userDropDownMenu" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
+                            <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+                            </svg>
+                            <span>{{ auth.name }}</span>
+                        </a>
+                        <ul class="dropdown-menu p-0 bg-dark" aria-labelledby="userDropDownMenu">
+                            <li>
+                                <form action="/logout" method="post">
+                                    {{ csrf.fields | raw }}
+                                    <button class="dropdown-item nav-link" href="#">Log Out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+    </div>
+    </nav>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

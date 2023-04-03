@@ -1,0 +1,88 @@
+<div class="modal fade modal-lg" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-4">{{ modal.title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        <div class="modal-body">
+  <label for="basic-url" class="form-label fs-5">Client</label>
+  <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Name</span>
+  <input type="text" name="client" class="form-control" placeholder="" aria-label="Client name" aria-describedby="basic-addon1" readonly>
+  <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-x-fill"></i></span>
+  <input type="text" name="number" class="form-control" placeholder="" aria-label="Client name" aria-describedby="basic-addon1" readonly>
+  <span class="input-group-text" id="basic-addon1">City</span>
+  <input type="text" name="city" class="form-control" placeholder="" aria-label="Client name" aria-describedby="basic-addon1" readonly>
+</div>
+
+<label for="basic-url" class="form-label fs-5">Job</label>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Type</span>
+  <input type="text" name="jobType" class="form-control" aria-label="Job Type" aria-describedby="basic-addon1" readonly>
+  <span class="input-group-text" id="basic-addon1">Due</i></span>
+  <input type="text" name="dueDate" class="form-control" aria-label="Duedate" aria-describedby="basic-addon1" readonly>
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text align-top">Details</span>
+  <textarea name="details" class="form-control" aria-label="Details" readonly></textarea>
+  <span class="input-group-text" id="basic-addon1">Status</span>
+  <input type="text" name="jobStatus" class="form-control" aria-label="Status" aria-describedby="basic-addon1" readonly>
+</div>
+
+<label for="basic-url" class="form-label fs-5">Other</label>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Staff</span>
+  <input type="text" name="staff" class="form-control" aria-label="Staff" aria-describedby="basic-addon1" readonly>
+  <span class="input-group-text" id="basic-addon1">Created</i></span>
+  <input type="text" name="createdAt" class="form-control" aria-label="Created At" aria-describedby="basic-addon1" readonly>
+  <span class="input-group-text" id="basic-addon1">Updated</span>
+  <input type="text" name="updatedAt" class="form-control" aria-label="Updated At" aria-describedby="basic-addon1" readonly>
+</div>
+
+        <div>
+            <label for="basic-url" class="form-label fs-5">Payment Status</label>
+            <table id="paystatusTable" class="row-border hover compact order-column stripe">
+                <thead>
+                    <tr>
+                        <th>Bill</th>
+                        <th>Paid</th>
+                        <th>Balance</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div>
+            <label for="basic-url" class="form-label fs-5">Payment breakdown</label>
+            <table id="paymentDetailsTable" class="row-border hover compact order-column stripe">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Staff</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+        </div>
+            <div class="modal-footer px-5">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i>
+                    Close
+                </button>
+                <button type="button" class="btn bg-primary d-none text-white job-details-btn">
+                    <i class="bi bi-check-circle me-1"></i>
+                    Download
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

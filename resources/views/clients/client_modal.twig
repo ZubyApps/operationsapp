@@ -1,0 +1,58 @@
+<div class="modal fade px-5" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog px-5 modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ modal.title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                        <div class="form-outline form-white mb-2">
+                        <label for="basic-url" class="form-label fs-5">Name<span class="text-danger">*</span></label>
+                                <input type="text" name="name"
+                                class="form-control form-control-md"
+                                placeholder="Enter Name" />
+                            </div>
+                            <div class="form-outline form-white mb-2">
+                            <label for="basic-url" class="form-label fs-5">Mobile No.<span class="text-danger">*</span></label>
+                                <input type="tel" name="number"
+                                class="form-control form-control-md"
+                                placeholder="Enter Phone No." />
+                            </div>
+                            <div class="form-outline form-white mb-2">
+                            <label for="basic-url" class="form-label fs-5">Email</label>
+                                <input type="email" name="email"
+                                class="form-control form-control-md"
+                                placeholder="Enter Email" />
+                            </div>
+                            <div class="form-outline form-white mb-2">
+                            <label for="basic-url" class="form-label fs-5">City</label>
+                                <input type="text" name="city" 
+                                class="form-control form-control-md"
+                                placeholder="Enter City" />
+                            </div>
+                            <div class="form-outline form-white mb-2">
+                            <label for="basic-url" class="form-label fs-5">State/Province</label>
+                                <input type="text" name="state" 
+                                class="form-control form-control-md"
+                                placeholder="Enter State/Province" />
+                            </div>
+                            <div class="form-outline form-white mb-2">
+                            <label for="basic-url" class="form-label fs-5">Country</label>
+                                <input type="text" name="country" 
+                                class="form-control form-control-md"
+                                placeholder="Enter Country" />
+                            </div>
+                        </div>
+            <div class="modal-footer px-5">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i>
+                    Close
+                </button>
+                <button type="button" class="btn bg-primary text-white {{ modal.isEdit ? 'save' : 'create' }}-client-btn">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ modal.isEdit ? 'Save' : 'Create' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

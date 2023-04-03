@@ -1,0 +1,37 @@
+{% extends './settings/settings.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('paymethod') }}
+{% endblock %}
+
+{% block title %}Pay Methods{% endblock %}
+
+{% block content %}
+    <div class="Paymethod container content-body">
+    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Payment Methods</h2>
+        <div class="text-end mb-4">
+            <button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newPayMethodModal">
+                <i class="bi bi-plus-circle me-1"></i>
+                New Payment Method
+            </button>
+        </div>
+{% include 'payments/method/paymethod_modal.twig' with {modal: {title: 'Create Payment Method', id: 'newPayMethodModal', isEdit: false}} %}
+{% include 'payments/method/paymethod_modal.twig' with {modal: {title: 'Edit Payment Method', id: 'editPayMethodModal', isEdit: true}} %}
+
+            <table id="payMethodTable" class="row-border hover compact order-column stripe">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Count</th>
+                        <th>Total Amount</th>
+                        <th>Created at</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'layout.twig' %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('settings') }}
+{% endblock %}
+
+{% block content %}
+<div class="Jobs container content-body">
+        <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center flex-wrap">Settings</h2>
+            <div class="row gy-5 justify-content-around mt-1">
+                <div class="col-md-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header bg-primary text-white">
+                            Payment Methods <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
+                            <i class="bi bi-pencil-fill"></i>
+                            </button>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for paymethod in paymethods %}
+                            <li class="list-group-item" value="{{ paymethod.id }}">{{ paymethod.name}}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header bg-primary text-white">
+                            Departments <button class="mr-5 btn btn-outline-black edit-department-btn" id="department-btn">
+                            <i class="bi bi-pencil-fill"></i>
+                            </button>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for department in departments %}
+                            <li class="list-group-item" value="{{ department.id }}">{{ department.name }}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header bg-primary text-white">
+                            Job Types <button class="mr-5 btn btn-outline-black edit-department-btn" id="jobtype-btn">
+                            <i class="bi bi-pencil-fill"></i>
+                            
+                            </button>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for jobtype in jobtypes %}
+                            <li class="list-group-item" value="{{ jobtype.id }}">{{ jobtype.name}}</li>
+                                    {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-5 justify-content-around mt-1">
+                <div class="col-sm-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header bg-primary text-white">
+                            Staff <button class="mr-5 btn btn-outline-black edit-department-btn" id="staff-btn">
+                            <i class="bi bi-pencil-fill"></i>
+                            </button>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                                {% for user in users %}
+                            <li class="list-group-item" value="{{ user.id }}">{{ user.firstname  ~ ' ' ~  user.lastname }}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

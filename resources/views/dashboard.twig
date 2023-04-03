@@ -1,0 +1,67 @@
+{% extends 'layout.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard') }}
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="dashboard mb-5">
+    <div class="container-fluid overflow-hidden mt-5">
+        <div class="row gy-4 justify-content-center mt-5">
+            <div class=" col-lg-6">
+                <div class="card" style="22rem">
+                        <div class="card-header fs-4 fw-bold">
+                            Booked Jobs <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
+                            {# <i class="bi bi-pencil-fill"></i> #}
+                            </button>
+                        </div>
+                    <div>
+                        <table id="bookedJobsTable" class="row-border hover compact order-column stripe">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Type</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-lg-6">
+                <div class="card" style="20rem">
+                        <div class="card-header fs-4 fw-bold">
+                            Jobs In progress <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
+                            {# <i class="bi bi-pencil-fill"></i> #}
+                            </button>
+                        </div>
+                    <div>
+                        <table id="jobsInProgressTable" class="row-border hover compact order-column stripe">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Type</th>
+                                <th>Details</th>
+                                <th>Since Event</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                {% include 'jobs/details_job_modal.twig' with {modal: {title: 'Details', id: 'detailsJobModal' }} %}
+        </div>
+    </div>
+</div>
+{% endblock %}
