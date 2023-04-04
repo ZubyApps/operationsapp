@@ -9,23 +9,23 @@
 
 {% block content %}
     <div class="Users container content-body">
-    <h2 class="bold mb-4 text-primary d-flex justify-content-center align-items-center">Users</h2>
+    <h2 class="bold mb-4 text-primary d-flex justify-content-center align-items-center">Staff</h2>
         <div class="d-flex justify-content-between mb-4">
             <div class="">
                 <button type="button" class="btn btn-primary text-white text-start" id="registerUser">
                 <i class="bi bi-plus-circle me-1"></i>
-                Register User
+                Register Staff
                 </button>
             </div>
             <div class"">
                 <button type="button" class="btn btn-primary text-white" id="openNewUserRoleModal" data-bs-toggle="modal" data-bs-target="#newUserRoleModal">
                 <i class="bi bi-plus-circle me-1"></i>
-                New User role
+                Staff role
                 </button>
             </div>
         </div>
 {% include '/users/new_user_role_modal.twig' %}
-{% include '/users/user_modal.twig' with {modal: {title: 'Edit User', id: 'editUserModal', isEdit: true}} %}
+{% include '/users/user_modal.twig' with {modal: {title: 'Edit Staff Profile', id: 'editUserModal', isEdit: true}} %}
 
 
         <div>

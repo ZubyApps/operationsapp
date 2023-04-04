@@ -119,6 +119,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     table.draw()
                     newExpenseModal.hide()
+                    clearValues(newExpenseModal)
                 }
             })
     })
@@ -133,7 +134,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     table.draw()
                     editExpenseModal.hide()
-                    clearValues(newExpenseModal)
                 }
             })
     })

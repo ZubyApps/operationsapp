@@ -2,13 +2,13 @@
     <div class="modal-dialog px-5">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">New User Role</h5>
+                <h5 class="modal-title">Staff Role</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                                     <div class="form-outline form-white mb-3 px-2">
                                         <select class="form-select form-select-md" aria-label="User" name="user">
-                                            <option value="">Select User</option>
+                                            <option value="">Select Staff</option>
                                                 {% for user in users %}
                                             <option value="{{ user.id }}">{{ user.firstname }}</option>
                                                 {% endfor %}

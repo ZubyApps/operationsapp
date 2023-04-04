@@ -19,9 +19,27 @@ window.addEventListener('DOMContentLoaded', function () {
         columns: [
             {data: "firstname"},
             {data: "phonenumber"},
-            {data: "jobCount"},
-            {data: "payCount"},
-            {data: "role"},
+            {data: row => function () { 
+                    if (row.activeUser === 'Admin'){
+                        return row.jobCount
+                    }
+                    return ''
+                }
+                },
+            {data: row => function () { 
+                    if (row.activeUser === 'Admin'){
+                        return row.payCount
+                    }
+                    return ''
+                }
+                },
+            {data: row => function () { 
+                    if (row.activeUser === 'Admin'){
+                        return row.role
+                    }
+                    return ''
+                }
+                },
             {data: "department"},
             {data: "head"},
             {data: "createdAt"},
@@ -83,6 +101,7 @@ window.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                     table.draw()
                     newUserRoleModal.hide()
+                    clearValues(newUserRoleModal)
                 }
             })
     })

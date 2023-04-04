@@ -197,5 +197,4 @@ function openJobModal(modal, {id, ...data}) {
         getPaymentDetails(id, modal)
         getPayStatus(id, modal)
         modal.show()
-
 }

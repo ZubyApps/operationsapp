@@ -16,19 +16,28 @@ window.addEventListener('DOMContentLoaded', function () {
         ajax: '/clients/load',
         orderMulti: false,
         columns: [
-            {data: row => `
-                    <div class="d-flex flex-">
+            {data: row => function (){
+                if (row.activeUser === 'Admin'){
+                return `<div class="d-flex flex-">
                     <button type="submit" class="btn btn-white details-client-btn text-decoration-underline" data-id="${ row.id }">
                             ${ row.name }
                     </button>
                     </div>
-                    `},
+                    `}
+                    return row.name
+                }
+                },
             {data: "number"},
             {data: "email"},
             {data: "city"},
             {data: "count"},
             {sortable: false,
-                data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.paid)
+                data: row => function () { 
+                    if (row.activeUser === 'Admin') {
+                    return new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.paid)
+                    }
+                    return ''
+                }
                 },
             {data: "createdAt"},
             {
