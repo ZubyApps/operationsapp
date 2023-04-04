@@ -119,6 +119,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     table.draw()
                     newClientModal.hide()
+                    clearValues(newClientModal)
                 }
             })
     })
@@ -139,7 +140,6 @@ window.addEventListener('DOMContentLoaded', function () {
     })
 
     newClientModal._element.addEventListener('hidden.bs.modal', function (){
-        //clearValues(newClientModal)
         clearValidationErrors(newClientModal._element)
     })
 
