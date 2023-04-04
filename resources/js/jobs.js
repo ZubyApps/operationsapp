@@ -40,14 +40,8 @@ window.addEventListener('DOMContentLoaded', function () {
             {data: "jobType"},
             {data: "date"},
             {data: "dueDate"},
-            {
-                sortable: false,
-                data: row => new Intl.NumberFormat(
-                    'en-US',
-                    {
-                        currencySign: 'accounting'
-                    }
-                    ).format(row.bill)
+            {sortable: false,
+                data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.bill)
                 },
             {data: row => function () {
                 if (row.jobStatus === 'Booked') {

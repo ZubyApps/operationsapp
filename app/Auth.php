@@ -10,7 +10,6 @@ use App\Contracts\UserInterface;
 use App\Contracts\UserProviderServiceInterface;
 use App\DataObjects\RegisterUserData;
 use App\Enum\UserRole;
-use App\Services\UserService;
 
 class Auth implements AuthInterface
 {

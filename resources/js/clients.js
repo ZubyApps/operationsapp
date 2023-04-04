@@ -27,7 +27,9 @@ window.addEventListener('DOMContentLoaded', function () {
             {data: "email"},
             {data: "city"},
             {data: "count"},
-            {data: "paid"},
+            {sortable: false,
+                data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.paid)
+                },
             {data: "createdAt"},
             {
                 sortable: false,
