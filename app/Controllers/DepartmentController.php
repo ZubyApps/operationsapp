@@ -7,7 +7,7 @@ namespace App\Controllers;
 use App\Contracts\RequestValidatorFactoryInterface;
 use App\DataObjects\DepartmentData;
 use App\Entity\Department;
-use App\RequestValidators\departmentRequestValidator;
+use App\RequestValidators\DepartmentRequestValidator;
 use App\ResponseFormatter;
 use App\Services\DepartmentService;
 use App\Services\RequestService;

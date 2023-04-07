@@ -116,7 +116,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     table.draw()
                     editUserModal.hide()
-                    clearValues(editUserModal)
                 }
             })
     })
@@ -134,6 +133,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
     newUserRoleModal._element.addEventListener('hidden.bs.modal', function () {
         clearValidationErrors(newUserRoleModal._element)
+    })
+
+    editUserModal._element.addEventListener('hidden.bs.modal', function () {
+        clearValidationErrors(editUserModal._element)
     })
 
     document.querySelector('#registerUser').addEventListener('click', function () {

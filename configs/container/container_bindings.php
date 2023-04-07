@@ -61,7 +61,6 @@ return [
         $configuration = ORMSetup::createAttributeMetadataConfiguration(
             $config->get('doctrine.entity_dir'),
             $config->get('doctrine.dev_mode'),
-            $config->get('doctrine.extensions.date')
         );
         $configuration->addCustomDatetimeFunction('DATE', 'DoctrineExtensions\Query\MySql\Date');
 
