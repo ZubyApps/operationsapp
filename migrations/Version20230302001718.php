@@ -21,8 +21,8 @@ final class Version20230302001718 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         //$this->addSql('CREATE TABLE paystatus (id INT UNSIGNED AUTO_INCREMENT NOT NULL, client_id INT UNSIGNED DEFAULT NULL, user_id INT UNSIGNED DEFAULT NULL, totalAmount NUMERIC(13, 3) DEFAULT NULL, job VARCHAR(255) DEFAULT NULL, billstatus VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX IDX_B9D9261919EB6921 (client_id), INDEX IDX_B9D92619A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE paystatus ADD CONSTRAINT FK_B9D9261919EB6921 FOREIGN KEY (client_id) REFERENCES clients (id)');
-        $this->addSql('ALTER TABLE paystatus ADD CONSTRAINT FK_B9D92619A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
+        // $this->addSql('ALTER TABLE paystatus ADD CONSTRAINT FK_B9D9261919EB6921 FOREIGN KEY (client_id) REFERENCES clients (id)');
+        // $this->addSql('ALTER TABLE paystatus ADD CONSTRAINT FK_B9D92619A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
         $this->addSql('ALTER TABLE completed DROP FOREIGN KEY FK_3AF85C6EA76ED395');
         $this->addSql('DROP TABLE completed');
         //$this->addSql('ALTER TABLE admins CHANGE `admin` `admin` VARCHAR(255) DEFAULT NULL, CHANGE addedBy addedBy VARCHAR(255) DEFAULT NULL');
