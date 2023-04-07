@@ -34,7 +34,7 @@ return function (App $app) {
     $app->group('/register', function (RouteCollectorProxy $register) {
         $register->get('', [AuthController::class, 'registerView']);
         $register->post('', [AuthController::class, 'register']);
-    })->add(AuthMiddleware::class);
+    });//->add(AuthMiddleware::class);
 
     $app->group('/clients', function (RouteCollectorProxy $client) {
         $client->get('', [ClientController::class, 'index']);
