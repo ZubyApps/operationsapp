@@ -25,10 +25,10 @@ final class Version20230302001718 extends AbstractMigration
         $this->addSql('ALTER TABLE paystatus ADD CONSTRAINT FK_B9D92619A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
         $this->addSql('ALTER TABLE completed DROP FOREIGN KEY FK_3AF85C6EA76ED395');
         $this->addSql('DROP TABLE completed');
-        $this->addSql('ALTER TABLE admins CHANGE `admin` `admin` VARCHAR(255) DEFAULT NULL, CHANGE addedBy addedBy VARCHAR(255) DEFAULT NULL');
+        //$this->addSql('ALTER TABLE admins CHANGE `admin` `admin` VARCHAR(255) DEFAULT NULL, CHANGE addedBy addedBy VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE clients CHANGE phone_number phoneNumber VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE departments ADD head VARCHAR(255) DEFAULT NULL, DROP hod, CHANGE name name VARCHAR(255) DEFAULT NULL, CHANGE description description VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE editors CHANGE editors editors VARCHAR(255) DEFAULT NULL, CHANGE addedBy addedBy VARCHAR(255) DEFAULT NULL');
+        //$this->addSql('ALTER TABLE editors CHANGE editors editors VARCHAR(255) DEFAULT NULL, CHANGE addedBy addedBy VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE expenses CHANGE amount amount NUMERIC(13, 3) DEFAULT NULL, CHANGE date date VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE jobs DROP FOREIGN KEY FK_A8936DC56C7B4691');
         $this->addSql('DROP INDEX IDX_A8936DC56C7B4691 ON jobs');
