@@ -12,6 +12,7 @@ use App\Services\JobTypeService;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Valitron\Validator;
+use DoctrineExtensions\Query\Mysql\Date;
 
 class CreateJobRequestValidator implements RequestValidatorInterface
 {
@@ -86,7 +87,7 @@ class CreateJobRequestValidator implements RequestValidatorInterface
 
 
                 $checkDay = $this->entityManager
-                ->createQuery("SELECT Date(j.dueDate) FROM App\Entity\Job j where Date(j.dueDate) = :booked AND Date(j.dueDate) > :today")
+                    ->createQuery("SELECT DATE(j.dueDate) FROM App\Entity\Job j where DATE(j.dueDate) = :booked AND DATE(j.dueDate) > :today")
                 ->setParameters([
                     'booked'=> $dateToBook,
                     'today' => $today
