@@ -68,6 +68,11 @@ function handleValidationErrors(errors, domElement) {
         errorDiv.classList.add('invalid-feedback')
         errorDiv.textContent = errors[name][0]
 
+        if (errors[name][0] === 'Warning: There is an event on this day') {
+            const element2 = domElement.querySelector('.form-check')
+            element2.classList.remove('d-none')
+        }
+
         element.parentNode.append(errorDiv)
     }
 }
