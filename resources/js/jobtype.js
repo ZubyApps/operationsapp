@@ -18,10 +18,17 @@ window.addEventListener('DOMContentLoaded', function () {
             {data: "name"},
             {data: "description"},
             {data: "count"},
-            {data: row => new Intl.NumberFormat('en-US',{currencySign: 'accounting'}).format(row.total)},
+            {data: row => function () { 
+                    if (row.activeUser === 'Admin') {
+                    return new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.total)
+                    }
+                    return ''
+                }
+            },
             {data: "createdAt"},
             {sortable: false,
                 data: row => function () {
+                    if (row.activeUser === 'Admin') {
                     if (row.count < 1) {
                         return `
                     <div class="d-flex flex-">
@@ -42,7 +49,8 @@ window.addEventListener('DOMContentLoaded', function () {
                     </button>
                     </div>
                     `}
-                } 
+                }
+            } 
             }
         ]
     });

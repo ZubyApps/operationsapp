@@ -47,7 +47,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 sortable: false,
                 data: row => function () { 
                     if (row.activeUser === 'Admin'){
-                        if (row.jobCount > 0 || row.payCount >0) {return `
+                        if (row.jobCount > 0 || row.payCount > 0) {return `
                     <div class="d-flex flex-">
                     <button class=" btn btn-outline-primary edit-user-btn" data-id="${ row.id }">
                     <i class="bi bi-pencil-fill"></i>
