@@ -10,6 +10,7 @@ use App\RequestValidators\PayMethodRequestValidator;
 use App\ResponseFormatter;
 use App\Services\PayMethodService;
 use App\Services\RequestService;
+use App\Services\UserService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
@@ -21,7 +22,8 @@ class PayMethodController
         private readonly RequestValidatorFactoryInterface $requestValidatorFactory,
         private readonly RequestService $requestService,
         private readonly ResponseFormatter $responseFormatter,
-        private readonly PayMethodService $payMethodService
+        private readonly PayMethodService $payMethodService,
+        private readonly UserService $userService,
     ) {
     }
 
@@ -93,6 +95,7 @@ class PayMethodController
                 'description'   => $payMethod->getDescription(),
                 'count'         => $payMethod->getPayments()->count(),
                 'total'         => $payMethod->getPaymentsTotal(),
+                'activeUser'    => $this->userService->getActiveUserRole(),
                 'createdAt'     => $payMethod->getCreatedAt()->format('m/d/Y g:i A'),
             ];
         };

@@ -10,6 +10,7 @@ use App\RequestValidators\JobTypeRequestValidator;
 use App\ResponseFormatter;
 use App\Services\JobTypeService;
 use App\Services\RequestService;
+use App\Services\UserService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
@@ -21,7 +22,8 @@ class JobTypeController
         private readonly RequestValidatorFactoryInterface $requestValidatorFactory,
         private readonly JobTypeService $jobTypeService,
         private readonly ResponseFormatter $responseFormatter,
-        private readonly RequestService $requestService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService,
     ) {
     }
 
@@ -93,6 +95,7 @@ class JobTypeController
                 'description'   => $jobType->getDescription(),
                 'count'         => $jobType->getJobs()->count(),
                 'total'         => $jobType->getJobPaymentsTotal(),
+                'activeUser'    => $this->userService->getActiveUserRole(),
                 'createdAt'     => $jobType->getCreatedAt()->format('m/d/Y g:i A'),
             ];
         };

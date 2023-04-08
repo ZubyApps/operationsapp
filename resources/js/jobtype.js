@@ -48,8 +48,14 @@ window.addEventListener('DOMContentLoaded', function () {
                     <button type="submit" class="ms-1 btn btn-outline-primary delete-jobtype-btn invisible" data-id="${ row.id }"><i class="bi bi-trash3-fill"></i>
                     </button>
                     </div>
-                    `}
-                }
+                    `} 
+                } else if (row.count < 1) {
+                        return `
+                    <div class="d-flex flex-">
+                    <button class=" btn btn-outline-primary edit-jobtype-btn" data-id="${ row.id }">
+                    <i class="bi bi-pencil-fill"></i>
+                    </button>`
+                    }
             } 
             }
         ]
