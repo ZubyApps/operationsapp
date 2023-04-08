@@ -74,13 +74,20 @@ class UserService
 
     public function update(UpdateUserData $data, User $user): User
     {
-        $user->setFirstName($data->firstname);
-        $user->setLastName($data->lastname);
-        $user->setEmail($data->email);
-        $user->setPhoneNumber($data->phonenumber);
-        $user->setDepartment($data->department);
-        $user->setPassword(password_hash($data->password, PASSWORD_BCRYPT, ['cost' => 12]));
-
+        if ($data->password === '') {
+            $user->setFirstName($data->firstname);
+            $user->setLastName($data->lastname);
+            $user->setEmail($data->email);
+            $user->setPhoneNumber($data->phonenumber);
+            $user->setDepartment($data->department);
+        } else {
+            $user->setFirstName($data->firstname);
+            $user->setLastName($data->lastname);
+            $user->setEmail($data->email);
+            $user->setPhoneNumber($data->phonenumber);
+            $user->setDepartment($data->department);
+            $user->setPassword(password_hash($data->password, PASSWORD_BCRYPT, ['cost' => 12]));
+        }
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

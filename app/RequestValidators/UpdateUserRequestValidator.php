@@ -5,8 +5,6 @@ declare(strict_types = 1);
 namespace App\RequestValidators;
 
 use App\Contracts\RequestValidatorInterface;
-use App\Entity\Department;
-use App\Entity\User;
 use App\Exception\ValidationException;
 use App\Services\DepartmentService;
 use Doctrine\ORM\EntityManager;
