@@ -15,11 +15,11 @@ use App\Enum\SameSite;
 use App\RequestValidators\RequestValidatorFactory;
 use App\Services\UserProviderService;
 use App\Session;
-use Doctrine\Common\ClassLoader;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDO\MySQL\Driver;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use DoctrineExtensions\Query\Mysql\Date;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
@@ -63,7 +63,7 @@ return [
             $config->get('doctrine.entity_dir'),
             $config->get('doctrine.dev_mode'),
         );
-        $configuration->addCustomDatetimeFunction('DATE', 'DoctrineExtensions\Query\MySql\Date');
+        $configuration->addCustomDatetimeFunction('DATE', Date::class);
 
         return new EntityManager(new Connection($config->get('doctrine.connection'), new Driver()),
         $configuration

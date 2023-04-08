@@ -81,13 +81,11 @@ class CreateJobRequestValidator implements RequestValidatorInterface
                     return \true;
                 }
 
-
                 $dateToBook = explode('T', $value)[0];
                 $today = (new DateTime())->format('Y-m-d');
 
-
                 $checkDay = $this->entityManager
-                    ->createQuery("SELECT DATE(j.dueDate) FROM App\Entity\Job j where DATE(j.dueDate) = :booked AND DATE(j.dueDate) > :today")
+                    ->createQuery("SELECT Date(j.dueDate) FROM App\Entity\Job j where Date(j.dueDate) = :booked AND Date(j.dueDate) > :today")
                 ->setParameters([
                     'booked'=> $dateToBook,
                     'today' => $today
