@@ -59,9 +59,6 @@ return [
 
     EntityManager::class                    => function (Config $config) {
 
-        $classLoader = new ClassLoader('DoctrineExtensions', __DIR__ . '/vendor/beberlei/doctrineextensions');
-        $classLoader->register();
-
         $configuration = ORMSetup::createAttributeMetadataConfiguration(
             $config->get('doctrine.entity_dir'),
             $config->get('doctrine.dev_mode'),
