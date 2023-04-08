@@ -15,6 +15,7 @@ use App\Enum\SameSite;
 use App\RequestValidators\RequestValidatorFactory;
 use App\Services\UserProviderService;
 use App\Session;
+use Doctrine\Common\ClassLoader;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDO\MySQL\Driver;
 use Doctrine\ORM\EntityManager;
@@ -58,6 +59,9 @@ return [
 
     EntityManager::class                    => function (Config $config) {
 
+        $classLoader = new ClassLoader('DoctrineExtensions', '/vendor/beberlei/doctrineextensions');
+        $classLoader->register();
+        
         $configuration = ORMSetup::createAttributeMetadataConfiguration(
             $config->get('doctrine.entity_dir'),
             $config->get('doctrine.dev_mode'),
