@@ -121,7 +121,7 @@ class ClientController
                 'activeUser'        => $this->userService->getActiveUserRole(),
                 'count'             => $client->getJobs()->count(),
                 'paid'             => $client->getTotalPayments(),
-                'createdAt'         => $client->getCreatedAt()->format('m/d/Y g:i A')
+                'createdAt'         => $client->getCreatedAt()->format('d/M/Y g:i A')
             ];
         };
 
@@ -160,8 +160,8 @@ class ClientController
             'country'       => $client->getCountry(),
             'jobtotal'      => $client->getJobs()->count(),
             'staff'         => $client->getUser()->getFirstname(),
-            'createdAt'     => $client->getCreatedAt()->format('m/d/Y g:i A'),
-            'updatedAt'     => $client->getUpdatedAt()->format('m/d/Y g:i A'),
+            'createdAt'     => $client->getCreatedAt()->format('d/M/Y g:i A'),
+            'updatedAt'     => $client->getUpdatedAt()->format('d/M/Y g:i A'),
             'allbills'      => $client->getTotalBills(),
             'allpayments'   => $client->getTotalPayments(),
             'balance'       => $client->getTotalBills() - $client->getTotalPayments(),
