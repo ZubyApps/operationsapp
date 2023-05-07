@@ -20,7 +20,7 @@ final class Version20230415105549 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE admins');
+        //$this->addSql('DROP TABLE admins');
         $this->addSql('DROP TABLE editors');
         $this->addSql('ALTER TABLE paystatus ADD totalPaid NUMERIC(13, 3) DEFAULT NULL after job_id');
     }
