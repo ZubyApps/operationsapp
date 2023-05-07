@@ -39,7 +39,7 @@ class PayStatusService
         $orderDir = strtolower($params->orderDir) === 'desc' ? 'desc' : 'desc';
 
         if (! empty($params->searchTerm)) {
-            $query->where('jj.name LIKE :param or c.name LIKE :param or c.phoneNumber LIKE :param or j.jobStatus LIKE :param')->setParameter('param', '%' . addcslashes($params->searchTerm, '%_') . '%');
+            $query->where('jj.name LIKE :param or c.name LIKE :param or c.phoneNumber LIKE :param or j.jobStatus LIKE :param or j.createdAt LIKE :param')->setParameter('param', '%' . addcslashes($params->searchTerm, '%_') . '%');
         }
 
         $query->orderBy('p.' . $orderBy, $orderDir);
@@ -62,12 +62,21 @@ class PayStatusService
 
     public function getByJobId(int $id)
     {
-        return $this->entityManager->createQuery('SELECT p.id FROM App\Entity\Paystatus p WHERE p.job = :id')->setParameter('id', $id)->getSingleScalarResult();
+        return $this->entityManager->getRepository(Paystatus::class)->findOneBy(['job' => $id]);
+    }
+
+    public function populate(Job $job, User $user)
+    {
+        $paystatus = $this->getByJobId($job->getId());
+
+        return $this->update($paystatus, $job, $user);
     }
 
     public function update(Paystatus $paystatus, Job $job, User $user): Paystatus
     {
+        
         $paystatus->setJob($job);
+        $paystatus->setTotalPaid($job->getPaymentsTotal());
         $paystatus->setUser($user);
 
         $this->entityManager->persist($paystatus);
@@ -107,22 +116,17 @@ class PayStatusService
         return new Paginator($query);
     }
 
-    // public function getPaginatedPayStatusIncompletePayments(DataTableQueryParams $params, array $queryParams): Paginator
-    // {
-    //     $query = $this->entityManager
-    //         ->getRepository(Paystatus::class)
-    //         ->createQueryBuilder('p')
-    //         ->leftJoin('p.job', 'j');
+    public function getPaginatedIncompletePayments(DataTableQueryParams $params, array $queryParams): Paginator
+    {
+        $query = $this->entityManager
+            ->getRepository(Paystatus::class)
+            ->createQueryBuilder('p')
+            ->leftJoin('p.job', 'j');
 
-    //     if ($queryParams['modal'] === 'detailsClientModal') {
-    //         $query->Where('c.id = :id')->setParameter('id', $queryParams['id']);
-    //     } else {
-    //         $query->Where('j.id = :id')->setParameter('id', $queryParams['id']);
-    //     }
+        $query->where('p.totalPaid < j.amountDue');
 
+        $query->orderBy('p.' . 'id', 'desc');
 
-    //     $query->orderBy('p.' . 'id', 'desc');
-
-    //     return new Paginator($query);
-    // }
+        return new Paginator($query);
+    }
 }

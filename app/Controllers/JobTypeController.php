@@ -96,7 +96,7 @@ class JobTypeController
                 'count'         => $jobType->getJobs()->count(),
                 'total'         => $jobType->getJobPaymentsTotal(),
                 'activeUser'    => $this->userService->getActiveUserRole(),
-                'createdAt'     => $jobType->getCreatedAt()->format('m/d/Y g:i A'),
+                'createdAt'     => $jobType->getCreatedAt()->format('d/m/Y g:i A'),
             ];
         };
 

@@ -20,8 +20,10 @@
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
+    "datatables.net-plugins": "^1.13.4",
     "datatables.net-responsive-dt": "^2.4.0",
     "datatables.net-select-dt": "^1.6.1",
-    "html2pdf.js": "^0.10.1"
+    "html2pdf.js": "^0.10.1",
+    "jquery": "^3.6.4"
   }
 }

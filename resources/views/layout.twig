@@ -35,50 +35,56 @@
                     <li class="nav-item">
                         <a href="/" class="nav-link fw-bold fs-5" aria-current="page">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/clients" class="nav-link fw-bold fs-5" aria-current="page">Clients</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/jobs" class="nav-link fw-bold fs-5" aria-current="page">Jobs</a>
-                    </li>
-                
                     
-                    <div class="dropdown payment-dropdown-menu ">
-                        <a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false">
-                        Payments
+                    <div class="dropdown payment-dropdown-menu">
+                        <a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        Operations
                         </a>
-                        <ul class="dropdown-menu p-0 bg-dark" aria-labelledby="paymentDropDownMenu">
+                        <ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="paymentDropDownMenu">
+                            <li class="nav-item">
+                                <a href="/clients" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Clients</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/jobs" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Jobs</a>
+                            </li>
                             <li class="nav-item p-0 ">
-                                <a href="/payments/paystatus" class="nav-link fw-bold fs-6" aria-current="page">Payment Status</a>
+                                <a href="/payments/paystatus" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Payment Status</a>
                             </li>
                             <li class="nav-item p-0">
-                                <a href="/payments/paydetails" class="nav-link fw-bold fs-6" aria-current="page">Payments Table</a>
+                                <a href="/payments/paydetails" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Payments Table</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="dropdown payment-dropdown-menu">
+
+                    <li class="nav-item">
+                        <a href="/expenses" class="nav-link fw-bold fs-5" aria-current="page">Expenses</a>
+                    </li>
+
+                    {% if auth.role is same as ('Admin') %}
+                    <li class="nav-item">
+                        <a href="/reports" class="nav-link fw-bold fs-5" aria-current="page">Reports</a>
+                    </li>
+                    {% endif %}
+
+                    <div class="dropdown settings-dropdown-menu">
                         <a href="" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false">
                         Settings
                         </a>
                         <ul class="dropdown-menu p-0 bg-dark" aria-labelledby="paymentDropDownMenu">
                             <li class="nav-item p-0 ">
-                                <a href="/settings/jobtype" class="nav-link fw-bold fs-6" aria-current="page">Job Type</a>
+                                <a href="/settings/jobtype" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Job Type</a>
                             </li>
                             <li class="nav-item p-0 ">
-                                <a href="/settings/department" class="nav-link fw-bold fs-6" aria-current="page">Department</a>
+                                <a href="/settings/department" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Department</a>
                             </li>
                             <li class="nav-item p-0 ">
-                                <a href="/settings/paymethod" class="nav-link fw-bold fs-6" aria-current="page">Pay Methods</a>
+                                <a href="/settings/paymethod" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Pay Methods</a>
                             </li>
                             <li class="nav-item p-0 ">
-                                <a href="/settings/users" class="nav-link fw-bold fs-6" aria-current="page">Staff</a>
-                            </li>
-                            <li class="nav-item p-0 ">
-                                <a href="/expenses" class="nav-link fw-bold fs-6" aria-current="page">Expenses</a>
+                                <a href="/settings/users" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Staff</a>
                             </li>
                         </ul>
                     </div>
-    
 
                     <div class="dropdown user-dropdown-menu ">
                         <a href="#" class="text-decoration-none d-flex align-items-center mt-2" id="userDropDownMenu" data-bs-toggle="dropdown"

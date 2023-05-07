@@ -1,5 +1,7 @@
 import { del } from "./ajax"
+import $ from 'jquery'
 import DataTable          from "datatables.net"
+import 'datatables.net-plugins/api/sum().mjs'
 
 window.addEventListener('DOMContentLoaded', function () {
 
@@ -7,6 +9,15 @@ window.addEventListener('DOMContentLoaded', function () {
         serverSide: true,
         ajax: '/payments/paydetails/load',
         orderMulti: false,
+        drawCallback: function () {
+            var api = this.api()
+            console.log(api.data()[0]['activeUser'] === 'Admin')
+            if (api.data()[0]['activeUser'] === 'Admin') {
+            $( api.column(4).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                api.column( 4, {page:'current'} ).data().sum())
+            );
+            }
+        },
         columns: [
             {data: "createdAt"},
             {data: "client"},

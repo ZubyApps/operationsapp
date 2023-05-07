@@ -1,6 +1,8 @@
 import { Modal }          from "bootstrap"
 import { get, post, del, clearValidationErrors } from "./ajax"
+import $ from 'jquery'
 import DataTable          from "datatables.net"
+import 'datatables.net-plugins/api/sum().mjs'
 import { clearValues, getPaymentDetails, getJobDetails, getPayStatus} from "./helpers"
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -15,6 +17,14 @@ window.addEventListener('DOMContentLoaded', function () {
         serverSide: true,
         ajax: '/clients/load',
         orderMulti: false,
+        drawCallback: function () {
+            var api = this.api()
+            if (api.data()[0]['activeUser'] === 'Admin') {
+            $( api.column(5).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                api.column( 5, {page:'current'} ).data().sum())
+            );
+            }
+        },
         columns: [
             {data: row => function (){
                 if (row.activeUser === 'Admin'){

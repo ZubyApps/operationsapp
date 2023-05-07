@@ -96,7 +96,7 @@ class PayMethodController
                 'count'         => $payMethod->getPayments()->count(),
                 'total'         => $payMethod->getPaymentsTotal(),
                 'activeUser'    => $this->userService->getActiveUserRole(),
-                'createdAt'     => $payMethod->getCreatedAt()->format('m/d/Y g:i A'),
+                'createdAt'     => $payMethod->getCreatedAt()->format('d/m/Y g:i A'),
             ];
         };
 

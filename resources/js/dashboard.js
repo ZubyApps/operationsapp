@@ -89,33 +89,6 @@ import { clearValues, getPaymentDetails, getPayStatus } from "./helpers"
                     `
                 }
                 }},
-            // {sortable: false,
-            //     data: row => function () {
-            //     if (row.days <= 2) {
-            //         if (row.days.includes('-')) {
-            //             return row.mins
-            //         }
-            //         return `
-            //         <div class="d-flex flex-">
-            //         <span class="text-danger fw-bold">${row.mins} min(s) left</span>
-            //         </button>
-            //         </div>
-            //         `} else if (row.days > 2 && row.days <= 14) {
-            //         return `
-            //         <div class="d-flex flex-">
-            //         <span class="text-warning fw-bold">${row.mins} min(s) left</span>
-            //         </button>
-            //         </div>
-            //         `
-            //     } else {
-            //         return `
-            //         <div class="d-flex flex-">
-            //         <span class="text-success fw-bold">${row.mins} min(s) left</span>
-            //         </button>
-            //         </div>
-            //         `
-            //     }
-            //     }},
         ]})
 
         new DataTables('#jobsInProgressTable', {
@@ -175,6 +148,67 @@ import { clearValues, getPaymentDetails, getPayStatus } from "./helpers"
         })
 
         document.querySelector('#jobsInProgressTable').addEventListener('click', function (event) {
+        const detailsBtn = event.target.closest('.details-job-btn')
+            if (detailsBtn) {
+            const jobId = detailsBtn.getAttribute('data-id')
+
+            get(`/jobs/details/${ jobId }`)
+                .then(response => response.json())
+                .then(response => openJobModal(detailsJobModal, response))
+        }
+        })
+
+        new DataTables('#jobsPaystatusTable', {
+            serverSide: true,
+            ajax: '/payments/paystatus/load/paystatus',
+            lengthChange: false,
+            paging: false,
+            searching: false,
+            orderMulti: false,
+            columns: [
+                {
+                    sortable: false,
+                    data: row => `<div class="d-flex flex-">
+                    <button type="submit" class="btn btn-white details-job-btn text-decoration-underline" data-id="${ row.jobId }">${ row.client }</button></div>`},
+                {
+                    sortable: false,
+                    data: 'job'},
+                {
+                    sortable: false,
+                    data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.bill)},
+                {
+                    sortable: false,
+                    data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.paid)},
+                {
+                    sortable: false,
+                    data: row => function () {
+                if (row.status < 45) {
+                    return `
+                    <div class="d-flex flex-">
+                    <span class="text-danger fw-bold">${row.status}<i class="bi bi-percent"></i></span>
+                    </button>
+                    </div>
+                    `
+                } else if (row.status > 45 && row.status < 100) {
+                    return `
+                    <div class="d-flex flex-">
+                    <span class="text-warning fw-bolder" style="colour:orange;">${row.status}<i class="bi bi-percent"></i></span>
+                    </button>
+                    </div>
+                    `
+                } else {
+                    return `
+                    <div class="d-flex flex-">
+                    <span class="text-success fw-bold">${row.status}<i class="bi bi-percent"></i></span>
+                    </button>
+                    </div>
+                    `
+                }
+            }},
+            ]
+        })
+
+        document.querySelector('#jobsPaystatusTable').addEventListener('click', function (event) {
         const detailsBtn = event.target.closest('.details-job-btn')
             if (detailsBtn) {
             const jobId = detailsBtn.getAttribute('data-id')

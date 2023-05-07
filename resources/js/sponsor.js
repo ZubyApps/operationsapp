@@ -1,6 +1,8 @@
 import { Modal }          from "bootstrap";
+import $ from "jquery"
 import { get, post, del, clearValidationErrors } from "./ajax"
 import DataTable          from "datatables.net"
+import 'datatables.net-plugins/api/sum().mjs'
 import { clearValues } from "./helpers";
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -14,12 +16,26 @@ window.addEventListener('DOMContentLoaded', function () {
         serverSide: true,
         ajax: '/sponsor/load',
         orderMulti: false,
+        drawCallback: function () {
+            var api = this.api()
+            console.log(api.data()[0]['activeUser'] === 'Admin')
+            if (api.data()[0]['activeUser'] === 'Admin') {
+            $( api.column(4).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                api.column( 4, {page:'current'} ).data().sum())
+            );
+            }
+        },
         columns: [
             {data: "name"},
             {data: "description"},
             {data: "flag"},
             {data: "count"},
-            {data: "total"},
+            {data: row => function () { 
+                    if (row.activeUser === 'Admin') {
+                    return new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.total)
+                    }
+                    return ''
+                }},
             {data: "createdAt"},
             {sortable: false,
                 data: row => function () {

@@ -145,12 +145,12 @@ class ExpenseController
         );
     }
 
-    public function expenseList(Request $request, Response $response): Response
-    {
-        $data = $this->expenseService->getAll();
+    // public function expenseList(Request $request, Response $response): Response
+    // {
+    //     $data = $this->expenseService->getAll();
 
-        return $this->responseFormatter->asJson($response,  $data);
-    }
+    //     return $this->responseFormatter->asJson($response,  $data);
+    // }
 
     public function loadDetails(Request $request, Response $response): Response
     {

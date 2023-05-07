@@ -10,6 +10,7 @@ use App\RequestValidators\SponsorRequestValidator;
 use App\ResponseFormatter;
 use App\Services\RequestService;
 use App\Services\SponsorService;
+use App\Services\UserService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
@@ -21,7 +22,8 @@ class SponsorController
         private readonly RequestValidatorFactoryInterface $requestValidatorFactory,
         private readonly SponsorService $sponsorService,
         private readonly ResponseFormatter $responseFormatter,
-        private readonly RequestService $requestService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService
     ) {
     }
 
@@ -36,7 +38,7 @@ class SponsorController
             $request->getParsedBody()
         );
 
-        $this->sponsorService->create($data);
+        $this->sponsorService->create($data, $request->getAttribute('user'));
 
         return $response->withHeader('Location', '/sponsor')->withStatus(302);
     }
@@ -78,7 +80,7 @@ class SponsorController
             return $response->withStatus(404);
         }
 
-        $this->sponsorService->update($sponsor, $data);
+        $this->sponsorService->update($sponsor, $data, $request->getAttribute('user'));
 
         return $response;
     }
@@ -95,7 +97,8 @@ class SponsorController
                 'flag'          => $sponsor->getFlag()->name,
                 'count'         => $sponsor->getExpenses()->count(),
                 'total'         => $sponsor->getExpenseTotal(),
-                'createdAt'     => $sponsor->getCreatedAt()->format('m/d/Y g:i A'),
+                'activeUser'    => $this->userService->getActiveUserRole(),
+                'createdAt'     => $sponsor->getCreatedAt()->format('d/m/Y g:i A'),
             ];
         };
 

@@ -90,6 +90,7 @@ return function (App $app) {
             $paystatus->get('', [PayStatusController::class, 'index']);
             $paystatus->get('/load', [PayStatusController::class, 'load']);
             $paystatus->get('/load/details', [PayStatusController::class, 'loadDetails']);
+            $paystatus->get('/load/paystatus', [PayStatusController::class, 'loadJobPaystatus']);
             $paystatus->post('', [PayStatusController::class, 'store']);
             $paystatus->get('/list', [PayStatusController::class, 'paystatusList']);
             $paystatus->delete('/{id:[0-9]+}', [PayStatusController::class, 'delete']);

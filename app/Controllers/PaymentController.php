@@ -12,6 +12,7 @@ use App\ResponseFormatter;
 use App\Services\ClientService;
 use App\Services\PaymentService;
 use App\Services\PayMethodService;
+use App\Services\PayStatusService;
 use App\Services\RequestService;
 use App\Services\UserService;
 use DateTime;
@@ -29,7 +30,8 @@ class PaymentController
         private readonly PaymentService $paymentService,
         private readonly ClientService $clientService,
         private readonly UserService $userService,
-        private readonly PayMethodService $payMethodService
+        private readonly PayMethodService $payMethodService,
+        private readonly PayStatusService $payStatusService
     ) {
     }
 
@@ -54,6 +56,8 @@ class PaymentController
                 $data['job'],
                 $data['paymethod']),
             $request->getAttribute('user'));
+
+        $this->payStatusService->populate($data['job'], $request->getAttribute('user'));
 
         return $response->withHeader('Location', '/payments/paydetails')->withStatus(302);
     }

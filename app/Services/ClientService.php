@@ -29,6 +29,8 @@ class ClientService
         $query = $this->entityManager
             ->getRepository(Client::class)
             ->createQueryBuilder('c')
+            ->select('c', 'j')
+            ->leftJoin('c.jobs', 'j')
             ->setFirstResult($params->start)
             ->setMaxResults($params->length);
 

@@ -21,7 +21,7 @@
 {% include 'jobs/job_modal.twig' with {modal: {title: 'Edit Job', id: 'editJobModal', isEdit: true}} %}
 {% include 'jobs/details_job_modal.twig' with {modal: {title: 'Details', id: 'detailsJobModal' }} %}
 
-            <table id="jobsTable" class="row-border hover compact order-column stripe ">
+            <table id="jobsTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
                         {# <th>Created</th> #}
@@ -36,6 +36,18 @@
                     </tr>
                 </thead>
                 <tbody></tbody>
+                <tfoot class="fw-bolder text-primary">
+                <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+                </tfoot>
             </table>
     </div>
 {% endblock %}

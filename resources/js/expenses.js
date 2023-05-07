@@ -1,6 +1,8 @@
 import { Modal }          from "bootstrap"
+import $ from 'jquery'
 import { get, post, del, clearValidationErrors } from "./ajax"
 import DataTable          from "datatables.net"
+import 'datatables.net-plugins/api/sum().mjs'
 import { clearValues, getPaymentDetails, getJobDetails, getPayStatus} from "./helpers"
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -14,32 +16,28 @@ window.addEventListener('DOMContentLoaded', function () {
         serverSide: true,
         ajax: '/expenses/load',
         orderMulti: false,
+        rowCallback: (row, data) => {
+            if (data.flag === 1) {
+                row.classList.add('text-primary', 'fw-bold')
+            }
+
+            return row
+        },
+        drawCallback: function () {
+            var api = this.api()
+            console.log(api.data()[0]['activeUser'] === 'Admin')
+            if (api.data()[0]['activeUser'] === 'Admin') {
+            $( api.column(4).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                api.column( 4, {page:'current'} ).data().sum())
+            );
+            }
+        },
         columns: [
             {data: "date"},
-            {data: row => function () {
-                if (row.flag === 1) {
-                    return `<span class="text-danger fw-bold">${ row.sponsor }</span>`
-                } 
-                return row.sponsor
-            }},
-            {data: row => function () {
-                if (row.flag === 1) {
-                    return `<span class="text-danger fw-bold">${ row.category }</span>`
-                } 
-                return row.category
-            }},
-            {data: row => function () {
-                if (row.flag === 1) {
-                    return `<span class="text-danger fw-bold">${ row.description }</span>`
-                }
-                return row.description
-            }},
-            {data: row => function () {
-                if (row.flag === 1) {
-                    return `<span class="text-danger fw-bold">${ new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.amount) }</span>`
-                }
-                return row.amount
-            }},
+            {data: "sponsor"},
+            {data: "category"},
+            {data: "description"},
+            {data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.amount)},
             {data: "createdAt"},
             {
                 sortable: false,

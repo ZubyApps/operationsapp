@@ -111,7 +111,7 @@ class DepartmentController
                 'head'          => $department->getHead()->getFirstname(),
                 'count'         => $department->getUsers()->count(),
                 'activeUser'    => $this->userService->getActiveUserRole(),
-                'createdAt'     => $department->getCreatedAt()->format('m/d/Y g:i A'),
+                'createdAt'     => $department->getCreatedAt()->format('d/m/Y g:i A'),
             ];
         };
 

@@ -123,7 +123,7 @@ class UserController
                 'payCount'      => $user->getPayments()->count(),
                 'role'          => $user->getUserRole(),
                 'head'          => $user->getDepartment()->getHead()->getFirstname(),
-                'createdAt'     => $user->getCreatedAt()->format('m/d/Y g:i A'),
+                'createdAt'     => $user->getCreatedAt()->format('d/m/Y g:i A'),
                 'activeUser'    => $this->userService->getActiveUserRole()
             ];
         };

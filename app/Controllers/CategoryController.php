@@ -10,6 +10,7 @@ use App\RequestValidators\CategoryRequestValidator;
 use App\ResponseFormatter;
 use App\Services\CategoryService;
 use App\Services\RequestService;
+use App\Services\UserService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
@@ -21,7 +22,8 @@ class CategoryController
         private readonly RequestValidatorFactoryInterface $requestValidatorFactory,
         private readonly CategoryService $categoryService,
         private readonly ResponseFormatter $responseFormatter,
-        private readonly RequestService $requestService
+        private readonly RequestService $requestService,
+        private readonly UserService $userService
     ) {
     }
 
@@ -93,7 +95,8 @@ class CategoryController
                 'description'   => $category->getDescription(),
                 'count'         => $category->getExpenses()->count(),
                 'total'         => $category->getExpenseTotal(),
-                'createdAt'     => $category->getCreatedAt()->format('m/d/Y g:i A'),
+                'activeUser'    => $this->userService->getActiveUserRole(),
+                'createdAt'     => $category->getCreatedAt()->format('d/m/Y g:i A'),
             ];
         };
 

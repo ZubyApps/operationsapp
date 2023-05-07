@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace App\Controllers;
 
 use App\Contracts\RequestValidatorFactoryInterface;
+use App\Entity\Job;
 use App\Entity\Paystatus;
+use App\Entity\User;
 use App\ResponseFormatter;
 use App\Services\ClientService;
 use App\Services\JobTypeService;
@@ -58,9 +60,7 @@ class PayStatusController
 
     public function get(Request $request, Response $response, array $args): Response
     {
-        $paystatusId = $this->payStatusService->getByJobId((int) $args['id']);
-    
-        $paystatus = $this->payStatusService->getById((int)$paystatusId);
+        $paystatus = $this->payStatusService->getByJobId((int) $args['id']);;
 
         if (! $paystatus) {
             return $response->withStatus(404);
@@ -79,23 +79,6 @@ class PayStatusController
         ];
 
         return $this->responseFormatter->asJson($response, $data);
-    }
-
-    public function update(Request $request, Response $response, array $args): Response
-    {
-        $data = $this->requestValidatorFactory->make(PayStatusRequestValidator::class)->validate(
-            $args + $request->getParsedBody()
-        );
-
-        $paystatus = $this->payStatusService->getById((int) $data['id']);
-
-        if (! $paystatus) {
-            return $response->withStatus(404);
-        }
-
-        $this->payStatusService->update($paystatus, $data['job'], $request->getAttribute('user'));
-
-        return $response;
     }
 
     public function load(Request $request, Response $response): Response
@@ -147,6 +130,32 @@ class PayStatusController
                 'bill'    => $paystatus->getJob()->getAmountDue(),
                 'paid'    => $paystatus->getJob()->getPaymentsTotal(),
                 'balance' => $paystatus->getJob()->getAmountDue() - $paystatus->getJob()->getPaymentsTotal(),
+                'status'  => round((float) ($paystatus->getJob()->getPaymentsTotal() / $paystatus->getJob()->getAmountDue()) * 100, 2),
+            ];
+        };
+
+        $totalpaystatuses = count($paystatuses);
+
+        return $this->responseFormatter->asDataTable(
+            $response,
+            array_map($transformer, (array) $paystatuses->getIterator()),
+            $params->draw,
+            $totalpaystatuses
+        );
+    }
+
+    public function loadJobPaystatus(Request $request, Response $response): Response
+    {
+        $params         = $this->requestService->getDataTableQueryParameters($request);
+        $paystatuses    = $this->payStatusService->getPaginatedIncompletePayments($params, $request->getQueryParams());
+        $transformer    = function (Paystatus $paystatus) {
+            return [
+                'id'      => $paystatus->getId(),
+                'jobId'   => $paystatus->getJob()->getId(),
+                'client'  => $paystatus->getJob()->getClient()->getName(),
+                'job'     => $paystatus->getJob()->getJobStatus(),
+                'bill'    => $paystatus->getJob()->getAmountDue(),
+                'paid'    => $paystatus->getJob()->getPaymentsTotal(),
                 'status'  => round((float) ($paystatus->getJob()->getPaymentsTotal() / $paystatus->getJob()->getAmountDue()) * 100, 2),
             ];
         };

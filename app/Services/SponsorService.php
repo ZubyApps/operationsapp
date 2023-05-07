@@ -7,6 +7,7 @@ namespace App\Services;
 
 use App\DataObjects\DataTableQueryParams;
 use App\Entity\Sponsor;
+use App\Entity\User;
 use App\Enum\Flag;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -17,11 +18,11 @@ class SponsorService
     {
     }
 
-    public function create(array $data): Sponsor
+    public function create(array $data, User $user): Sponsor
     {
         $sponsor = new Sponsor();
 
-        return $this->update($sponsor, $data);
+        return $this->update($sponsor, $data, $user);
     }
 
     public function getPaginatedSponsors(DataTableQueryParams $params): Paginator
@@ -58,11 +59,13 @@ class SponsorService
         return $this->entityManager->find(Sponsor::class, $id);
     }
 
-    public function update(Sponsor $sponsor, array $data): Sponsor
+    public function update(Sponsor $sponsor, array $data, User $user): Sponsor
     {
         $sponsor->setName($data['name']);
         $sponsor->setDescription($data['description']);
         $sponsor->setFlag(Flag::from((int)$data['flag']));
+
+        $sponsor->setUser($user);
 
         $this->entityManager->persist($sponsor);
         $this->entityManager->flush();

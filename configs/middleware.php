@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 
 use App\Config;
+use App\Enum\AppEnvironment;
 use Slim\App;
 use App\Middleware\CsrfFieldsMiddleware;
 use App\Middleware\DeleteExceptionMiddleware;
@@ -10,6 +11,8 @@ use App\Middleware\OldFormDataMiddleware;
 use App\Middleware\StartSessionsMiddleware;
 use App\Middleware\ValidationErrorsMiddleware;
 use App\Middleware\ValidationExceptionMiddleware;
+use Clockwork\Clockwork;
+use Clockwork\Support\Slim\ClockworkMiddleware;
 use Slim\Middleware\MethodOverrideMiddleware;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
@@ -26,6 +29,9 @@ return function (App $app) {
     $app->add(ValidationErrorsMiddleware::class);
     $app->add(OldFormDataMiddleware::class);
     $app->add(StartSessionsMiddleware::class);
+    if (AppEnvironment::isDevelopment($config->get('app_environment'))) {
+        $app->add(new ClockworkMiddleware($app, $container->get(Clockwork::class)));
+    }
     $app->addBodyParsingMiddleware();
     $app->addErrorMiddleware(
         (bool) $config->get('display_error_details'),

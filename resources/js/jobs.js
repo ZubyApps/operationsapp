@@ -1,6 +1,8 @@
 import { Modal }          from "bootstrap";
+import $ from 'jquery';
 import { get, post, del, clearValidationErrors } from "./ajax";
-import DataTable          from "datatables.net"
+import DataTable          from "datatables.net";
+import 'datatables.net-plugins/api/sum().mjs'
 import { clearValues, getPaymentDetails, getPayStatus, clearClientsList } from "./helpers";
 
 
@@ -27,6 +29,14 @@ window.addEventListener('DOMContentLoaded', function () {
         orderMulti: false,
         language: {
             searchPlaceholder:"Date? eg '2023-12-31'"
+        },
+        drawCallback: function () {
+            var api = this.api()
+            if (api.data()[0]['activeUser'] === 'Admin') {
+            $( api.column(5).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                api.column( 5, {page:'current'} ).data().sum())
+            );
+            }
         },
         columns: [
             {data: row => `
@@ -126,7 +136,6 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         ]
     });
-    
 
     document.querySelector('#jobsTable').addEventListener('click', function (event) {
         const editBtn       = event.target.closest('.edit-job-btn')

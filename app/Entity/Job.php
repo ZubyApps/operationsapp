@@ -120,7 +120,7 @@ class Job
     {
         $dateTime = (new Datetime())->setTimezone(new DateTimeZone('Africa/Lagos'));
         $interval = new DateInterval('PT1H');
-        //return $this->dueDate ? $this->dueDate->diff($dateTime->add($interval)) : 'N/A';
+        
         return $this->dueDate ? $dateTime->add($interval)->diff($this->dueDate) : 'N/A';
         
     }
@@ -138,7 +138,7 @@ class Job
     /**
      * Get the value of amountDue
      */
-    public function getAmountDue(): float
+    public function getAmountDue(): ?float
     {
         return $this->amountDue;
     }
@@ -146,7 +146,7 @@ class Job
     /**
      * Set the value of amountDue
      */
-    public function setAmountDue(float $amountDue): Job
+    public function setAmountDue(?float $amountDue): Job
     {
         $this->amountDue = $amountDue;
 

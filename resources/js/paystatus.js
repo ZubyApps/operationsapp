@@ -1,6 +1,8 @@
 import { Modal }          from "bootstrap"
+import $ from 'jquery';
 import { get, post, clearValidationErrors } from "./ajax"
 import DataTable          from "datatables.net"
+import 'datatables.net-plugins/api/sum().mjs'
 import html2pdf  from "html2pdf.js"
 import { clearValues, getPaymentDetails, getReceiptJobDetails,getPayStatus, getReceiptPaymentDetails} from "./helpers"
 
@@ -17,6 +19,25 @@ window.addEventListener('DOMContentLoaded', function () {
         serverSide: true,
         ajax: '/payments/paystatus/load',
         orderMulti: false,
+        language: {
+            searchPlaceholder:"Date? eg '2023-12-31'"
+        },
+        drawCallback: function () {
+            var api = this.api()
+            if (api.data()[0]['activeUser'] === 'Admin') {
+                $( api.column(4).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                    api.column( 4, {page:'current'} ).data().sum())
+                );
+        
+                $( api.column(5).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                    api.column( 5, {page:'current'} ).data().sum())
+                );
+
+                $( api.column(6).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                    api.column( 6, {page:'current'} ).data().sum())
+                );
+            }
+        },
         columns: [
             //{data: "createdAt"},
             {data: row => `
@@ -30,17 +51,13 @@ window.addEventListener('DOMContentLoaded', function () {
             {data: "jobtype"},
             {data: "jobstatus"},
             {data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.bill)},
-            {data: row =>  `
-                    <div class="d-flex flex-">
-                    <button type="submit" class="btn btn-white details-payment-btn text-decoration-underline tooltip-test" title="Pay Details" data-id="${ row.jobId }">${ new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.paid)}
-                    </button>
-                    </div>
-                    `},
+            {data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.paid)},
             {data: row => new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(row.balance)},
             {data: row => function () {
                 if (row.status < 45) {
                     return `
                     <div class="d-flex flex-">
+                    <button type="submit" class="btn btn-white details-payment-btn text-decoration-underline tooltip-test" title="Pay Details" data-id="${ row.jobId }">
                     <span class="text-danger fw-bold">${row.status}<i class="bi bi-percent"></i></span>
                     </button>
                     </div>
@@ -48,6 +65,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 } else if (row.status > 45 && row.status < 100) {
                     return `
                     <div class="d-flex flex-">
+                    <button type="submit" class="btn btn-white details-payment-btn text-decoration-underline tooltip-test" title="Pay Details" data-id="${ row.jobId }">
                     <span class="text-warning fw-bolder" style="colour:orange;">${row.status}<i class="bi bi-percent"></i></span>
                     </button>
                     </div>
@@ -55,6 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 } else {
                     return `
                     <div class="d-flex flex-">
+                    <button type="submit" class="btn btn-white details-payment-btn text-decoration-underline tooltip-test" title="Pay Details" data-id="${ row.jobId }">
                     <span class="text-success fw-bold">${row.status}<i class="bi bi-percent"></i></span>
                     </button>
                     </div>

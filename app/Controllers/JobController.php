@@ -110,7 +110,8 @@ class JobController
             return $response->withStatus(404);
         }
 
-        $this->jobService->update($job,
+        $updatedJob = $this->jobService->update(
+            $job,
             new jobData(
                 $data['client'],
                 $data['jobType'],
@@ -119,6 +120,8 @@ class JobController
                 (float) $data['bill'],
                 JobStatus::from($data['jobStatus'])),
             $request->getAttribute('user'));
+
+        $this->payStatusService->populate($updatedJob, $request->getAttribute('user'));
 
         return $response;
     }
@@ -137,7 +140,7 @@ class JobController
                 'dueDate'       => $job->getDueDate() ? $job->getDueDate()->format('D d-M-y g:ia') : 'N/A',
                 'jobType'       => $job->getJobtype()->getName(),
                 'jobDetails'    => $job->getDetails(),
-                'bill'          => $job->getAmountDue(),
+                'bill'          => $job?->getAmountDue(),
                 'jobStatus'     => $job->getJobStatus(),
                 'count'         => $job->getPayments()->count(),
                 'activeUser'    => $this->userService->getActiveUserRole(),

@@ -26,11 +26,8 @@ class Paystatus
     #[Id, Column(options: ['unsigned' => true]), GeneratedValue]
     private int $id;
 
-    // #[Column(type: Types::DECIMAL, precision: 13, scale: 3)]
-    // private float $percentPaid;
-
-    // #[Column()]
-    // private BillStatus $billStatus;
+    #[Column(type: Types::DECIMAL, precision: 13, scale: 3, nullable: \true)]
+    private float|null $totalPaid;
 
     #[OneToOne(targetEntity: Job::class, inversedBy: 'paystatus')]
     #[JoinColumn(onDelete:'CASCADE')]
@@ -120,4 +117,22 @@ class Paystatus
 
     //     return $this;
     // }
+
+    /**
+     * Get the value of totalPaid
+     */
+    public function getTotalPaid(): float
+    {
+        return $this->totalPaid;
+    }
+
+    /**
+     * Set the value of totalPaid
+     */
+    public function setTotalPaid(float $totalPaid): Paystatus
+    {
+        $this->totalPaid = $totalPaid;
+
+        return $this;
+    }
 }
