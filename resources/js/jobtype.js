@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', function () {
         orderMulti: false,
         drawCallback: function () {
             var api = this.api()
-            console.log(api.data()[0]['activeUser'] === 'Admin')
+
             if (api.data()[0]['activeUser'] === 'Admin') {
                 
                 $( api.column(2).footer() ).html(api.column( 2, {page:'current'} ).data().sum());

@@ -13,6 +13,7 @@ use App\Controllers\JobTypeController;
 use App\Controllers\PaymentController;
 use App\Controllers\PayMethodController;
 use App\Controllers\PayStatusController;
+use App\Controllers\ReportController;
 use App\Controllers\SettingsController;
 use App\Controllers\SponsorController;
 use App\Controllers\UserController;
@@ -24,16 +25,23 @@ use Slim\Routing\RouteCollectorProxy;
 return function (App $app) {
     $app->get('/', [HomeController::class, 'index'])->add(AuthMiddleware::class);
 
+    
     $app->group('', function (RouteCollectorProxy $guest) {
         $guest->get('/login', [AuthController::class, 'loginView']);
         $guest->post('/login', [AuthController::class, 'logIn']);
     })->add(GuestMiddleware::class);
-
+    
     $app->post('/logout', [AuthController::class, 'logOut'])->add(AuthMiddleware::class);
-
+    
     $app->group('/register', function (RouteCollectorProxy $register) {
         $register->get('', [AuthController::class, 'registerView']);
         $register->post('', [AuthController::class, 'register']);
+    })->add(AuthMiddleware::class);
+
+    $app->group('/reports', function (RouteCollectorProxy $reports) {
+        $reports->get('', [ReportController::class, 'index']);
+        $reports->get('/load', [ReportController::class, 'load']);
+        $reports->get('/load/list', [ReportController::class, 'loadListByDate']);
     })->add(AuthMiddleware::class);
 
     $app->group('/clients', function (RouteCollectorProxy $client) {

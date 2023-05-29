@@ -1,4 +1,4 @@
-import DataTable          from "datatables.net"
+import DataTable          from "datatables.net";
 import { del } from "./ajax";
 
 function clearValues(modal) {
@@ -186,8 +186,6 @@ function getReceiptJobDetails(id, modal){
                 data: 'clientNumber'},
             {sortable: false,
                 data: 'jobType'},
-            // {sortable: false,
-            //     data: row => new Intl.NumberFormat('en-US',{currencySign: 'accounting'}).format(row.bill)},
             {sortable: false,
                 data: 'jobStatus'},
         ]})

@@ -93,7 +93,7 @@ class JobService
         return $this->entityManager
             ->getRepository(Job::class)
             ->createQueryBuilder('j')
-            ->select('j.id', 'j.JobType', 'j.details', 'dueDate')
+            ->select('j.id', 'j.jobType', 'j.details', 'dueDate')
             ->orderBy('j.' . 'dueDate', 'asc')
             ->getQuery()
             ->getArrayResult();

@@ -1,0 +1,63 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services;
+
+use App\Entity\Job;
+use App\Entity\JobType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
+class ReportService
+{
+    public function __construct(private readonly EntityManager $entityManager)
+    {
+    }
+
+    public function jobReportsByMonth(array $queryParams): Paginator
+    {
+        $query = $this->entityManager
+            ->getRepository(Job::class)
+            ->createQueryBuilder('j')
+            ->select('j', 'jt')
+            ->leftJoin('j.jobType', 'jt');
+
+
+        $query->where('j.createdAt >= :param1 and j.createdAt <= :param2')
+            ->setParameters(
+                [
+                    'param1' => $queryParams['from'] . ' 00:00:00',
+                    'param2' => $queryParams['to'] . ' 23:59:59'
+                ]
+            );
+
+        $query->orderBy('jt.' . 'name', 'asc');
+
+        return new Paginator($query);
+    }
+
+    public function listJobsByDateAndType(array $queryParams): Paginator
+    {
+        $query = $this->entityManager
+            ->getRepository(Job::class)
+            ->createQueryBuilder('j')
+            ->select('j', 'jt', 'c')
+            ->leftJoin('j.jobType', 'jt')
+            ->leftJoin('j.client', 'c');
+
+
+        $query->where('j.createdAt >= :param1 and j.createdAt <= :param2')
+            ->setParameters(
+                [
+                    'param1' => $queryParams['from'] . ' 00:00:00',
+                    'param2' => $queryParams['to'] . ' 23:59:59',
+                ]
+            );
+        $query->andWhere('jt.name = :jobType')->setParameter('jobType', $queryParams['jobType']);
+
+        $query->orderBy('j.' . 'createdAt', 'asc');
+
+        return new Paginator($query);
+    }
+}
