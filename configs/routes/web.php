@@ -39,9 +39,12 @@ return function (App $app) {
     })->add(AuthMiddleware::class);
 
     $app->group('/reports', function (RouteCollectorProxy $reports) {
-        $reports->get('', [ReportController::class, 'index']);
-        $reports->get('/load', [ReportController::class, 'load']);
-        $reports->get('/load/list', [ReportController::class, 'loadListByDate']);
+        $reports->get('/jobtypes', [ReportController::class, 'jobTypeIndex']);
+        $reports->get('/expenses', [ReportController::class, 'expensesIndex']);
+        $reports->get('/load/jobtypes', [ReportController::class, 'loadJobTypeReports']);
+        $reports->get('/load/expenses', [ReportController::class, 'loadExpenseReports']);
+        $reports->get('/load/listjobtypes', [ReportController::class, 'loadJobListByDate']);
+        $reports->get('/load/listexpenses', [ReportController::class, 'loadExpenseListByDate']);
     })->add(AuthMiddleware::class);
 
     $app->group('/clients', function (RouteCollectorProxy $client) {

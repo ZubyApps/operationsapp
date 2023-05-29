@@ -3,14 +3,14 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('reports') }}
+    {{ encore_entry_script_tags('expensereports') }}
 {% endblock %}
 
 {% block title %}Reports{% endblock %}
 
 {% block content %}
     <div class="JobType container content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Reports</h2>
+    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Expense Reports</h2>
             <div class="d-flex justify-content-end text-start mb-4">
                 <div>
                     <span>From</span>
@@ -29,24 +29,20 @@
                 </div>
             </div>
 
-{% include 'reports/list_jobs_modal.twig' with {modal: {title: 'List of Jobs', id: 'listJobsModal' }} %}
+{% include 'reports/list_expenses_modal.twig' with {modal: {title: 'List of Expenses', id: 'listExpensesModal' }} %}
 
             <div class="">
-            <table id="jobTypeReports" class="row-border hover compact order-column stripe d-none my-4">
+            <table id="expenseReports" class="row-border hover compact order-column stripe d-none my-4">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Billed</th>
-                        <th>Paid</th>
-                        <th>Unpaid</th>
-                        <th>No. of Jobs</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>No. of Expenses</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
                 <tfoot class="fw-bolder text-primary">
                 <tr>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

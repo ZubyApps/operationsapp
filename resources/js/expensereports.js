@@ -1,13 +1,13 @@
 import { Modal }          from "bootstrap";
 import { get } from "./ajax";
 import 'datatables.net-plugins/api/sum().mjs'
-import { getJobTypesTableList, getListofJobs, getJobTypesTotalsChart, getJobTypesCountsChart } from "./reporthelpers";
+import { getExpenseReportTable, getListofExpenses, getExpensesTotalsChart, getExpensesCountsChart } from "./expensereporthelpers";
 
 window.addEventListener('DOMContentLoaded', function () {
 
-    const listJobsModal = new Modal(document.getElementById('listJobsModal'))
+    const listExpenseModal = new Modal(document.getElementById('listExpensesModal'))
     const getReportBtn  = document.querySelector('.search-date-btn')
-    const table = document.querySelector('#jobTypeReports')
+    const table = document.querySelector('#expenseReports')
     const chart = document.querySelector('#myChart')
     const chart2 = document.querySelector('#myChart2')
 
@@ -18,19 +18,19 @@ window.addEventListener('DOMContentLoaded', function () {
         
         if (from.value !== '' && to.value !== '') {
 
-            getJobTypesTableList(from.value, to.value)
+            getExpenseReportTable(from.value, to.value)
 
             table.classList.contains('d-none') ? table.classList.remove('d-none') : ''
 
-            get('/reports/load', {'from' : from.value, 'to' : to.value})
+            get('/reports/load/expenses', {'from' : from.value, 'to' : to.value})
                 .then(response => response.json())
-                .then(response => getJobTypesTotalsChart(chart, response, from.value, to.value, getReportBtn))
+                .then(response => getExpensesTotalsChart(chart, response, from.value, to.value, getReportBtn))
             
                 chart.classList.contains('d-none') ? chart.classList.remove('d-none') : ''
                 
-            get('/reports/load', {'from' : from.value, 'to' : to.value})
+            get('/reports/load/expenses', {'from' : from.value, 'to' : to.value})
                 .then(response => response.json())
-                .then(response => getJobTypesCountsChart(chart2, response, from.value, to.value, getReportBtn))
+                .then(response => getExpensesCountsChart(chart2, response, from.value, to.value, getReportBtn))
 
                 chart2.classList.contains('d-none') ? chart2.classList.remove('d-none') : ''
 
@@ -42,14 +42,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
     })
 
-    document.querySelector('#jobTypeReports').addEventListener('click', function (event) {
-        const listJobsBtn = event.target.closest('.list-jobs-btn')
+    document.querySelector('#expenseReports').addEventListener('click', function (event) {
+        const listExpensesBtn = event.target.closest('.list-expenses-btn')
 
-        if (listJobsBtn) {
-            const jobType = listJobsBtn.getAttribute('data-id')
+        if (listExpensesBtn) {
+            const category = listExpensesBtn.getAttribute('data-id')
 
             from.value !== '' && to.value !== '' ? 
-            getListofJobs(from.value, to.value, jobType, listJobsModal) 
+            getListofExpenses(from.value, to.value, category, listExpenseModal) 
             : alert('Reinsert dates')
 
             

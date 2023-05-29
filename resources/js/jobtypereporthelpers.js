@@ -3,13 +3,13 @@ import $ from 'jquery';
 import { Chart } from "chart.js/auto";
 
 
-function getJobTypesTableList(from, to){
+function getJobTypesReportTable(from, to){
     if ($.fn.DataTable.isDataTable( '#jobTypeReports' )){
         $('#jobTypeReports').dataTable().fnDestroy()
     }
         const table = new DataTable('#jobTypeReports', {
         serverSide: true,
-        ajax: {url: '/reports/load', data: {
+        ajax: {url: '/reports/load/jobtypes', data: {
                 'from': from,
                 'to': to
             }},
@@ -62,7 +62,7 @@ function getJobTypesTableList(from, to){
 function getListofJobs(from, to, jobType, modal){
     const jobsTable = new DataTable('#listOfJobs', {
             serverSide: true,
-            ajax: {url: '/reports/load/list', data: {
+            ajax: {url: '/reports/load/listjobtypes', data: {
                 'from': from,
                 'to': to,
                 'jobType': jobType
@@ -137,8 +137,9 @@ function getJobTypesTotalsChart(chart, data, from, to, reportBtn){
     });
 
     reportBtn.addEventListener('click', function() {
-        if (!chart.classList.contains('d-none'))
-        jobTypesChart.destroy()
+        if (!chart.classList.contains('d-none')) {
+            document.querySelector('[name="from"]').value !== '' && document.querySelector('[name="to"]').value !== '' ? jobTypesChart.destroy() : ''
+        }
     })
 
 }
@@ -168,8 +169,9 @@ function getJobTypesCountsChart(chart, data, from, to, reportBtn){
     });
 
     reportBtn.addEventListener('click', function() {
-        if (!chart.classList.contains('d-none'))
-        jobTypesChart.destroy()
+        if (!chart.classList.contains('d-none')){
+            document.querySelector('[name="from"]').value !== '' && document.querySelector('[name="to"]').value !== '' ?jobTypesChart.destroy() : ''
+        }
     })
 }
 
@@ -179,4 +181,4 @@ function convertDate(date){
     return newdate;
     }
 
-export {getJobTypesTableList, getListofJobs, getJobTypesTotalsChart, getJobTypesCountsChart}
+export {getJobTypesReportTable, getListofJobs, getJobTypesTotalsChart, getJobTypesCountsChart}

@@ -40,7 +40,7 @@
                         <a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false" role="button">
                         Operations
                         </a>
-                        <ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="paymentDropDownMenu">
+                        <ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="operationsDropDownMenu">
                             <li class="nav-item">
                                 <a href="/clients" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Clients</a>
                             </li>
@@ -61,9 +61,22 @@
                     </li>
 
                     {% if auth.role is same as ('Admin') %}
-                    <li class="nav-item">
-                        <a href="/reports" class="nav-link fw-bold fs-5" aria-current="page">Reports</a>
+                    <div class="dropdown payment-dropdown-menu">
+                    <a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        Reports
+                    </a>
+
+                    <ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="paymentDropDownMenu">
+
+                    <li class="nav-item p-0 ">
+                        <a href="/reports/jobtypes" class="nav-link fw-bold fs-6 text-primary" aria-current="page">JobTypes</a>
                     </li>
+                    <li class="nav-item p-0">
+                        <a href="/reports/expenses" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Expenses</a>
+                    </li>
+
+                    </ul>
+                    </div>
                     {% endif %}
 
                     <div class="dropdown settings-dropdown-menu">
