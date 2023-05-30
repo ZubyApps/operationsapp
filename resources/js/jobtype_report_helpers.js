@@ -181,4 +181,4 @@ function convertDate(date){
     return newdate;
     }
 
-export {getJobTypesReportTable, getListofJobs, getJobTypesTotalsChart, getJobTypesCountsChart}
+export {getJobTypesReportTable, getListofJobs, getJobTypesTotalsChart, getJobTypesCountsChart, convertDate}

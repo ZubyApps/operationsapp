@@ -34,8 +34,9 @@ Encore
     .addEntry("expenses", "./resources/js/expenses.js")
     .addEntry("category", "./resources/js/category.js")
     .addEntry("sponsor", "./resources/js/sponsor.js")
-    .addEntry("jobtypereports", "./resources/js/jobtypereports.js")
-    .addEntry("expensereports", "./resources/js/expensereports.js")
+    .addEntry("jobtype_reports", "./resources/js/jobtype_reports.js")
+    .addEntry("expense_reports", "./resources/js/expense_reports.js")
+    .addEntry("profit_loss", "./resources/js/profit_loss.js")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

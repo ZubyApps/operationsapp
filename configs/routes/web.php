@@ -40,11 +40,13 @@ return function (App $app) {
 
     $app->group('/reports', function (RouteCollectorProxy $reports) {
         $reports->get('/jobtypes', [ReportController::class, 'jobTypeIndex']);
-        $reports->get('/expenses', [ReportController::class, 'expensesIndex']);
         $reports->get('/load/jobtypes', [ReportController::class, 'loadJobTypeReports']);
-        $reports->get('/load/expenses', [ReportController::class, 'loadExpenseReports']);
         $reports->get('/load/listjobtypes', [ReportController::class, 'loadJobListByDate']);
+        $reports->get('/expenses', [ReportController::class, 'expensesIndex']);
+        $reports->get('/load/expenses', [ReportController::class, 'loadExpenseReports']);
         $reports->get('/load/listexpenses', [ReportController::class, 'loadExpenseListByDate']);
+        $reports->get('/profit_loss', [ReportController::class, 'profitLossIndex']);
+        $reports->get('/load/profit_loss', [ReportController::class, 'loadProfitLossReports']);
     })->add(AuthMiddleware::class);
 
     $app->group('/clients', function (RouteCollectorProxy $client) {

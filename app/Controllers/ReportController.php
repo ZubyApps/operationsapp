@@ -14,8 +14,6 @@ use Slim\Views\Twig;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-use function DI\string;
-
 class ReportController
 {
     public function __construct(
@@ -26,17 +24,13 @@ class ReportController
         private readonly RequestValidatorFactoryInterface $requestValidatorFactory
     ) {
     }
+
     public function jobTypeIndex(Request $request, Response $response): Response
     {
-        return $this->twig->render($response, 'reports/jobtype.twig');
+        return $this->twig->render($response, 'reports/jobtype/jobtype.twig');
     }
 
-    public function expensesIndex(Request $request, Response $response): Response
-    {
-        return $this->twig->render($response, 'reports/expenses.twig');
-    }
-
-    public function loadJobTypeReports(Request $request, Response $response)
+    public function loadJobTypeReports(Request $request, Response $response): Response
     {
 
         $params = 1;
@@ -151,7 +145,12 @@ class ReportController
         );
     }
 
-    public function loadExpenseReports(Request $request, Response $response)
+    public function expensesIndex(Request $request, Response $response): Response
+    {
+        return $this->twig->render($response, 'reports/expenses/expenses.twig');
+    }
+
+    public function loadExpenseReports(Request $request, Response $response): Response
     {
 
         $params = 1;
@@ -245,6 +244,49 @@ class ReportController
             array_map($transformer, (array) $expenses->getIterator()),
             $params->draw,
             $totalExpenses
+        );
+    }
+
+    public function profitLossIndex(Request $request, Response $response): Response
+    {
+        return $this->twig->render($response, 'reports/profit_loss/profit_loss.twig');
+    }
+
+    public function loadProfitLossReports(Request $request, Response $response): Response
+    {
+        $params = 1;
+        $jobs   = $this->reportService->jobReportsByMonth($request->getQueryParams());
+        $expenses   = $this->reportService->expenseReportsByMonth($request->getQueryParams());
+
+        $billsTransformer = function (Job $job) {
+            return $job->getAmountDue();
+        };
+
+        $paymentsTransformer = function (Job $job) {
+            return $job->getPaymentsTotal();
+        };
+
+        $expensesTransformer = function (Expense $expense) {
+            return $expense->getAmount();
+        };
+
+        $totalBills = array_map($billsTransformer, (array) $jobs->getIterator());
+        $totalPayments = array_map($paymentsTransformer, (array) $jobs->getIterator());
+        $totalExpenses = array_map($expensesTransformer, (array) $expenses->getIterator());
+
+        $finalArray[] = [
+            'totalBills'    => array_sum($totalBills),
+            'totalPayments' => array_sum($totalPayments),
+            'totalExpenses' => array_sum($totalExpenses),
+        ];
+
+        $totalArray = count($finalArray);
+
+        return $this->responseFormatter->asDataTable(
+            $response,
+            $finalArray,
+            $params,
+            $totalArray
         );
     }
 }

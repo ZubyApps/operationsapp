@@ -1,7 +1,7 @@
 import { Modal }          from "bootstrap";
 import { get } from "./ajax";
 import 'datatables.net-plugins/api/sum().mjs'
-import { getJobTypesReportTable, getListofJobs, getJobTypesTotalsChart, getJobTypesCountsChart } from "./jobtypereporthelpers";
+import { getJobTypesReportTable, getListofJobs, getJobTypesTotalsChart, getJobTypesCountsChart } from "./jobtype_report_helpers";
 
 window.addEventListener('DOMContentLoaded', function () {
 

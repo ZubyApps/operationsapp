@@ -1,7 +1,7 @@
 import { Modal }          from "bootstrap";
 import { get } from "./ajax";
 import 'datatables.net-plugins/api/sum().mjs'
-import { getExpenseReportTable, getListofExpenses, getExpensesTotalsChart, getExpensesCountsChart } from "./expensereporthelpers";
+import { getExpenseReportTable, getListofExpenses, getExpensesTotalsChart, getExpensesCountsChart } from "./expense_report_helpers";
 
 window.addEventListener('DOMContentLoaded', function () {
 
