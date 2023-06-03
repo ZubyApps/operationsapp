@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         <div class="modal-body">
-  <label for="basic-url" class="form-label fs-5">Client</label>
+  <label class="form-label fs-5">Client</label>
   <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">Name</span>
   <input type="text" name="client" class="form-control" placeholder="" aria-label="Client name" aria-describedby="basic-addon1" readonly>
@@ -16,7 +16,7 @@
   <input type="text" name="city" class="form-control" placeholder="" aria-label="Client name" aria-describedby="basic-addon1" readonly>
 </div>
 
-<label for="basic-url" class="form-label fs-5">Job</label>
+<label class="form-label fs-5">Job</label>
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">Type</span>
   <input type="text" name="jobType" class="form-control" aria-label="Job Type" aria-describedby="basic-addon1" readonly>
@@ -30,7 +30,7 @@
   <input type="text" name="jobStatus" class="form-control" aria-label="Status" aria-describedby="basic-addon1" readonly>
 </div>
 
-<label for="basic-url" class="form-label fs-5">Other</label>
+<label class="form-label fs-5">Other</label>
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">Staff</span>
   <input type="text" name="staff" class="form-control" aria-label="Staff" aria-describedby="basic-addon1" readonly>
@@ -41,14 +41,14 @@
 </div>
 
         <div>
-            <label for="basic-url" class="form-label fs-5">Payment Status</label>
-            <table id="paystatusTable" class="row-border hover compact order-column stripe">
+            <label class="form-label fs-5">Payment Status</label>
+            <table id="paystatusTable" name="paystatusTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
                         <th>Bill</th>
                         <th>Paid</th>
                         <th>Balance</th>
-                        <th>Status</th>
+                        <th>% Paid</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -56,8 +56,8 @@
         </div>
 
         <div>
-            <label for="basic-url" class="form-label fs-5">Payment breakdown</label>
-            <table id="paymentDetailsTable" class="row-border hover compact order-column stripe">
+            <label class="form-label fs-5">Payment breakdown</label>
+            <table id="paymentDetailsTable" name="paymentDetailsTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
                         <th>Date</th>

@@ -19,8 +19,9 @@
             <div class=" col-lg-6">
                 <div class="card" style="22rem">
                         <div class="card-header fs-4 fw-bold">
-                            Booked Jobs <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
-                            {# <i class="bi bi-pencil-fill"></i> #}
+                            Booked Jobs <button 
+                            class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
+                            <a href="/jobs"><i tooltip-test title="see full table" class="bi bi-cursor-fill"></i></a>
                             </button>
                         </div>
                     <div>
@@ -42,7 +43,7 @@
                 <div class="card" style="20rem">
                         <div class="card-header fs-4 fw-bold">
                             Incomplete Payments <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
-                            {# <i class="bi bi-pencil-fill"></i> #}
+                            <a href="/payments/paystatus"><i tooltip-test title="see full table" class="bi bi-cursor-fill"></i></a>
                             </button>
                         </div>
                     <div>
@@ -53,7 +54,7 @@
                                 <th>Job</th>
                                 <th>Bill</th>
                                 <th>Paid</th>
-                                <th>Status</th>
+                                <th>% Paid</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -67,7 +68,7 @@
                 <div class="card" style="20rem">
                         <div class="card-header fs-4 fw-bold">
                             Jobs In progress <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
-                            {# <i class="bi bi-pencil-fill"></i> #}
+                            <a href="/jobs"><i tooltip-test title="see full table" class="bi bi-cursor-fill"></i></a>
                             </button>
                         </div>
                     <div>

@@ -96,7 +96,7 @@ class PayStatusController
                 'bill'      => $paystatus->getJob()->getAmountDue(),
                 'paid'      => $paystatus->getJob()->getPaymentsTotal(),
                 'balance'   => $paystatus->getJob()->getAmountDue() - $paystatus->getJob()->getPaymentsTotal(),
-                'status'    => round((float)($paystatus->getJob()->getPaymentsTotal()/$paystatus->getJob()->getAmountDue())*100, 2),
+                'status'    => $paystatus->getJob()->getAmountDue() ? round((float)($paystatus->getJob()->getPaymentsTotal() / $paystatus->getJob()->getAmountDue()) * 100, 2) : 0,
                 'staff'     => $paystatus->getUser()->getFirstname(),
                 'activeUser'=> $this->userService->getActiveUserRole(),
                 'createdAt' => $paystatus->getCreatedAt()->format('d-M-Y g:ia')
