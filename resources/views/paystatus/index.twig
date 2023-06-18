@@ -8,11 +8,10 @@
 {% block title %}Payment Status{% endblock %}
 
 {% block content %}
-    <div class="PayStatus container content-body">
+<div class="PayStatus container-md content-body">
     <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Payment Status</h2>
         <div class="text-end mb-4">
             <button type="button" class="btn btn-primary text-white" id="payDetails" data-bs-toggle="modal" data-bs-target="">
-                <i class="bi bi-plus-circle me-1"></i>
                 Payments
             </button>
         </div>
@@ -20,6 +19,7 @@
 {% include 'paystatus/details_paystatus_modal.twig' with {modal: {title: 'Pay Details', id: 'detailsPaystatusModal' }} %}
 {% include 'paystatus/receipt_modal.twig' with {modal: {title: 'Job Receipt', id: 'receiptModal' }} %}
 
+        
             <table id="payStatusTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
@@ -48,6 +48,5 @@
                 </tr>
                 </tfoot>
             </table>
-        </div>
     </div>
 {% endblock %}

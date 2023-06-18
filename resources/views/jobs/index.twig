@@ -9,12 +9,11 @@
 
 {% block content %}
     <div class="Jobs container content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Jobs</h2>
-
+        <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Jobs</h2>
         <div class="text-end mb-4">
             <button type="button" class="btn btn-primary text-white add-list" data-bs-toggle="modal" data-bs-target="#newJobModal">
                 <i class="bi bi-plus-circle me-1"></i>
-                New Job
+                Job
             </button>
         </div>
 {% include 'jobs/job_modal.twig' with {modal: {title: 'Create Job', id: 'newJobModal', isEdit: false}} %}

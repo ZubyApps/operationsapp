@@ -13,7 +13,7 @@
         <div class="text-end mb-4">
             <button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newDepartmentModal">
                 <i class="bi bi-plus-circle me-1"></i>
-                New Department
+                Department
             </button>
         </div>
 {% include 'users/department/department_modal.twig' with {modal: {title: 'Create Department', id: 'newDepartmentModal', isEdit: false}} %}
@@ -32,6 +32,5 @@
                 </thead>
                 <tbody></tbody>
             </table>
-        </div>
     </div>
 {% endblock %}

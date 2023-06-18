@@ -51,42 +51,11 @@ class ReportController
         $finalReport = [];
         if (!empty($joblist)) {
             foreach ($joblist as $job) {
-                $preparedTotalsArray[] = [$job['jobType'] => [$job['jobType'], $job['bill'], $job['paid']]];
+                $preparedArray[] = [$job['jobType'] => [$job['jobType'], $job['bill'], $job['paid']]];
             }
 
-            $totalBillsArray = array_reduce(
-                $preparedTotalsArray,
-                function ($carry, $job) {
-
-                    foreach ($job as $type => $score) {
-
-                        if (array_key_exists($type, $carry)) {
-                            $carry[$type] += $score[1];
-                        } else {
-                            $carry[$type] = $score[1];
-                        }
-                    }
-                    return  $carry;
-                },
-                []
-            );
-
-            $totalPaidArray = array_reduce(
-                $preparedTotalsArray,
-                function ($carry, $job) {
-
-                    foreach ($job as $type => $score) {
-
-                        if (array_key_exists($type, $carry)) {
-                            $carry[$type] += $score[2];
-                        } else {
-                            $carry[$type] = $score[2];
-                        }
-                    }
-                    return  $carry;
-                },
-                []
-            );
+            $totalBillsArray = $this->reportService->prepareTotalsArray($preparedArray, 1);
+            $totalPaidArray = $this->reportService->prepareTotalsArray($preparedArray, 0);
 
             $preparedJobtypesArray = \array_flip(\array_keys($countArray));
 
@@ -115,7 +84,7 @@ class ReportController
 
         return $this->responseFormatter->asDataTable(
             $response,
-            \array_merge_recursive($finalReport),
+            $finalReport,
             $params,
             $totalJobs
         );
@@ -170,26 +139,10 @@ class ReportController
         $finalReport = [];
         if (!empty($expenseList)) {
             foreach ($expenseList as $expense) {
-                $preparedTotalsArray[] = [$expense['category'] => [$expense['category'], $expense['amount']]];
+                $preparedArray[] = [$expense['category'] => [$expense['category'], $expense['amount']]];
             }
 
-            $totalAmountsArray = array_reduce(
-                $preparedTotalsArray,
-                function ($carry, $expense) {
-
-                    foreach ($expense as $category => $value) {
-
-                        if (array_key_exists($category, $carry)) {
-                            $carry[$category] += $value[1];
-                        } else {
-                            $carry[$category] = $value[1];
-                        }
-                    }
-                    return  $carry;
-                },
-                []
-            );
-
+            $totalAmountsArray = $this->reportService->prepareTotalsArray($preparedArray, 1);
 
             $preparedCategoriesArray = \array_flip(\array_keys($countsArray));
 
@@ -217,7 +170,7 @@ class ReportController
 
         return $this->responseFormatter->asDataTable(
             $response,
-            \array_merge_recursive($finalReport),
+            $finalReport,
             $params,
             $totalExpenses
         );

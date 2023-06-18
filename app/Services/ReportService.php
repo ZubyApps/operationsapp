@@ -107,4 +107,24 @@ class ReportService
 
         return new Paginator($query);
     }
+
+    public function prepareTotalsArray(array $preparedTotalsArray, int $flag): array
+    {
+        return array_reduce(
+            $preparedTotalsArray,
+            function ($carry, $job) use ($flag) {
+
+                foreach ($job as $type => $score) {
+
+                    if (array_key_exists($type, $carry)) {
+                        $carry[$type] += $flag ? $score[1] : $score[2];
+                    } else {
+                        $carry[$type] = $flag ? $score[1] : $score[2];
+                    }
+                }
+                return  $carry;
+            },
+            []
+        );
+    }
 }

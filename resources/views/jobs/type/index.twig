@@ -14,7 +14,7 @@
         <div class="text-end mb-4">
             <button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newJobTypeModal">
                 <i class="bi bi-plus-circle me-1"></i>
-                New Job Type
+                Job Type
             </button>
         </div>
 {% include 'jobs/type/jobtype_modal.twig' with {modal: {title: 'Create Job Type', id: 'newJobTypeModal', isEdit: false}} %}
@@ -43,6 +43,5 @@
                 </tr>
                 </tfoot>
             </table>
-        </div>
     </div>
 {% endblock %}

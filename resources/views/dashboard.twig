@@ -13,11 +13,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="dashboard mb-5">
-    <div class="container-fluid overflow-hidden mt-5">
+<div class="dashboard mb-3">
+    <div class="container-sm mt-5">
         <div class="row gy-4 justify-content-center mt-5">
-            <div class=" col-lg-6">
-                <div class="card" style="22rem">
+            <div class="col-lg-6">
+                <div class="card overflow-auto" style="22rem">
                         <div class="card-header fs-4 fw-bold">
                             Booked Jobs <button 
                             class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
@@ -40,14 +40,14 @@
                 </div>
             </div>
             <div class=" col-lg-6">
-                <div class="card" style="20rem">
+                <div class="card overflow-auto" style="">
                         <div class="card-header fs-4 fw-bold">
                             Incomplete Payments <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
                             <a href="/payments/paystatus"><i tooltip-test title="see full table" class="bi bi-cursor-fill"></i></a>
                             </button>
                         </div>
                     <div>
-                        <table id="jobsPaystatusTable" class="row-border hover compact order-column stripe">
+                        <table id="jobsPaystatusTable" class="row-border hover compact order-column stripe overflow-scroll">
                         <thead>
                             <tr>
                                 <th>Client</th>
@@ -64,8 +64,8 @@
             </div>
         </div>
         <div class="row gy-4 justify-content-start mt-1">
-            <div class=" col-lg-6">
-                <div class="card" style="20rem">
+            <div class=" col-lg-6 ">
+                <div class="card overflow-auto" style="">
                         <div class="card-header fs-4 fw-bold">
                             Jobs In progress <button class="mr-5 btn btn-outline-black edit-department-btn" id="paymethod-btn">
                             <a href="/jobs"><i tooltip-test title="see full table" class="bi bi-cursor-fill"></i></a>

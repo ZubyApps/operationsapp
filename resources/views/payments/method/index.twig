@@ -13,7 +13,7 @@
         <div class="text-end mb-4">
             <button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newPayMethodModal">
                 <i class="bi bi-plus-circle me-1"></i>
-                New Payment Method
+                Payment Method
             </button>
         </div>
 {% include 'payments/method/paymethod_modal.twig' with {modal: {title: 'Create Payment Method', id: 'newPayMethodModal', isEdit: false}} %}
@@ -42,6 +42,5 @@
                 </tr>
                 </tfoot>
             </table>
-        </div>
     </div>
 {% endblock %}

@@ -10,21 +10,19 @@
 {% block content %}
     <div class="Expenses container content-body">
     <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center mb-5">Expenses</h2>
-        <div class="d-flex justify-content-between mb-4">
+        <div class="d-flex justify-content-between mb-4 flex-wrap">
             <div class="">
                 <button type="button" class="btn btn-primary text-white text-start" id="categoryBtn">
-                <i class="bi bi-plus-circle me-1"></i>
-                Set Category
+                Category
                 </button>
                 <button type="button" class="btn btn-primary text-white text-start" id="sponsorBtn">
-                <i class="bi bi-plus-circle me-1"></i>
-                Set Sponsor
+                Sponsor
                 </button>
             </div>
             <div class"">
                 <button type="button" class="btn btn-primary text-white" id="expenseModalBtn" data-bs-toggle="modal" data-bs-target="#newExpenseModal">
                 <i class="bi bi-plus-circle me-1"></i>
-                New Expense
+                Expense
                 </button>
             </div>
         </div>
@@ -56,6 +54,5 @@
                 </tr>
                 </tfoot>
             </table>
-        </div>
     </div>
 {% endblock %}
