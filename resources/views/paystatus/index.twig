@@ -19,7 +19,7 @@
 {% include 'paystatus/details_paystatus_modal.twig' with {modal: {title: 'Pay Details', id: 'detailsPaystatusModal' }} %}
 {% include 'paystatus/receipt_modal.twig' with {modal: {title: 'Job Receipt', id: 'receiptModal' }} %}
 
-        
+        <div class="container overflow-auto">
             <table id="payStatusTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
@@ -48,5 +48,6 @@
                 </tr>
                 </tfoot>
             </table>
+        </div>
     </div>
 {% endblock %}

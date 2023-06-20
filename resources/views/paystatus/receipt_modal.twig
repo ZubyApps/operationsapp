@@ -1,11 +1,11 @@
 <div class="modal fade modal-lg" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fs-4">{{ modal.title }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        <div class="modal-body receipt">
+        <div class="modal-body receipt overflow-auto">
             <header class="d-flex flex-wrap justify-content-between align-items-top mb-4">
                 <div class="">
                     <img src="{{ asset('build/images/tripple a logo.jpg') }}" width="128" height="128" alt="OperationsApp Logo" />

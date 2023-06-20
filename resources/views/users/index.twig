@@ -13,12 +13,12 @@
         <div class="d-flex justify-content-end mb-4">
             <div class="">
                 <button type="button" class="btn btn-primary text-white text-start" id="registerUser">
-                <i class="bi bi-plus-circle me-1"></i>
-                Register Staff
+                {# <i class="bi bi-plus-circle me-1"></i> #}
+                Register
                 </button>
                 <button type="button" class="btn btn-primary text-white" id="openNewUserRoleModal" data-bs-toggle="modal" data-bs-target="#newUserRoleModal">
-                <i class="bi bi-plus-circle me-1"></i>
-                Staff role
+                {# <i class="bi bi-plus-circle me-1"></i> #}
+                Roles
                 </button>
             </div>
         </div>
@@ -26,7 +26,7 @@
 {% include '/users/user_modal.twig' with {modal: {title: 'Edit Staff Profile', id: 'editUserModal', isEdit: true}} %}
 
 
-        <div>
+        <div class="overflow-auto">
             <table id="usersTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>

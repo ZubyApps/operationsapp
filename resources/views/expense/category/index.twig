@@ -11,15 +11,13 @@
 {% block content %}
     <div class="Category container content-body">
     <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center mb-5">Expense Categories</h2>
-        <div class="d-flex justify-content-between mb-4">
+        <div class="d-flex justify-content-end gx-1 mb-4">
             <div class="">
                 <button type="button" class="btn btn-primary text-white text-start" id="expensesBtn">
-                Back to Expenses
+                Back
                 </button>
-            </div>
-            <div class"">
+            
                 <button type="button" class="btn btn-primary text-white" id="expenseModalBtn" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
-                <i class="bi bi-plus-circle me-1"></i>
                 Category
                 </button>
             </div>
@@ -27,6 +25,7 @@
 {% include 'expense/category/category_modal.twig' with {modal: {title: 'Create Category', id: 'newCategoryModal', isEdit: false}} %}
 {% include 'expense/category/category_modal.twig' with {modal: {title: 'Edit Category', id: 'editCategoryModal', isEdit: true}} %}
 
+        <div class="overflow-auto">
             <table id="categoriesTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
@@ -50,5 +49,6 @@
                 </tr>
                 </tfoot>
             </table>
+        </div>
     </div>
 {% endblock %}

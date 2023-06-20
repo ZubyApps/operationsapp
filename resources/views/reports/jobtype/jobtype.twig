@@ -10,18 +10,18 @@
 
 {% block content %}
     <div class="JobType container content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">JobType Reports</h2>
+        <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">JobType Reports</h2>
             <div class="d-flex justify-content-end text-start mb-4">
                 <div>
                     <span>From</span>
-                    <input type="date" name="from" min="" class="form-control form-control-md" required />
+                    <input type="date" name="from" min="" class="form-control form-control-sm" required />
                 </div>
                 <div class="mx-2">
                     <span>To</span>
-                    <input type="date" name="to" min="" class="form-control form-control-md" required />
+                    <input type="date" name="to" min="" class="form-control form-control-sm" required />
                 </div>
             </div>
-            <div class="d-flex justify-content-end mb-4">
+            <div class="d-flex justify-content-end">
                 <div>
                     <button type="button" class="btn btn-primary text-white search-date-btn" >
                     Get Report
@@ -31,8 +31,8 @@
 
 {% include 'reports/jobtype/list_jobs_modal.twig' with {modal: {title: 'List of Jobs', id: 'listJobsModal' }} %}
 
-            <div class="">
-            <table id="jobTypeReports" class="row-border hover compact order-column stripe d-none my-4">
+            <div class="container overflow-auto">
+            <table id="jobTypeReports" class="row-border hover compact order-column stripe d-none">
                 <thead>
                     <tr>
                         <th>Type</th>
@@ -54,13 +54,15 @@
                 </tfoot>
             </table>
             </div>
-            <div class="mx-4" style="width: 800px; height: 800px;">
-                <canvas id="myChart" class="d-none"></canvas>
+            <div class="overflow-auto">
+                <div class="mx-4" style="width: 800px; height:500px;">
+                    <canvas id="myChart" class="d-none"></canvas>
+                </div>
             </div>
-
-            <div class="mx-4" style="width: 800px; height: 800px;">
-                <canvas id="myChart2" class="d-none"></canvas>
+            <div class="overflow-auto">
+                <div class="mx-4" style="width: 800px; height: 500px;">
+                    <canvas id="myChart2" class="d-none"></canvas>
+                </div>
             </div>
         </div>
-    </div>
 {% endblock %}

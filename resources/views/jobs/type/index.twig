@@ -20,6 +20,7 @@
 {% include 'jobs/type/jobtype_modal.twig' with {modal: {title: 'Create Job Type', id: 'newJobTypeModal', isEdit: false}} %}
 {% include 'jobs/type/jobtype_modal.twig' with {modal: {title: 'Edit Job Type', id: 'editJobTypeModal', isEdit: true}} %}
 
+        <div class="overflow-auto">
             <table id="jobTypesTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
@@ -43,5 +44,6 @@
                 </tr>
                 </tfoot>
             </table>
+        </div>
     </div>
 {% endblock %}

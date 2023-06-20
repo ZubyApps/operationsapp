@@ -20,10 +20,10 @@
 {% include 'jobs/job_modal.twig' with {modal: {title: 'Edit Job', id: 'editJobModal', isEdit: true}} %}
 {% include 'jobs/details_job_modal.twig' with {modal: {title: 'Details', id: 'detailsJobModal' }} %}
 
+        <div class="overflow-auto">
             <table id="jobsTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
-                        {# <th>Created</th> #}
                         <th>Client</th>
                         <th>No.</th>
                         <th>Type</th>
@@ -48,5 +48,6 @@
                 </tr>
                 </tfoot>
             </table>
+        <div>
     </div>
 {% endblock %}

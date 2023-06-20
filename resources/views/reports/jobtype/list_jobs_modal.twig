@@ -1,13 +1,13 @@
 <div class="modal fade modal-lg" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fs-4">{{ modal.title }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        <div class="modal-body">
-        <div>
+        
         <span class="table-label fs-5"></span>
+        <div class="overflow-auto">
             <table id="listOfJobs" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
@@ -41,4 +41,3 @@
             </div>
         </div>
     </div>
-</div>

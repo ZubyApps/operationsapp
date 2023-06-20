@@ -19,6 +19,7 @@
 {% include 'payments/method/paymethod_modal.twig' with {modal: {title: 'Create Payment Method', id: 'newPayMethodModal', isEdit: false}} %}
 {% include 'payments/method/paymethod_modal.twig' with {modal: {title: 'Edit Payment Method', id: 'editPayMethodModal', isEdit: true}} %}
 
+        <div class="overflow-auto">
             <table id="payMethodTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
@@ -42,5 +43,6 @@
                 </tr>
                 </tfoot>
             </table>
+        </div>
     </div>
 {% endblock %}

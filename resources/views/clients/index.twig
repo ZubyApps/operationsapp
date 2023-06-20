@@ -20,6 +20,7 @@
 {% include 'clients/client_modal.twig' with {modal: {title: 'Edit Client', id: 'editClientModal', isEdit: true}} %}
 {% include 'clients/details_client_modal.twig' with {modal: {title: 'Details', id: 'detailsClientModal' }} %}
 
+        <div class="overflow-auto">
             <table id="clientsTable" class="row-border hover compact order-column stripe " style="vw: 80%;">
                 <thead>
                     <tr>
@@ -47,5 +48,6 @@
                 </tr>
                 </tfoot>
             </table>
+        </div>
     </div>
 {% endblock %}

@@ -10,16 +10,16 @@
 {% block content %}
     <div class="Expenses container content-body">
     <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center mb-5">Expenses</h2>
-        <div class="d-flex justify-content-end mb-4 gy-2 gx-3">
+        <div class="d-flex justify-content-end mb-4 gx-1 p-0">
             <div class="">
-                <button type="button" class="btn btn-primary text-white text-start" id="categoryBtn">
+                <button type="button" class="btn btn-primary text-white text-start px-2" id="categoryBtn">
                 Category
                 </button>
-                <button type="button" class="btn btn-primary text-white text-start" id="sponsorBtn">
+                <button type="button" class="btn btn-primary text-white text-start px-2" id="sponsorBtn">
                 Sponsor
                 </button>
-                <button type="button" class="btn btn-primary text-white text-end" id="expenseModalBtn" data-bs-toggle="modal" data-bs-target="#newExpenseModal">
-                <i class="bi bi-plus-circle "></i>
+                <button type="button" class="btn btn-primary text-white text-end px-2" id="expenseModalBtn" data-bs-toggle="modal" data-bs-target="#newExpenseModal">
+                {# <i class="bi bi-plus-circle "></i> #}
                 Expense
                 </button>
             </div>
@@ -27,6 +27,7 @@
 {% include 'expense/expense_modal.twig' with {modal: {title: 'Record Expense', id: 'newExpenseModal', isEdit: false}} %}
 {% include 'expense/expense_modal.twig' with {modal: {title: 'Edit Expense', id: 'editExpenseModal', isEdit: true}} %}
 
+        <div class="overflow-auto">
             <table id="expenseTable" class="row-border hover compact order-column stripe">
                 <thead>
                     <tr>
@@ -52,5 +53,6 @@
                 </tr>
                 </tfoot>
             </table>
+        </div>
     </div>
 {% endblock %}
