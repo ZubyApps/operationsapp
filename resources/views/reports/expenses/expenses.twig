@@ -9,7 +9,7 @@
 {% block title %}Reports{% endblock %}
 
 {% block content %}
-    <div class="JobType container content-body">
+    <div class="Expenses container content-body">
         <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Expense Reports</h2>
             <div class="d-flex justify-content-end text-start mb-4">
                 <div>
@@ -31,7 +31,7 @@
 
 {% include 'reports/expenses/list_expenses_modal.twig' with {modal: {title: 'List of Expenses', id: 'listExpensesModal' }} %}
 
-            <div class="container overflow-auto">
+            <div class="container">
                 <table id="expenseReports" class="row-border hover compact order-column d-none stripe my-4">
                     <thead>
                         <tr>

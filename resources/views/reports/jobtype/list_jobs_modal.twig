@@ -5,33 +5,31 @@
                 <h5 class="modal-title fs-4">{{ modal.title }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        
-        <span class="table-label fs-5"></span>
-        <div class="overflow-auto">
-            <table id="listOfJobs" class="row-border hover compact order-column stripe">
-                <thead>
+        <div class="modal-body">
+            <span class="table-label fs-5"></span>
+            <div class="overflow-auto">
+                <table id="listOfJobs" class="row-border hover compact order-column stripe">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Client</th>
+                            <th>Bill</th>
+                            <th>Paid</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot class="fw-bolder text-primary">
                     <tr>
-                        <th>Date</th>
-                        <th>Client</th>
-                        <th>Bill</th>
-                        <th>Paid</th>
-                        <th>Status</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     </tr>
-                </thead>
-                <tbody></tbody>
-                <tfoot class="fw-bolder text-primary">
-                <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-
-
+                    </tfoot>
+                </table>
+            </div>
         </div>
             <div class="modal-footer px-5">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -39,5 +37,6 @@
                     Close
                 </button>
             </div>
+        </div>
         </div>
     </div>
