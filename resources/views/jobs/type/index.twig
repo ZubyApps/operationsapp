@@ -2,48 +2,49 @@
 
 
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('jobtype') }}
+	{{ parent() }}
+	{{ encore_entry_script_tags('jobtype') }}
 {% endblock %}
 
-{% block title %}Job Types{% endblock %}
+{% block title %}Job Types
+{% endblock %}
 
 {% block content %}
-    <div class="JobType container content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Job Types</h2>
-        <div class="text-end mb-4">
-            <button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newJobTypeModal">
-                <i class="bi bi-plus-circle me-1"></i>
-                Job Type
-            </button>
-        </div>
-{% include 'jobs/type/jobtype_modal.twig' with {modal: {title: 'Create Job Type', id: 'newJobTypeModal', isEdit: false}} %}
-{% include 'jobs/type/jobtype_modal.twig' with {modal: {title: 'Edit Job Type', id: 'editJobTypeModal', isEdit: true}} %}
+	<div class="JobType container content-body">
+		<h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Job Types</h2>
+		<div class="text-end mb-4">
+			<button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newJobTypeModal">
+				<i class="bi bi-plus-circle me-1"></i>
+				Job Type
+			</button>
+		</div>
+		{% include 'jobs/type/jobtype_modal.twig' with {modal: {title: 'Create Job Type', id: 'newJobTypeModal', isEdit: false}} %}
+		{% include 'jobs/type/jobtype_modal.twig' with {modal: {title: 'Edit Job Type', id: 'editJobTypeModal', isEdit: true}} %}
 
-        <div class="">
-            <table id="jobTypesTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Job count</th>
-                        <th>Total</th>
-                        <th>Created at</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-                <tfoot class="fw-bolder text-primary">
-                <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+		<div class="">
+			<table id="jobTypesTable" class="row-border hover compact order-column stripe">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Job count</th>
+						<th>Total</th>
+						<th>Created at</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot class="fw-bolder text-primary">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
 {% endblock %}

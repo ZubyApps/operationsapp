@@ -2,8 +2,6 @@ window.addEventListener('DOMContentLoaded', function () {
     const    jobTypeBtn = document.getElementById('jobtype-btn')
     const    departmentBtn = document.getElementById('department-btn')
     const    paymethodBtn = document.getElementById('paymethod-btn')
-    const    adminBtn = document.getElementById('admin-btn')
-    const    creatorBtn = document.getElementById('creator-btn')
     const    staffBtn = document.getElementById('staff-btn')
 
 
@@ -29,14 +27,5 @@ window.addEventListener('DOMContentLoaded', function () {
     staffBtn.addEventListener('click', function() {
         window.location = "settings/users"
     })
-    }
-    // adminBtn.addEventListener('click', function () {
-    //     window.location = "/settings/admin"
-    // })
-
-    // creatorBtn.addEventListener('click', function() {
-    //     window.location = "settings/creator"
-    // })
-
-    
+    }    
 })

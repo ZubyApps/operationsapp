@@ -22,7 +22,12 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDO\MySQL\Driver;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use DoctrineExtensions\Query\Mysql\Cast;
 use DoctrineExtensions\Query\Mysql\Date;
+use DoctrineExtensions\Query\Mysql\DateFormat;
+use DoctrineExtensions\Query\Mysql\Month;
+use DoctrineExtensions\Query\Mysql\MonthName;
+use DoctrineExtensions\Query\Mysql\Year;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
@@ -67,6 +72,11 @@ return [
             $config->get('doctrine.dev_mode'),
         );
         $configuration->addCustomDatetimeFunction('DATE', Date::class);
+        $configuration->addCustomDatetimeFunction('YEAR', Year::class);
+        $configuration->addCustomDatetimeFunction('CAST', Cast::class);
+        $configuration->addCustomDatetimeFunction('MONTH', Month::class);
+        $configuration->addCustomDatetimeFunction('MONTHNAME', MonthName::class);
+        $configuration->addCustomDatetimeFunction('DATE_FORMAT', DateFormat::class);
 
         return new EntityManager(new Connection($config->get('doctrine.connection'), new Driver()),
         $configuration

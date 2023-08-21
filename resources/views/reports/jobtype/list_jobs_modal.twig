@@ -1,42 +1,46 @@
 <div class="modal fade modal-lg" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fs-4">{{ modal.title }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-        <div class="modal-body">
-            <span class="table-label fs-5"></span>
-            <div class="overflow-auto">
-                <table id="listOfJobs" class="row-border hover compact order-column stripe">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Client</th>
-                            <th>Bill</th>
-                            <th>Paid</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot class="fw-bolder text-primary">
-                    <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-            <div class="modal-footer px-5">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle me-1"></i>
-                    Close
-                </button>
-            </div>
-        </div>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title fs-4">{{ modal.title }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<span class="table-label fs-5"></span>
+				<div class="overflow-auto">
+					<table id="listOfJobs" class="row-border hover compact order-column stripe">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Client</th>
+								{{ modal.isMonth ? '<th>JobType</th>' : '' }}
+								<th>Bill</th>
+								<th>Paid</th>
+								<th>Unpaid</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+						<tfoot class="fw-bolder text-primary">
+							<tr>
+								<td></td>
+								<td></td>
+								{{ modal.isMonth ? '<td></td>' : '' }}
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer px-5">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+					<i class="bi bi-x-circle me-1"></i>
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

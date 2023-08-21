@@ -2,8 +2,21 @@ import { Modal }          from "bootstrap";
 import $ from 'jquery';
 import { get, post, del, clearValidationErrors } from "./ajax";
 import DataTable          from "datatables.net";
-import 'datatables.net-plugins/api/sum().mjs'
+import 'datatables.net-plugins/api/sum().mjs';
+import JSzip from 'jszip';
+import pdfMake from 'pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+import 'datatables.net-buttons-dt';
+import 'datatables.net-buttons/js/buttons.colVis.mjs';
+import 'datatables.net-buttons/js/buttons.html5.mjs';
+import 'datatables.net-buttons/js/buttons.print.mjs';
+import 'datatables.net-select-dt';
+import 'datatables.net-staterestore-dt';
 import { clearValues, getPaymentDetails, getPayStatus, clearClientsList } from "./helpers";
+DataTable.Buttons.jszip(JSzip)
+DataTable.Buttons.pdfMake(pdfMake)
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -27,6 +40,14 @@ window.addEventListener('DOMContentLoaded', function () {
         serverSide: true,
         ajax: '/jobs/load',
         orderMulti: false,
+        dom: 'lfrtip<"my-5 text-center "B>',
+        buttons: [
+            {extend: 'copy', className: 'btn btn-primary text-white'},
+            {extend: 'csv', className: 'btn btn-primary text-white'},
+            {extend: 'excel', className: 'btn btn-primary text-white'},
+            {extend: 'pdfHtml5', className: 'btn btn-primary text-white'},
+            {extend: 'print', className: 'btn btn-primary text-white'},
+             ],
         language: {
             searchPlaceholder:"Date? eg '2023-12-31'"
         },
@@ -278,14 +299,13 @@ window.addEventListener('DOMContentLoaded', function () {
     })
     
     editJobModal._element.addEventListener('hidden.bs.modal', function () {
-        clearClientsList(editJobModal._element.querySelector('#clientOption'))
         clearValidationErrors(editJobModal._element)
     })
 })
 
 
 
-function openJobModal(modal, {id, ...data}) {    
+function openJobModal(modal, {id, clientId, ...data}) {    
     for (let name in data) {
         const nameInput = modal._element.querySelector(`[name="${ name }"]`)
 
@@ -295,6 +315,7 @@ function openJobModal(modal, {id, ...data}) {
         if (modal._element.id === 'editJobModal'){
             let date = new Date().toISOString().slice(0,16)
             modal._element.querySelector('.save-job-btn').setAttribute('data-id', id)
+            modal._element.querySelector('#client-id').setAttribute('data-id', clientId)
             modal._element.querySelector('[name="dueDate"]').setAttribute('min', date)
 
             if (modal._element.querySelector('[name="jobStatus"]').value === 'Booked') {
@@ -304,9 +325,9 @@ function openJobModal(modal, {id, ...data}) {
             }
 
             modal.show()
-            get('/clients/list')
-                .then(response => response.json())
-                .then(response => displayClientList(modal, response))
+            // get('/clients/list')
+            //     .then(response => response.json())
+            //     .then(response => displayClientList(modal, response))
             
         } else if (modal._element.id === 'detailsJobModal') {
             modal._element.querySelector('.job-details-btn').setAttribute('data-id', id)
@@ -349,6 +370,10 @@ function displayClientList(modal, data) {
 
 function getClientDataId(modal) {
         const inputEl = modal._element.querySelector('#client-id')
+
+        if (modal._element.id === 'editJobModal'){
+            return inputEl.dataset.id
+        }
 
         const dataListId = modal._element.querySelector('#clientList')
 

@@ -1,76 +1,78 @@
 <div class="modal fade modal-md" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content w-2">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ modal.title }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Client<span class="text-danger">*</span></label>
-                                <input type="search" name="client" id="client-id" required
-                                class="form-control form-control-md"
-                                placeholder="Search Client Name" {{ modal.isEdit ? 'disabled' : '' }} />
-                                <datalist name="client" type="text" class="decoration-none bg-white">
-                                </datalist>
-                            </div>
-                            <div class="form-outline form-white mb-2" {{ modal.isEdit ? '' : 'hidden' }}>
-                            <label for="basic-url" class="form-label fs-5">Mobile No.<span class="text-danger">*</span></label>
-                                <input type="tel" name="number"
-                                class="form-control form-control-md"
-                                placeholder="Phone No."  {{ modal.isEdit ? 'disabled' : '' }}/>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Job type<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-md" aria-label="JobType" name="jobType">
-                                    <option value="">Select Job Type</option>
-                                        {% for jobType in jobTypes %}
-                                    <option value="{{ jobType.id }}">{{ jobType.name }}</option>
-                                        {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Details<span class="text-danger">*</span></label>
-                                <textarea type="text" name="details" rows="6" class="form-control" aria-label="Details" placeholder="Details"></textarea>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Bill<span class="text-danger">*</span></label>
-                                <input type="number" name="bill" 
-                                class="form-control form-control-md"
-                                placeholder="Job Bill" />
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Job status<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-md" aria-label="JobStatus" name="jobStatus">
-                                    <option value="">Select Status</option>
-                                    <option value="Booked">Booked</option>
-                                    <option value="Inprogress">In progress</option>
-                                    <option value="Delivered" {{ modal.isEdit ? "" : "hidden" }}>Delivered</option>
-                                </select>
-                            </div>
-                            <div class="form-check d-none">
-                            <input class="form-check-input" type="radio" name="confirmBooking" value="" id="flexSwitchCheckDefault" >
-                            <label class="form-check-label" for="flexSwitchCheckDefault">
-                                Force booking
-                            </label>
-                            </div>
-                            <div class="form-outline form-white mb-2 d-none dueDate" id="">
-                            <label for="basic-url" class="form-label fs-5">Due date<span class="text-danger">*</span></label>
-                                <input type="datetime-local" name="dueDate" min=""
-                                class="form-control form-control-md"
-                                placeholder="Date" />
-                            </div>
-                        </div>
-            <div class="modal-footer px-5">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle me-1"></i>
-                    Close
-                </button>
-                <button type="button" class="btn bg-primary text-white {{ modal.isEdit ? 'save' : 'create' }}-job-btn">
-                    <i class="bi bi-check-circle me-1"></i>
-                    {{ modal.isEdit ? 'Save' : 'Create' }}
-                </button>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content w-2">
+			<div class="modal-header">
+				<h5 class="modal-title">{{ modal.title }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Client<span class="text-danger">*</span>
+					</label>
+					<input type="search" name="client" id="client-id" required class="form-control form-control-md" placeholder="Search Client Name" {{ modal.isEdit ? 'disabled' : '' }}/>
+					{{ modal.isEdit ? ''
+                                 : '<datalist name="client" type="text" class="decoration-none bg-white">
+                                </datalist>'
+                                 }}
+
+				</div>
+				<div class="form-outline form-white mb-2" {{ modal.isEdit ? '' : 'hidden' }}>
+					<label for="basic-url" class="form-label fs-5">Mobile No.<span class="text-danger">*</span>
+					</label>
+					<input type="tel" name="number" class="form-control form-control-md" placeholder="Phone No." {{ modal.isEdit ? 'disabled' : '' }}/>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Job type<span class="text-danger">*</span>
+					</label>
+					<select class="form-select form-select-md" aria-label="JobType" name="jobType">
+						<option value="">Select Job Type</option>
+						{% for jobType in jobTypes %}
+							<option value="{{ jobType.id }}">{{ jobType.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Details<span class="text-danger">*</span>
+					</label>
+					<textarea type="text" name="details" rows="6" class="form-control" aria-label="Details" placeholder="Details"></textarea>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Bill<span class="text-danger">*</span>
+					</label>
+					<input type="number" name="bill" class="form-control form-control-md" placeholder="Job Bill"/>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Job status<span class="text-danger">*</span>
+					</label>
+					<select class="form-select form-select-md" aria-label="JobStatus" name="jobStatus">
+						<option value="">Select Status</option>
+						<option value="Booked">Booked</option>
+						<option value="Inprogress">In progress</option>
+						<option value="Delivered" {{ modal.isEdit ? "" : "hidden" }}>Delivered</option>
+					</select>
+				</div>
+				<div class="form-check d-none">
+					<input class="form-check-input" type="radio" name="confirmBooking" value="" id="flexSwitchCheckDefault">
+					<label class="form-check-label" for="flexSwitchCheckDefault">
+						Force booking
+					</label>
+				</div>
+				<div class="form-outline form-white mb-2 d-none dueDate" id="">
+					<label for="basic-url" class="form-label fs-5">Due date<span class="text-danger">*</span>
+					</label>
+					<input type="datetime-local" name="dueDate" min="" class="form-control form-control-md" placeholder="Date"/>
+				</div>
+			</div>
+			<div class="modal-footer px-5">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+					<i class="bi bi-x-circle me-1"></i>
+					Close
+				</button>
+				<button type="button" class="btn bg-primary text-white {{ modal.isEdit ? 'save' : 'create' }}-job-btn">
+					<i class="bi bi-check-circle me-1"></i>
+					{{ modal.isEdit ? 'Save' : 'Create' }}
+				</button>
+			</div>
+		</div>
+	</div>
 </div>

@@ -22,13 +22,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
             table.classList.contains('d-none') ? table.classList.remove('d-none') : ''
 
-            get('/reports/load/jobtypes', {'from' : from.value, 'to' : to.value})
+            get('/reports/load/job_reports', {'from' : from.value, 'to' : to.value})
                 .then(response => response.json())
                 .then(response => getJobTypesTotalsChart(chart, response, from.value, to.value, getReportBtn))
             
                 chart.classList.contains('d-none') ? chart.classList.remove('d-none') : ''
                 
-            get('/reports/load/jobtypes', {'from' : from.value, 'to' : to.value})
+            get('/reports/load/job_reports', {'from' : from.value, 'to' : to.value})
                 .then(response => response.json())
                 .then(response => getJobTypesCountsChart(chart2, response, from.value, to.value, getReportBtn))
 

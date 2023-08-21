@@ -2,54 +2,55 @@
 
 
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('category') }}
+	{{ parent() }}
+	{{ encore_entry_script_tags('category') }}
 {% endblock %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Category
+{% endblock %}
 
 {% block content %}
-    <div class="Category container content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center mb-5">Expense Categories</h2>
-        <div class="d-flex justify-content-end gx-1 mb-4">
-            <div class="">
-                <button type="button" class="btn btn-primary text-white text-start" id="expensesBtn">
-                Back
-                </button>
-            
-                <button type="button" class="btn btn-primary text-white" id="expenseModalBtn" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
-                <i class="bi bi-plus-circle me-1"></i>
-                Category
-                </button>
-            </div>
-        </div>
-{% include 'expense/category/category_modal.twig' with {modal: {title: 'Create Category', id: 'newCategoryModal', isEdit: false}} %}
-{% include 'expense/category/category_modal.twig' with {modal: {title: 'Edit Category', id: 'editCategoryModal', isEdit: true}} %}
+	<div class="Category container content-body">
+		<h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center mb-5">Expense Categories</h2>
+		<div class="d-flex justify-content-end gx-1 mb-4">
+			<div class="">
+				<button type="button" class="btn btn-primary text-white text-start" id="expensesBtn">
+					Back
+				</button>
 
-        <div class="">
-            <table id="categoriesTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Expenses Count</th>
-                        <th>Total</th>
-                        <th>Created at</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-                <tfoot class="fw-bolder text-primary">
-                <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+				<button type="button" class="btn btn-primary text-white" id="expenseModalBtn" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
+					<i class="bi bi-plus-circle me-1"></i>
+					Category
+				</button>
+			</div>
+		</div>
+		{% include 'expense/category/category_modal.twig' with {modal: {title: 'Create Category', id: 'newCategoryModal', isEdit: false}} %}
+		{% include 'expense/category/category_modal.twig' with {modal: {title: 'Edit Category', id: 'editCategoryModal', isEdit: true}} %}
+
+		<div class="">
+			<table id="categoriesTable" class="row-border hover compact order-column stripe">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Expenses Count</th>
+						<th>Total</th>
+						<th>Created at</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot class="fw-bolder text-primary">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
 {% endblock %}

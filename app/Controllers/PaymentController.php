@@ -65,6 +65,7 @@ class PaymentController
     public function delete(Request $request, Response $response, array $args): Response
     {
         $this->paymentService->delete((int) $args['id']);
+        $this->payStatusService->populate($request->getParsedBody()['job'], $request->getAttribute('user'));
 
         return $response;
     }

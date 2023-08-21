@@ -1,53 +1,54 @@
 {% extends 'layout.twig' %}
 
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('paystatus') }}
+	{{ parent() }}
+	{{ encore_entry_script_tags('paystatus') }}
 {% endblock %}
 
-{% block title %}Payment Status{% endblock %}
+{% block title %}Payment Status
+{% endblock %}
 
 {% block content %}
-<div class="PayStatus container-md content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Payment Status</h2>
-        <div class="text-end mb-4">
-            <button type="button" class="btn btn-primary text-white" id="payDetails" data-bs-toggle="modal" data-bs-target="">
-                Payments
-            </button>
-        </div>
-{% include 'paystatus/pay_job_modal.twig' with {modal: {title: 'Pay For Job', id: 'payJobModal' }} %}
-{% include 'paystatus/details_paystatus_modal.twig' with {modal: {title: 'Pay Details', id: 'detailsPaystatusModal' }} %}
-{% include 'paystatus/receipt_modal.twig' with {modal: {title: 'Job Receipt', id: 'receiptModal' }} %}
+	<div class="PayStatus container-md content-body">
+		<h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Payment Status</h2>
+		<div class="text-end mb-4">
+			<button type="button" class="btn btn-primary text-white" id="payDetails" data-bs-toggle="modal" data-bs-target="">
+				Payments
+			</button>
+		</div>
+		{% include 'paystatus/pay_job_modal.twig' with {modal: {title: 'Pay For Job', id: 'payJobModal' }} %}
+		{% include 'paystatus/details_paystatus_modal.twig' with {modal: {title: 'Pay Details', id: 'detailsPaystatusModal' }} %}
+		{% include 'paystatus/receipt_modal.twig' with {modal: {title: 'Job Receipt', id: 'receiptModal' }} %}
 
-        <div class="container">
-            <table id="payStatusTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Client</th>
-                        <th>Phone</th>
-                        <th>Job type</th>
-                        <th>Job Status</th>
-                        <th>Bill</th>
-                        <th>Paid</th>
-                        <th>Balance</th>
-                        <th>%</th>
-                        <th>Pay</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-                <tfoot class="fw-bolder text-primary">
-                <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+		<div class="container">
+			<table id="payStatusTable" class="row-border hover compact order-column stripe">
+				<thead>
+					<tr>
+						<th>Client</th>
+						<th>Phone</th>
+						<th>Job type</th>
+						<th>Job Status</th>
+						<th>Bill</th>
+						<th>Paid</th>
+						<th>Balance</th>
+						<th>%</th>
+						<th>Pay</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot class="fw-bolder text-primary">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
 {% endblock %}

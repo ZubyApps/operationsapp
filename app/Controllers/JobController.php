@@ -85,7 +85,8 @@ class JobController
         }
 
         $data = [
-            'id'        => $job->getId(), 
+            'id'        => $job->getId(),
+            'clientId'  => $job->getClient()->getId(), 
             'client'    => $job->getClient()->getName(),
             'number'    => $job->getClient()->getPhoneNumber(),
             'jobType'   => $job->getJobtype()->getId(),

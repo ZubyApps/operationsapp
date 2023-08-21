@@ -19,6 +19,7 @@ use App\Controllers\SponsorController;
 use App\Controllers\UserController;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
+use App\Middleware\RegisterMiddleware;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
@@ -34,20 +35,26 @@ return function (App $app) {
     $app->post('/logout', [AuthController::class, 'logOut'])->add(AuthMiddleware::class);
     
     $app->group('/register', function (RouteCollectorProxy $register) {
-        $register->get('', [AuthController::class, 'registerView']);
+        $register->get('', [AuthController::class, 'registerView'])->add(RegisterMiddleware::class);
         $register->post('', [AuthController::class, 'register']);
     })->add(AuthMiddleware::class);
 
     $app->group('/reports', function (RouteCollectorProxy $reports) {
-        $reports->get('/jobtypes', [ReportController::class, 'jobTypeIndex']);
-        $reports->get('/load/jobtypes', [ReportController::class, 'loadJobTypeReports']);
-        $reports->get('/load/listjobtypes', [ReportController::class, 'loadJobListByDate']);
-        $reports->get('/expenses', [ReportController::class, 'expensesIndex']);
+        $reports->get('/job_reports', [ReportController::class, 'jobReportIndex']);
+        $reports->get('/load/job_reports', [ReportController::class, 'loadJobTypeSByIntervals']);
+        $reports->get('/load/listjobtypes', [ReportController::class, 'loadJobsByDate']);
+        $reports->get('/expense_reports', [ReportController::class, 'expenseReportIndex']);
         $reports->get('/load/expenses', [ReportController::class, 'loadExpenseReports']);
         $reports->get('/load/listexpenses', [ReportController::class, 'loadExpenseListByDate']);
-        $reports->get('/profit_loss', [ReportController::class, 'profitLossIndex']);
+        $reports->get('/profit_report', [ReportController::class, 'profitLossIndex']);
         $reports->get('/load/profit_loss', [ReportController::class, 'loadProfitLossReports']);
-    })->add(AuthMiddleware::class);
+        $reports->get('/yearly_reports', [ReportController::class, 'yearIndex']);
+        $reports->get('/load/yearlyJobs', [ReportController::class, 'loadYearlyJobs']);
+        $reports->get('/load/yearlyExpenses', [ReportController::class, 'loadYearlyExpenses']);
+        $reports->get('/load/jobs_by_month', [ReportController::class, 'loadJobsByMonth']);
+        $reports->get('/load/expenses_by_month', [ReportController::class, 'loadExpensesByMonth']);
+        $reports->get('/load/yearlyIncome', [ReportController::class, 'loadYearlyIncome']);
+    })->add(RegisterMiddleware::class)->add(AuthMiddleware::class);
 
     $app->group('/clients', function (RouteCollectorProxy $client) {
         $client->get('', [ClientController::class, 'index']);
