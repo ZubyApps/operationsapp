@@ -3,7 +3,21 @@ import { get, post, del, clearValidationErrors } from "./ajax"
 import $ from 'jquery'
 import DataTable          from "datatables.net"
 import 'datatables.net-plugins/api/sum().mjs'
+import JSzip from 'jszip';
+import pdfMake from 'pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+import 'datatables.net-buttons-dt';
+import 'datatables.net-buttons/js/buttons.colVis.mjs';
+import 'datatables.net-buttons/js/buttons.html5.mjs';
+import 'datatables.net-buttons/js/buttons.print.mjs';
+import 'datatables.net-select-dt';
+import 'datatables.net-staterestore-dt';
 import { clearValues, getPaymentDetails, getJobDetails, getPayStatus} from "./helpers"
+DataTable.Buttons.jszip(JSzip)
+DataTable.Buttons.pdfMake(pdfMake)
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 window.addEventListener('DOMContentLoaded', function () {
     const newClientModal        = new Modal(document.getElementById('newClientModal'))
@@ -17,6 +31,14 @@ window.addEventListener('DOMContentLoaded', function () {
         serverSide: true,
         ajax: '/clients/load',
         orderMulti: false,
+        dom: 'lfrtip<"my-5 text-center "B>',
+        buttons: [
+            {extend: 'copy', className: 'btn btn-primary text-white'},
+            {extend: 'csv', className: 'btn btn-primary text-white'},
+            {extend: 'excel', className: 'btn btn-primary text-white'},
+            {extend: 'pdfHtml5', className: 'btn btn-primary text-white'},
+            {extend: 'print', className: 'btn btn-primary text-white'},
+             ],
         drawCallback: function () {
             var api = this.api()
             if (api.data()[0]['activeUser'] === 'Admin') {

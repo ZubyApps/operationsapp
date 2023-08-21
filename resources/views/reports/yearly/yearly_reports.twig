@@ -1,0 +1,165 @@
+{% extends 'layout.twig' %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('yearly_reports') }}
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+	<div class="Reports container content-body">
+		<h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Monthly Summary by Year</h2>
+
+		<nav>
+			<div class="nav nav-tabs fs-4 mt-4" id="nav-tab" role="tablist">
+
+				<button class="nav-link active" id="nav-jobs-tab" data-bs-toggle="tab" data-bs-target="#nav-jobs" type="button" role="tab" aria-controls="nav-jobs" aria-selected="true">Jobs</button>
+
+				<button class="nav-link" id="nav-expenses-tab" data-bs-toggle="tab" data-bs-target="#nav-expenses" type="button" role="tab" aria-controls="nav-expenses" aria-selected="false">Expenses</button>
+
+				<button class="nav-link" id="nav-summary-tab" data-bs-toggle="tab" data-bs-target="#nav-summary" type="button" role="tab" aria-controls="nav-summary" aria-selected="false">Summary</button>
+
+			</div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent">
+			<div class="tab-pane fade show active" id="nav-jobs" role="tabpanel" aria-labelledby="nav-jobs-tab" tabindex="0">
+				{% include 'reports/jobtype/list_jobs_modal.twig' with {modal: {title: 'List of Jobs', id: 'listJobsModal', isMonth: true }} %}
+
+				<div class="d-flex justify-content-end text-start my-4">
+					<div>
+						<span>Pick Year</span>
+						<input type="number" class="border rounded" name="job-year" min="1900" max="{{ date()|date('Y') }}" step="1" value="{{ date()|date('Y') }}"/>
+
+					</div>
+				</div>
+				<div class="d-flex justify-content-end">
+					<div>
+						<button type="button" class="btn btn-primary text-white search-job-year-btn">
+							Get Report
+						</button>
+					</div>
+				</div>
+				<div class="container text-center">
+
+					<table id="monthlyJobs" class="row-border hover compact order-column stripe">
+						<thead>
+							<tr>
+								<th>Month</th>
+								<th>Bills</th>
+								<th>Paid</th>
+								<th>Difference</th>
+							</tr>
+						</thead>
+						<tbody class="text-start"></tbody>
+						<tfoot class="fw-bolder text-primary">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="overflow-auto">
+					<div class="mx-4" style="width: 800px; height:500px;">
+						<canvas id="myJobChart" class=""></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane fade active" id="nav-expenses" role="tabpanel" aria-labelledby="nav-expenses-tab" tabindex="0">
+				{% include 'reports/expenses/list_expenses_modal.twig' with {modal: {title: 'List of Expenses', id: 'listExpensesModal', isMonth: true }} %}
+
+				<div class="d-flex justify-content-end text-start my-4">
+					<div>
+						<span>Pick Year</span>
+						<input type="number" class="border rounded px-2" name="expense-year" min="1900" max="{{ date()|date('Y') }}" step="1" value="{{ date()|date('Y') }}"/>
+
+					</div>
+				</div>
+				<div class="d-flex justify-content-end">
+					<div>
+						<button type="button" class="btn btn-primary text-white search-expense-year-btn">
+							Get Report
+						</button>
+					</div>
+				</div>
+				<div class="container">
+					<table id="monthlyExpenses" class="row-border hover compact order-column stripe my-4">
+						<thead>
+							<tr>
+								<th>Month</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+						<tfoot class="fw-bolder text-primary">
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="overflow-auto">
+					<div class="mx-4" style="width: 800px; height:500px;">
+						<canvas id="myExpenseChart"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade active" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab" tabindex="0">
+
+				<div class="d-flex justify-content-end text-start my-4">
+					<div>
+						<span>Pick Year</span>
+						<input type="number" class="border rounded px-2" name="summary-year" min="1900" max="{{ date()|date('Y') }}" step="1" value="{{ date()|date('Y') }}"/>
+
+					</div>
+				</div>
+				<div class="d-flex justify-content-end">
+					<div>
+						<button type="button" class="btn btn-primary text-white search-income-year-btn">
+							Get Report
+						</button>
+					</div>
+				</div>
+				<div class="container">
+					<table id="monthlyIncome" class="row-border hover compact order-column stripe my-4">
+						<thead>
+							<tr>
+								<th>Month</th>
+								<th>Total Sales</th>
+								<th>Total Payments</th>
+								<th>Total Expenses</th>
+								<th>Expected Net</th>
+								<th>Actual Net</th>
+								<th>Net Difference</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+						<tfoot class="fw-bolder text-primary">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="overflow-auto">
+					<div class="mx-4" style="width: 800px; height:500px;">
+						<canvas id="myIncomeChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

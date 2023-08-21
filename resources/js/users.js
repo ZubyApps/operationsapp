@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const saveUserBtn       = document.querySelector('.save-user-btn')
     const changePasswordDiv = document.querySelector('.change-password-div')
     const passwordDiv       = document.querySelector('.password-div')
+    var activeUserRole
     
     const table = new DataTable('#usersTable', {
         serverSide: true,
@@ -46,6 +47,7 @@ window.addEventListener('DOMContentLoaded', function () {
             {
                 sortable: false,
                 data: row => function () { 
+                    activeUserRole = row.activeUser
                     if (row.activeUser === 'Admin'){
                         if (row.jobCount > 0 || row.payCount > 0) {return `
                     <div class="d-flex flex-">
@@ -140,7 +142,11 @@ window.addEventListener('DOMContentLoaded', function () {
     })
 
     document.querySelector('#registerUser').addEventListener('click', function () {
-        window.location = '/register'
+        if (activeUserRole === 'Admin' || activeUserRole === 'Editor'){
+                window.location = '/register'
+        } else {
+            alert('Please, you are not authorized to register a new staff')
+        }
     })
 
 })
@@ -171,7 +177,4 @@ function openEditUserModal(modal, {id, ...data}) {
     modal.show()
 }
 
-// function changePassword(buttonDiv, passwordDiv) {
-//     buttonDiv.classList.add('d-none')
-// }
 

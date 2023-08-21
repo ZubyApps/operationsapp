@@ -2,55 +2,56 @@
 
 
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('sponsor') }}
+	{{ parent() }}
+	{{ encore_entry_script_tags('sponsor') }}
 {% endblock %}
 
-{% block title %}Sponsors{% endblock %}
+{% block title %}Sponsors
+{% endblock %}
 
 {% block content %}
-    <div class="Sponsor container content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center mb-5">Sponsors</h2>
-        <div class="d-flex justify-content-end mb-4">
-            <div class="">
-                <button type="button" class="btn btn-primary text-white text-start" id="expensesBtn">
-                Back
-                </button>
-                <button type="button" class="btn btn-primary text-white" id="sponsorModalBtn" data-bs-toggle="modal" data-bs-target="#newSponsorModal">
-                <i class="bi bi-plus-circle me-1"></i>
-                Sponsor
-                </button>
-            </div>
-        </div>
-{% include 'expense/sponsor/sponsor_modal.twig' with {modal: {title: 'Create Sponsor', id: 'newSponsorModal', isEdit: false}} %}
-{% include 'expense/sponsor/sponsor_modal.twig' with {modal: {title: 'Edit Sponsor', id: 'editSponsorModal', isEdit: true}} %}
+	<div class="Sponsor container content-body">
+		<h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center mb-5">Sponsors</h2>
+		<div class="d-flex justify-content-end mb-4">
+			<div class="">
+				<button type="button" class="btn btn-primary text-white text-start" id="expensesBtn">
+					Back
+				</button>
+				<button type="button" class="btn btn-primary text-white" id="sponsorModalBtn" data-bs-toggle="modal" data-bs-target="#newSponsorModal">
+					<i class="bi bi-plus-circle me-1"></i>
+					Sponsor
+				</button>
+			</div>
+		</div>
+		{% include 'expense/sponsor/sponsor_modal.twig' with {modal: {title: 'Create Sponsor', id: 'newSponsorModal', isEdit: false}} %}
+		{% include 'expense/sponsor/sponsor_modal.twig' with {modal: {title: 'Edit Sponsor', id: 'editSponsorModal', isEdit: true}} %}
 
-        <div class="">
-            <table id="sponsorsTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Flag</th>
-                        <th>Expenses Count</th>
-                        <th>Total</th>
-                        <th>Created at</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-                <tfoot class="fw-bolder text-primary">
-                <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+		<div class="">
+			<table id="sponsorsTable" class="row-border hover compact order-column stripe">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Flag</th>
+						<th>Expenses Count</th>
+						<th>Total</th>
+						<th>Created at</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot class="fw-bolder text-primary">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
 {% endblock %}

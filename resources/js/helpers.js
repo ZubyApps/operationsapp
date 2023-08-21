@@ -4,9 +4,9 @@ import { del } from "./ajax";
 function clearValues(modal) {
         const tagName = modal._element.querySelectorAll('input, select, textarea, #clientOption')
 
-        tagName.forEach(tag => {
-            tag.id === 'clientOption' ? clearClientsList(tag) : tag.value = ''
-        });
+            tagName.forEach(tag => {
+                tag.value = ''
+            });        
     }
 
 function clearClientsList(element){
@@ -34,7 +34,7 @@ function getPaymentDetails(id, modal){
             {sortable: false,
                 data: 'staff'},
             {sortable: false,
-            data: row => function() {if (row.activeUser === 'Admin') {return `<button type="submit" class="ms-1 btn btn-outline-primary delete-payment-details-btn" data-id="${ row.id }"><i class="bi bi-trash3-fill"></i></button>`}else {return ''}}
+            data: row => function() {if (row.activeUser === 'Admin') {return `<button type="submit" class="ms-1 btn btn-outline-primary delete-payment-details-btn" job-id="${id}" data-id="${ row.id }"><i class="bi bi-trash3-fill"></i></button>`} else {return ''}}
             }]})
         
     modal.show()
@@ -43,9 +43,10 @@ function getPaymentDetails(id, modal){
             const deletePaymentDetailsBtn = event.target.closest('.delete-payment-details-btn')
 
             const paymentId = deletePaymentDetailsBtn.getAttribute('data-id')
+            const jobId = deletePaymentDetailsBtn.getAttribute('job-id')
             if (deletePaymentDetailsBtn) {
                 if (confirm('Are you sure you want to delete this payment?')) {
-                        del(`/payments/paydetails/${ paymentId }`).then(response => {
+                        del(`/payments/paydetails/${ paymentId }`, {job: jobId}).then(response => {
                         if (response.ok) {
                         paymentsTable.draw()
                         }

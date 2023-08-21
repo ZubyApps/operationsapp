@@ -1,38 +1,39 @@
 {% extends './settings/settings.twig' %}
 
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('department') }}
+	{{ parent() }}
+	{{ encore_entry_script_tags('department') }}
 {% endblock %}
 
-{% block title %}Departments{% endblock %}
+{% block title %}Departments
+{% endblock %}
 
 {% block content %}
-    <div class="JobType container content-body">
-    <h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Departments</h2>
-        <div class="text-end mb-4">
-            <button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newDepartmentModal">
-                <i class="bi bi-plus-circle me-1"></i>
-                Department
-            </button>
-        </div>
-{% include 'users/department/department_modal.twig' with {modal: {title: 'Create Department', id: 'newDepartmentModal', isEdit: false}} %}
-{% include 'users/department/department_modal.twig' with {modal: {title: 'Edit Department', id: 'editDepartmentModal', isEdit: true}} %}
+	<div class="JobType container content-body">
+		<h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center">Departments</h2>
+		<div class="text-end mb-4">
+			<button type="button" class="btn btn-primary text-white" id="openModal" data-bs-toggle="modal" data-bs-target="#newDepartmentModal">
+				<i class="bi bi-plus-circle me-1"></i>
+				Department
+			</button>
+		</div>
+		{% include 'users/department/department_modal.twig' with {modal: {title: 'Create Department', id: 'newDepartmentModal', isEdit: false}} %}
+		{% include 'users/department/department_modal.twig' with {modal: {title: 'Edit Department', id: 'editDepartmentModal', isEdit: true}} %}
 
-        <div class="">
-            <table id="departmentTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Head</th>
-                        <th>Staff count</th>
-                        <th>Created at</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </div>
+		<div class="">
+			<table id="departmentTable" class="row-border hover compact order-column stripe">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Head</th>
+						<th>Staff count</th>
+						<th>Created at</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}

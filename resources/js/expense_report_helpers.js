@@ -59,14 +59,20 @@ function getListofExpenses(from, to, category, modal){
             drawCallback: function () {
                 var api = this.api()
 
-                $( api.column(2).footer() ).html(new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(api.column( 2, {page:'current'} ).data().sum()));
+                $( api.column(1).footer() ).html(new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(api.column( 1, {page:'current'} ).data().sum()));
 
             },
             columns: [
             {sortable: false,
-                data: 'createdAt'},
-            {sortable: false,
                 data: 'sponsor'},
+            // {sortable: false,
+            //     data: row => function (){
+            //         if (row.category in row){
+            //                 return row.category
+            //             }else{
+            //             return ''
+            //         }
+            //     }},
             {sortable: false,
                 data: row => new Intl.NumberFormat('en-US',{currencySign: 'accounting'}).format(row.amount)},
             {sortable: false,

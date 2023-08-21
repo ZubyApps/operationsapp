@@ -25,72 +25,28 @@ class ReportController
     ) {
     }
 
-    public function jobTypeIndex(Request $request, Response $response): Response
+    public function jobReportIndex(Request $request, Response $response): Response
     {
         return $this->twig->render($response, 'reports/jobtype/jobtype.twig');
     }
 
-    public function loadJobTypeReports(Request $request, Response $response): Response
+    public function loadJobTypesByIntervals(Request $request, Response $response):Response
     {
 
         $params = 1;
-        $jobs   = $this->reportService->jobReportsByMonth($request->getQueryParams());
+        $jobs   = $this->reportService->getJobTypesByIntervals($request->getQueryParams());
 
-        $transformer = function (Job $job) {
-            return [
-                'jobType'       => $job->getJobType()->getName(),
-                'bill'          => $job->getAmountDue(),
-                'paid'          => $job->getPaymentsTotal()
-            ];
-        };
-
-        $joblist = array_map($transformer, (array) $jobs->getIterator());
-        $countArray =  \array_count_values(\array_column($joblist, 'jobType'));
         $totalJobs = count($jobs);
-
-        $finalReport = [];
-        if (!empty($joblist)) {
-            foreach ($joblist as $job) {
-                $preparedArray[] = [$job['jobType'] => [$job['jobType'], $job['bill'], $job['paid']]];
-            }
-
-            $totalBillsArray = $this->reportService->prepareTotalsArray($preparedArray, 1);
-            $totalPaidArray = $this->reportService->prepareTotalsArray($preparedArray, 0);
-
-            $preparedJobtypesArray = \array_flip(\array_keys($countArray));
-
-            foreach ($preparedJobtypesArray as $key => $value) {
-                $jobTypesArray[$key] = $key;
-            }
-
-            $mergedArray = \array_merge_recursive($jobTypesArray, $totalBillsArray, $totalPaidArray, $countArray);
-
-            $num = 0;
-            foreach ($mergedArray as $key => $value) {
-                $transformedKeysMergedArray[] = $jobTypeFinal[$num++] = $value;
-            }
-
-            foreach ($transformedKeysMergedArray as $value) {
-
-                $finalReport[] = [
-                    'jobType'   => $value[0],
-                    'totalBill' => $value[1],
-                    'totalPaid' => $value[2],
-                    'count'     => $value[3],
-
-                ];
-            }
-        }
-
+        
         return $this->responseFormatter->asDataTable(
             $response,
-            $finalReport,
+            $jobs,
             $params,
             $totalJobs
         );
     }
 
-    public function loadJobListByDate(Request $request, Response $response): Response
+    public function loadJobsByDate(Request $request, Response $response): Response
     {
         $params         = $this->requestService->getDataTableQueryParameters($request);
         $jobs           = $this->reportService->listJobsByDateAndType($request->getQueryParams());
@@ -114,7 +70,7 @@ class ReportController
         );
     }
 
-    public function expensesIndex(Request $request, Response $response): Response
+    public function expenseReportIndex(Request $request, Response $response): Response
     {
         return $this->twig->render($response, 'reports/expenses/expenses.twig');
     }
@@ -125,52 +81,11 @@ class ReportController
         $params = 1;
         $expenses   = $this->reportService->expenseReportsByMonth($request->getQueryParams());
 
-        $transformer = function (Expense $expense) {
-            return [
-                'category'       => $expense->getCategory()->getName(),
-                'amount'         => $expense->getAmount(),
-            ];
-        };
-
-        $expenseList = array_map($transformer, (array) $expenses->getIterator());
-        $countsArray =  \array_count_values(\array_column($expenseList, 'category'));
         $totalExpenses = count($expenses);
-
-        $finalReport = [];
-        if (!empty($expenseList)) {
-            foreach ($expenseList as $expense) {
-                $preparedArray[] = [$expense['category'] => [$expense['category'], $expense['amount']]];
-            }
-
-            $totalAmountsArray = $this->reportService->prepareTotalsArray($preparedArray, 1);
-
-            $preparedCategoriesArray = \array_flip(\array_keys($countsArray));
-
-            foreach ($preparedCategoriesArray as $key => $value) {
-                $categoriesArray[$key] = $key;
-            }
-
-            $mergedArray = \array_merge_recursive($categoriesArray, $totalAmountsArray, $countsArray);
-
-            $num = 0;
-            foreach ($mergedArray as $key => $value) {
-                $transformedKeysMergedArray[] = $jobTypeFinal[$num++] = $value;
-            }
-
-            foreach ($transformedKeysMergedArray as $value) {
-
-                $finalReport[] = [
-                    'category'      => $value[0],
-                    'totalAmount'   => $value[1],
-                    'count'         => $value[2],
-
-                ];
-            }
-        }
 
         return $this->responseFormatter->asDataTable(
             $response,
-            $finalReport,
+            $expenses,
             $params,
             $totalExpenses
         );
@@ -179,14 +94,13 @@ class ReportController
     public function loadExpenseListByDate(Request $request, Response $response): Response
     {
         $params         = $this->requestService->getDataTableQueryParameters($request);
-        $expenses           = $this->reportService->listExpensesByDateAndCategory($request->getQueryParams());
+        $expenses       = $this->reportService->listExpensesByDateAndCategory($request->getQueryParams());
         $transformer    = function (Expense $expense) {
             return [
-                'createdAt'         => $expense->getCreatedAt()->format('d-M-y'),
                 'sponsor'           => $expense->getSponsor()->getName(),
                 'amount'            => $expense->getAmount(),
                 'description'       => $expense->getDescription(),
-                'dateSpent'         => $expense->getDate()->format('d-M-y'),
+                'dateSpent'         => $expense->getDate()->format('dS M y'),
             ];
         };
 
@@ -208,29 +122,13 @@ class ReportController
     public function loadProfitLossReports(Request $request, Response $response): Response
     {
         $params = 1;
-        $jobs   = $this->reportService->jobReportsByMonth($request->getQueryParams());
-        $expenses   = $this->reportService->expenseReportsByMonth($request->getQueryParams());
-
-        $billsTransformer = function (Job $job) {
-            return $job->getAmountDue();
-        };
-
-        $paymentsTransformer = function (Job $job) {
-            return $job->getPaymentsTotal();
-        };
-
-        $expensesTransformer = function (Expense $expense) {
-            return $expense->getAmount();
-        };
-
-        $totalBills = array_map($billsTransformer, (array) $jobs->getIterator());
-        $totalPayments = array_map($paymentsTransformer, (array) $jobs->getIterator());
-        $totalExpenses = array_map($expensesTransformer, (array) $expenses->getIterator());
+        $job   = $this->reportService->getJobTotals($request->getQueryParams());
+        $expense  = $this->reportService->getExpenseTotals($request->getQueryParams());
 
         $finalArray[] = [
-            'totalBills'    => array_sum($totalBills),
-            'totalPayments' => array_sum($totalPayments),
-            'totalExpenses' => array_sum($totalExpenses),
+            'totalBills'    => $job['totalBill'],
+            'totalPayments' => $job['totalPaid'],
+            'totalExpenses' => $expense['totalExpense'],
         ];
 
         $totalArray = count($finalArray);
@@ -240,6 +138,117 @@ class ReportController
             $finalArray,
             $params,
             $totalArray
+        );
+    }
+
+    public function yearIndex(Request $request, Response $response): Response
+    {
+        return $this->twig->render($response, 'reports/yearly/yearly_reports.twig');
+    }
+
+    public function loadYearlyJobs(Request $request, Response $response):Response
+    {
+        $params = 1;
+        $jobs   = $this->reportService->getMonthlyJobsSummary($request->getQueryParams());
+
+        $totalJobs = count($jobs);
+
+        return $this->responseFormatter->asDataTable(
+            $response,
+            $jobs,
+            $params,
+            $totalJobs
+        );
+    }
+
+    public function loadJobsByMonth(Request $request, Response $response): Response
+    {
+        $params         = $this->requestService->getDataTableQueryParameters($request);
+        $jobs           = $this->reportService->getJobsByMonth($request->getQueryParams());
+
+        $totaljobs = count($jobs);
+
+        return $this->responseFormatter->asDataTable(
+            $response,
+            $jobs,
+            $params->draw,
+            $totaljobs
+        );
+    }
+
+    public function loadYearlyExpenses(Request $request, Response $response):Response
+    {
+        $params = 1;
+        $expenses   = $this->reportService->getMonthlyExpensesSummary($request->getQueryParams());
+
+        $totalExpenses = count($expenses);
+
+        return $this->responseFormatter->asDataTable(
+            $response,
+            $expenses,
+            $params,
+            $totalExpenses
+        );
+    }
+
+    public function loadExpensesByMonth(Request $request, Response $response): Response
+    {
+        $params         = $this->requestService->getDataTableQueryParameters($request);
+        $expenses       = $this->reportService->getExpensesByMonth($request->getQueryParams());
+
+        $totalExpenses = count($expenses);
+
+        return $this->responseFormatter->asDataTable(
+            $response,
+            $expenses,
+            $params->draw,
+            $totalExpenses
+        );
+    }
+
+    public function loadYearlyIncome(Request $request, Response $response): Response
+    {
+        $params     = 1;
+        $jobs       = $this->reportService->getMonthlyJobsSummary($request->getQueryParams());
+        $expenses   = $this->reportService->getMonthlyExpensesSummary($request->getQueryParams());
+
+        $incomeArray = [...$jobs, ...$expenses];
+
+        $months = [
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'January', 'm' => 1],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'February', 'm' => 2],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'March', 'm' => 3],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'April', 'm' => 4],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'May', 'm' => 5],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'June', 'm' => 6],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'July', 'm' => 7],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'August', 'm' => 8],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'September', 'm' => 9],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'October', 'm' => 10],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'November', 'm' => 11],
+            ['bill' => 0, 'paid' => 0,'expense' => 0, 'month_name' => 'December', 'm' => 12],
+        ];
+
+
+        foreach($incomeArray as $income){
+            foreach($months as $key => $month){
+                if ($month['m'] === $income['month']){
+                    $months[$key]['bill'] === 0 && $income['bill'] ? $months[$key]['bill'] = $income['bill'] : 0 ;
+
+                    $months[$key]['paid'] === 0 && $income['paid'] ? $months[$key]['paid'] = $income['paid'] : 0 ;
+                    
+                    $months[$key]['expense'] = $income['amount'] ?? 0;
+                }
+            }
+        }
+
+        $total = count($months);
+
+        return $this->responseFormatter->asDataTable(
+            $response,
+            $months,
+            $params,
+            $total
         );
     }
 }

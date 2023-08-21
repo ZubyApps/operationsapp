@@ -1,168 +1,170 @@
 <div class="modal fade modal-lg" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fs-4">{{ modal.title }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-<div class="modal-body">
-    <label for="basic-url" class="form-label fs-5">Client Overall Information</label>
-{# first row #}
-    <div class="row">
-        <div class="col-lg-4 themed-grid-col">
-            <div class="input-group mb-1">
-                <span class="input-group-text" id="basic-addon1">Name</span>
-                <input type="text" name="name" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1" readonly>
-            </div>
-        </div>
-        <div class="col-lg-4 themed-grid-col">
-            <div class="input-group mb-1">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-x-fill"></i></span>
-                <input type="text" name="number" class="form-control" placeholder="" aria-label="phone number" aria-describedby="basic-addon1" readonly>
-            </div>
-        </div>
-        <div class="col-lg-4 themed-grid-col">
-            <div class="input-group mb-1">
-                <span class="input-group-text" id="basic-addon1">Email</span>
-                <input type="text" name="email" class="form-control" placeholder="" aria-label="Client name" aria-describedby="basic-addon1" readonly>
-            </div>
-        </div>
-    </div>
-{# second row #}
-<div class="row">
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">City</span>
-            <input type="text" name="city" class="form-control" placeholder="" aria-label="City" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">State</i></span>
-            <input type="text" name="state" class="form-control" placeholder="" aria-label="State" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Country</span>
-            <input type="text" name="country" class="form-control" placeholder="" aria-label="Country" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title fs-4">{{ modal.title }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<label for="basic-url" class="form-label fs-5">Client Overall Information</label>
+				{# first row #}
+				<div class="row">
+					<div class="col-lg-4 themed-grid-col">
+						<div class="input-group mb-1">
+							<span class="input-group-text" id="basic-addon1">Name</span>
+							<input type="text" name="name" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+					<div class="col-lg-4 themed-grid-col">
+						<div class="input-group mb-1">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="bi bi-telephone-x-fill"></i>
+							</span>
+							<input type="text" name="number" class="form-control" placeholder="" aria-label="phone number" aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+					<div class="col-lg-4 themed-grid-col">
+						<div class="input-group mb-1">
+							<span class="input-group-text" id="basic-addon1">Email</span>
+							<input type="text" name="email" class="form-control" placeholder="" aria-label="Client name" aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+				</div>
+				{# second row #}
+				<div class="row">
+					<div class="col-lg-4 themed-grid-col">
+						<div class="input-group mb-1">
+							<span class="input-group-text" id="basic-addon1">City</span>
+							<input type="text" name="city" class="form-control" placeholder="" aria-label="City" aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+					<div class="col-lg-4 themed-grid-col">
+						<div class="input-group mb-1">
+							<span class="input-group-text" id="basic-addon1">State</i>
+						</span>
+						<input type="text" name="state" class="form-control" placeholder="" aria-label="State" aria-describedby="basic-addon1" readonly>
+					</div>
+				</div>
+				<div class="col-lg-4 themed-grid-col">
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Country</span>
+						<input type="text" name="country" class="form-control" placeholder="" aria-label="Country" aria-describedby="basic-addon1" readonly>
+					</div>
+				</div>
+			</div>
+
+			<label for="basic-url" class="form-label fs-5">Jobs</label>
+			<div class="row">
+				<div class="col-lg-4 themed-grid-col">
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Total # of Jobs</span>
+						<input type="text" name="jobtotal" class="form-control" aria-label="Job total" aria-describedby="basic-addon1" readonly>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<table id="jobDetailsTable" class="row-border hover compact order-column stripe">
+					<thead>
+						<tr>
+							<th>Due Date</th>
+							<th>Job type</th>
+							<th>Bill</th>
+							<th>Status</th>
+							<th>Staff</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div>
+				<label for="basic-url" class="form-label fs-5">Payment Status</label>
+				<table id="paystatusTable" class="row-border hover compact order-column stripe">
+					<thead>
+						<tr>
+							<th>Bill</th>
+							<th>Paid</th>
+							<th>Balance</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<label for="basic-url" class="form-label fs-5">Other</label>
+			<div class="row">
+				<div class="col-lg-4 themed-grid-col">
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Staff</span>
+						<input type="text" name="staff" class="form-control" aria-label="Staff" aria-describedby="basic-addon1" readonly>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 themed-grid-col">
+					<div class="input-group mb-1">
+						<span class="input-group-text" id="basic-addon1">Created</i>
+					</span>
+					<input type="text" name="createdAt" class="form-control" aria-label="Created At" aria-describedby="basic-addon1" readonly>
+				</div>
+			</div>
+			<div class="col-lg-6 themed-grid-col">
+				<div class="input-group mb-1">
+					<span class="input-group-text" id="basic-addon1">Updated</span>
+					<input type="text" name="updatedAt" class="form-control" aria-label="Updated At" aria-describedby="basic-addon1" readonly>
+				</div>
+			</div>
+		</div>
+
+		<label for="basic-url" class="form-label fs-5">Payments</label>
+		<div class="row">
+			<div class="col-lg-4 themed-grid-col">
+				<div class="input-group mb-1">
+					<span class="input-group-text" id="basic-addon1">Bills</span>
+					<input type="text" name="allbills" class="form-control" aria-label="Bill" aria-describedby="basic-addon1" readonly>
+				</div>
+			</div>
+			<div class="col-lg-4 themed-grid-col">
+				<div class="input-group mb-1">
+					<span class="input-group-text" id="basic-addon1">Payments</i>
+				</span>
+				<input type="text" name="allpayments" class="form-control" aria-label="paid" aria-describedby="basic-addon1" readonly>
+			</div>
+		</div>
+		<div class="col-lg-4 themed-grid-col">
+			<div class="input-group mb-1">
+				<span class="input-group-text" id="basic-addon1">Outstanding</span>
+				<input type="text" name="balance" class="form-control" aria-label="balance" aria-describedby="basic-addon1" readonly>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<table id="paymentDetailsTable" class="row-border hover compact order-column stripe">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Amount</th>
+					<th>Method</th>
+					<th>Staff</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+
+
 </div>
-
-<label for="basic-url" class="form-label fs-5">Jobs</label>
-<div class="row">
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Total # of Jobs</span>
-            <input type="text" name="jobtotal" class="form-control" aria-label="Job total" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-</div>
-
-        <div>
-            <table id="jobDetailsTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Due Date</th>
-                        <th>Job type</th>
-                        <th>Bill</th>
-                        <th>Status</th>
-                        <th>Staff</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-        <div>
-            <label for="basic-url" class="form-label fs-5">Payment Status</label>
-            <table id="paystatusTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Bill</th>
-                        <th>Paid</th>
-                        <th>Balance</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-<label for="basic-url" class="form-label fs-5">Other</label>
-<div class="row">
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Staff</span>
-            <input type="text" name="staff" class="form-control" aria-label="Staff" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6 themed-grid-col">
-        <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">Created</i></span>
-            <input type="text" name="createdAt" class="form-control" aria-label="Created At" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-    <div class="col-lg-6 themed-grid-col">
-        <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">Updated</span>
-            <input type="text" name="updatedAt" class="form-control" aria-label="Updated At" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-</div>
-
-<label for="basic-url" class="form-label fs-5">Payments</label>
-<div class="row">
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">Bills</span>
-            <input type="text" name="allbills" class="form-control" aria-label="Bill" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">Payments</i></span>
-            <input type="text" name="allpayments" class="form-control" aria-label="paid" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-    <div class="col-lg-4 themed-grid-col">
-        <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">Outstanding</span>
-            <input type="text" name="balance" class="form-control" aria-label="balance" aria-describedby="basic-addon1" readonly>
-        </div>
-    </div>
-</div>
-
-        <div>
-            <table id="paymentDetailsTable" class="row-border hover compact order-column stripe">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Method</th>
-                        <th>Staff</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-
-        </div>
-            <div class="modal-footer px-5">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle me-1"></i>
-                    Close
-                </button>
-                <button type="button" class="btn bg-primary text-white client-details-btn disabled">
-                    <i class="bi bi-check-circle me-1"></i>
-                    Print
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="modal-footer px-5">
+	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+		<i class="bi bi-x-circle me-1"></i>
+		Close
+	</button>
+	<button type="button" class="btn bg-primary text-white client-details-btn disabled">
+		<i class="bi bi-check-circle me-1"></i>
+		Print
+	</button>
+</div></div></div></div>

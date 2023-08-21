@@ -1,69 +1,57 @@
 <div class="modal fade modal-md" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ modal.title }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                                    <div class="form-outline form-white mb-3 px-2">
-                                        <input type="text" name="firstname" 
-                                            class="form-control form-control-md"
-                                            placeholder="Firstname" required/>
-                                    </div>
-                                    <div class="form-outline form-white mb-3 px-2">
-                                        <input type="text" name="lastname" 
-                                            class="form-control form-control-md"
-                                            placeholder="Lastname" required/>
-                                    </div>
-                                    <div class="form-outline form-white mb-3 px-2">
-                                        <input type="email" name="email" 
-                                            class="form-control form-control-md"
-                                            placeholder="Email" required/>
-                                    </div>
-                                    <div class="form-outline form-white mb-3 px-2">
-                                        <input type="tel" name="phonenumber"
-                                            class="form-control form-control-md"
-                                            placeholder="Phone No." required/>
-                                    </div>
-                                    <div class="form-outline form-white mb-3 px-2">
-                                    <select class="form-select form-select-md" aria-label="Department" name="department" placeholder="Set Department">
-                                        <option value="0">Choose Department</option>
-                                        {% for department in departments %}
-                                        <option value="{{ department.id }}">{{ department.name }}</option>
-                                        {% endfor %}
-                                        <option value="U">Remove Department</option>
-                                    </select>
-                                    </div>
-                                    <div class="mb-3 form-switch hover change-password-div">
-                                    <input class="form-check-input" id="radio-btn" type="checkbox" role="switch" name="changePassword" value="" id="flexSwitchCheckDefault" >
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">
-                                        Change Password?
-                                    </label>
-                                    </div>
-                                    <div class="password-div d-none">
-                                    <div class="form-outline form-white mb-3 px-2">
-                                        <input type="password" name="password" 
-                                            class="form-control form-control-md"
-                                            placeholder="Password" required/>
-                                    </div>
-                                    <div class="form-outline form-white mb-3 px-2">
-                                        <input type="password" name="conpassword" 
-                                            class="form-control form-control-md"
-                                            placeholder="Confirm Password" />
-                                    </div>
-                                    </div>
-            </div>
-            <div class="modal-footer px-5">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle me-1"></i>
-                    Close
-                </button>
-                <button type="button" class="btn bg-primary text-white {{ modal.isEdit ? 'save' : 'create' }}-user-btn">
-                    <i class="bi bi-check-circle me-1"></i>
-                    {{ modal.isEdit ? 'Save' : 'Create' }}
-                </button>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">{{ modal.title }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="form-outline form-white mb-3 px-2">
+					<input type="text" name="firstname" class="form-control form-control-md" placeholder="Firstname" required/>
+				</div>
+				<div class="form-outline form-white mb-3 px-2">
+					<input type="text" name="lastname" class="form-control form-control-md" placeholder="Lastname" required/>
+				</div>
+				<div class="form-outline form-white mb-3 px-2">
+					<input type="email" name="email" class="form-control form-control-md" placeholder="Email" required/>
+				</div>
+				<div class="form-outline form-white mb-3 px-2">
+					<input type="tel" name="phonenumber" class="form-control form-control-md" placeholder="Phone No." required/>
+				</div>
+				<div class="form-outline form-white mb-3 px-2">
+					<select class="form-select form-select-md" aria-label="Department" name="department" placeholder="Set Department">
+						<option value="0">Choose Department</option>
+						{% for department in departments %}
+							<option value="{{ department.id }}">{{ department.name }}</option>
+						{% endfor %}
+						<option value="U">Remove Department</option>
+					</select>
+				</div>
+				<div class="mb-3 form-switch hover change-password-div">
+					<input class="form-check-input" id="radio-btn" type="checkbox" role="switch" name="changePassword" value="" id="flexSwitchCheckDefault">
+					<label class="form-check-label" for="flexSwitchCheckDefault">
+						Change Password?
+					</label>
+				</div>
+				<div class="password-div d-none">
+					<div class="form-outline form-white mb-3 px-2">
+						<input type="password" name="password" class="form-control form-control-md" placeholder="Password" required/>
+					</div>
+					<div class="form-outline form-white mb-3 px-2">
+						<input type="password" name="conpassword" class="form-control form-control-md" placeholder="Confirm Password"/>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer px-5">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+					<i class="bi bi-x-circle me-1"></i>
+					Close
+				</button>
+				<button type="button" class="btn bg-primary text-white {{ modal.isEdit ? 'save' : 'create' }}-user-btn">
+					<i class="bi bi-check-circle me-1"></i>
+					{{ modal.isEdit ? 'Save' : 'Create' }}
+				</button>
+			</div>
+		</div>
+	</div>
 </div>

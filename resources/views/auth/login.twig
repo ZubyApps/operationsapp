@@ -1,48 +1,47 @@
 {% extends 'auth/layout.twig' %}
 
-{% block title %}Log In{% endblock %}
+{% block title %}Log In
+{% endblock %}
 
 {% block content %}
-    <section class="vh-100">
-        <div class="container  h-100">
-            <div class="row d-flex align-items-center vh-100" >
-                <div class="text-center">
-                    <div class="card bg-light text-white" style="border-radius: 1rem; width: 18rem; margin: 0 auto;">
-                        <div class="card-body text-center px-3">
-                            <div class="mb-2 mt-3">
-                                <h2 class="bold mb-4 text-primary d-flex justify-content-center align-items-center">
-                                    Sign in
-                                </h2>
-                                <form method="post" action="/login">
-                                    {{ csrf.fields | raw }}
+	<section class="vh-100">
+		<div class="container  h-100">
+			<div class="row d-flex align-items-center vh-100">
+				<div class="text-center">
+					<div class="card bg-light text-white" style="border-radius: 1rem; width: 18rem; margin: 0 auto;">
+						<div class="card-body text-center px-3">
+							<div class="mb-2 mt-3">
+								<h2 class="bold mb-4 text-primary d-flex justify-content-center align-items-center">
+									Sign in
+								</h2>
+								<form method="post" action="/login">
+									{{ csrf.fields | raw }}
 
-                                    <div class="form-outline form-white mb-2">
-                                        <input type="email" name="email" class="form-control form-control-md {{ errors.email ? 'is-invalid' : '' }}"
-                                            value="{{ old.email }}"
-                                            placeholder="Email"
-                                            required />
-                                        <div class="invalid-feedback">
-                                            {{ errors.email | first }}
-                                        </div>
-                                    </div>
-                                    <div class="form-outline form-white mb-2">
-                                        <input type="password" name="password" class="form-control form-control-md {{ errors.password ? 'is-invalid' : '' }}"
-                                            placeholder="Password" required />
-                                        <div class="invalid-feedback">
-                                            {{ errors.password | first }}
-                                        </div>
-                                    </div>
-                                    <p class="mb-4"><a class="text-secondary fw-semibold text-decoration-none" href="#">Forgot
-                                            password? Contact Admin</a></p>
-                                    <button class="btn btn-primary bg-gradient text-white btn-lg px-3 py-1 fs-5 mb-2" type="submit">Log
-                                        In
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+									<div class="form-outline form-white mb-2">
+										<input type="email" name="email" class="form-control form-control-md {{ errors.email ? 'is-invalid' : '' }}" value="{{ old.email }}" placeholder="Email" required/>
+										<div class="invalid-feedback">
+											{{ errors.email | first }}
+										</div>
+									</div>
+									<div class="form-outline form-white mb-2">
+										<input type="password" name="password" class="form-control form-control-md {{ errors.password ? 'is-invalid' : '' }}" placeholder="Password" required/>
+										<div class="invalid-feedback">
+											{{ errors.password | first }}
+										</div>
+									</div>
+									<p class="mb-4">
+										<a class="text-secondary fw-semibold text-decoration-none" href="#">Forgot
+											                                            password? Contact Admin</a>
+									</p>
+									<button class="btn btn-primary bg-gradient text-white btn-lg px-3 py-1 fs-5 mb-2" type="submit">Log
+										                                        In
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

@@ -1,131 +1,145 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta id="csrfName" name="{{ csrf.keys.name }}" content="{{ csrf.name }}">
-        <meta id="csrfValue" name="{{ csrf.keys.value }}" content="{{ csrf.value }}">
-        <title>{% block title %}TrippleAapp{% endblock %}</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-            rel="stylesheet">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta id="csrfName" name="{{ csrf.keys.name }}" content="{{ csrf.name }}">
+		<meta id="csrfValue" name="{{ csrf.keys.value }}" content="{{ csrf.value }}">
+		<title>
+			{% block title %}TrippleAapp
+			{% endblock %}
+		</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            
-                <a href="/" class="navbar-brand">
-                    <img src="{{ asset('build/images/tripple a logo.jpg') }}" width="64" height="64" alt="OperationsApp Logo" />
-                    <span class="fs-1 text-secondary fw-bold">Operations<span class="text-primary">App</span></span>
-                </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link fw-bold fs-5" aria-current="page">Home</a>
-                    </li>
-                    
-                    <div class="dropdown payment-dropdown-menu">
-                        <a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                        Operations
-                        </a>
-                        <ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="operationsDropDownMenu">
-                            <li class="nav-item">
-                                <a href="/clients" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Clients</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/jobs" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Jobs</a>
-                            </li>
-                            <li class="nav-item p-0 ">
-                                <a href="/payments/paystatus" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Payment Status</a>
-                            </li>
-                            <li class="nav-item p-0">
-                                <a href="/payments/paydetails" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Payments Table</a>
-                            </li>
-                        </ul>
-                    </div>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="vh-100">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
 
-                    <li class="nav-item">
-                        <a href="/expenses" class="nav-link fw-bold fs-5" aria-current="page">Expenses</a>
-                    </li>
+				<a href="/" class="navbar-brand">
+					<img src="{{ asset('build/images/tripple a logo.jpg') }}" width="64" height="64" alt="OperationsApp Logo"/>
+					<span class="fs-1 text-secondary fw-bold">Operations<span class="text-primary">App</span>
+					</span>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarColor02">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a href="/" class="nav-link fw-bold fs-5" aria-current="page">Home</a>
+						</li>
 
-                    {% if auth.role is same as ('Admin') %}
-                    <div class="dropdown payment-dropdown-menu">
-                    <a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                        Reports
-                    </a>
+						<div class="dropdown payment-dropdown-menu">
+							<a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+								Operations
+							</a>
+							<ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="operationsDropDownMenu">
+								<li class="nav-item">
+									<a href="/clients" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Clients</a>
+								</li>
+								<li class="nav-item">
+									<a href="/jobs" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Jobs</a>
+								</li>
+								<li class="nav-item p-0 ">
+									<a href="/payments/paystatus" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Payment Status</a>
+								</li>
+								<li class="nav-item p-0">
+									<a href="/payments/paydetails" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Payments Table</a>
+								</li>
+							</ul>
+						</div>
 
-                    <ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="paymentDropDownMenu">
+						<li class="nav-item">
+							<a href="/expenses" class="nav-link fw-bold fs-5" aria-current="page">Expenses</a>
+						</li>
 
-                    <li class="nav-item p-0 ">
-                        <a href="/reports/jobtypes" class="nav-link fw-bold fs-6 text-primary" aria-current="page">JobTypes Report</a>
-                    </li>
-                    <li class="nav-item p-0">
-                        <a href="/reports/expenses" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Expenses Report</a>
-                    </li>
-                    <li class="nav-item p-0">
-                        <a href="/reports/profit_loss" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Profit/Loss Report</a>
-                    </li>
+						{% if auth.role is same as ('Admin') %}
+							<div class="dropdown payment-dropdown-menu">
+								<a href="#" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+									Reports
+								</a>
 
-                    </ul>
-                    </div>
-                    {% endif %}
+								<ul class="dropdown-menu p-0 bg-dark text-primary" aria-labelledby="paymentDropDownMenu">
 
-                    <div class="dropdown settings-dropdown-menu">
-                        <a href="" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5"  data-bs-toggle="dropdown" aria-expanded="false">
-                        Settings
-                        </a>
-                        <ul class="dropdown-menu p-0 bg-dark" aria-labelledby="paymentDropDownMenu">
-                            <li class="nav-item p-0 ">
-                                <a href="/settings/jobtype" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Job Type</a>
-                            </li>
-                            <li class="nav-item p-0 ">
-                                <a href="/settings/department" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Department</a>
-                            </li>
-                            <li class="nav-item p-0 ">
-                                <a href="/settings/paymethod" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Pay Methods</a>
-                            </li>
-                            <li class="nav-item p-0 ">
-                                <a href="/settings/users" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Staff</a>
-                            </li>
-                        </ul>
-                    </div>
+									<li class="nav-item p-0 ">
+										<a href="/reports/job_reports" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Job Reports</a>
+									</li>
+									<li class="nav-item p-0">
+										<a href="/reports/expense_reports" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Expense Report</a>
+									</li>
+									<li class="nav-item p-0">
+										<a href="/reports/profit_report" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Profit/Loss Report</a>
+									</li>
+									<li class="nav-item p-0">
+										<a href="/reports/yearly_reports" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Yearly Reports</a>
+									</li>
 
-                    <div class="dropdown user-dropdown-menu ">
-                        <a href="#" class="text-decoration-none d-flex align-items-center mt-2" id="userDropDownMenu" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
-                            <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
-                            </svg>
-                            <span>{{ auth.name }}</span>
-                        </a>
-                        <ul class="dropdown-menu p-0 bg-dark" aria-labelledby="userDropDownMenu">
-                            <li>
-                                <form action="/logout" method="post">
-                                    {{ csrf.fields | raw }}
-                                    <button class="dropdown-item nav-link" href="#">Log Out</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </ul>
-            </div>
-    </div>
-    </nav>
-        <div class="container-fluid">
-            {% block content %}{% endblock %}
-        </div>
-    </body>
-</html>
+								</ul>
+							</div>
+						{% endif %}
+
+						<div class="dropdown settings-dropdown-menu">
+							<a href="" class="text-decoration-none d-flex align-items-center nav-link fw-bold fs-5" data-bs-toggle="dropdown" aria-expanded="false">
+								Settings
+							</a>
+							<ul class="dropdown-menu p-0 bg-dark" aria-labelledby="paymentDropDownMenu">
+								<li class="nav-item p-0 ">
+									<a href="/settings/jobtype" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Job Type</a>
+								</li>
+								<li class="nav-item p-0 ">
+									<a href="/settings/department" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Department</a>
+								</li>
+								<li class="nav-item p-0 ">
+									<a href="/settings/paymethod" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Pay Methods</a>
+								</li>
+								<li class="nav-item p-0 ">
+									<a href="/settings/users" class="nav-link fw-bold fs-6 text-primary" aria-current="page">Staff</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="dropdown user-dropdown-menu ">
+							<a href="#" class="text-decoration-none d-flex align-items-center mt-2" id="userDropDownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+								<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="icon">
+									<path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd"/>
+								</svg>
+								<span>{{ auth.name }}</span>
+							</a>
+							<ul class="dropdown-menu p-0 bg-dark" aria-labelledby="userDropDownMenu">
+								<li>
+									<form action="/logout" method="post">
+										{{ csrf.fields | raw }}
+										<button class="dropdown-item nav-link" href="#">Log Out</button>
+									</form>
+								</li>
+							</ul>
+						</div>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container-fluid"> {% block content %}{% endblock %}
+			</div>
+			<div class="container-fluid mt-5 navbar-dark bg-dark">
+				<footer class="d-flex flex-wrap justify-content-end align-items-end py-3 my-4">
+					<div class="container">
+						<div class="col-md-4 d-flex align-items-center">
+							<a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+								<span class="fw-bold text-white">Zuby<b class="text-primary">Apps</b>&copy;
+									{{ date()|date('Y') }}</span>
+							</a>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</body>
+	</html>

@@ -1,4 +1,4 @@
-import DataTable          from "datatables.net";
+import DataTable from "datatables.net";
 import $ from 'jquery';
 import { Chart } from "chart.js/auto";
 
@@ -9,7 +9,7 @@ function getJobTypesReportTable(from, to){
     }
         const table = new DataTable('#jobTypeReports', {
         serverSide: true,
-        ajax: {url: '/reports/load/jobtypes', data: {
+        ajax: {url: '/reports/load/job_reports', data: {
                 'from': from,
                 'to': to
             }},
@@ -78,6 +78,9 @@ function getListofJobs(from, to, jobType, modal){
 
                 $( api.column(3).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
                     api.column( 3, {page:'current'} ).data().sum()));
+
+                $( api.column(4).footer() ).html( new Intl.NumberFormat('en-US', {currencySign: 'accounting'}).format(
+                    api.column( 4, {page:'current'} ).data().sum()));
             },
             columns: [
             {sortable: false,
@@ -88,6 +91,8 @@ function getListofJobs(from, to, jobType, modal){
                 data: row => new Intl.NumberFormat('en-US',{currencySign: 'accounting'}).format(row.bill)},
             {sortable: false,
                 data: row => new Intl.NumberFormat('en-US',{currencySign: 'accounting'}).format(row.paid)},
+                {sortable: false,
+                    data: row => new Intl.NumberFormat('en-US',{currencySign: 'accounting'}).format(row.bill - row.paid)},
             {sortable: false,
                 data: 'jobStatus'}
         ]})

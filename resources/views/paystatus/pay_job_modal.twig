@@ -1,97 +1,85 @@
 <div class="modal fade modal-md" id="{{ modal.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ modal.title }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Client</label>
-                                <input type="text" name="client" id="client-id" required
-                                class="form-control form-control-md"
-                                placeholder="Search Client Name" disabled  />
-                                <datalist name="client" type="text" class="decoration-none bg-white" style='background: white;'>
-                                </datalist>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Mobile No.</label>
-                                <input type="tel" name="number"
-                                class="form-control form-control-md"
-                                placeholder="Phone No."  disabled/>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Job type</label>
-                                <select class="form-select form-select-md" aria-label="JobType" name="jobType" disabled>
-                                    <option value="">Select Job Type</option>
-                                        {% for jobType in jobTypes %}
-                                    <option value="{{ jobType.id }}">{{ jobType.name }}</option>
-                                        {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Details</label>
-                                <textarea type="text" name="details" class="form-control" aria-label="Details" placeholder="Details" disabled></textarea>
-                            </div>
-                            <div class="form-outline form-white mb-2 dueDate">
-                            <label for="basic-url" class="form-label fs-5">Due date</label>
-                                <input type="datetime-local" name="dueDate" 
-                                class="form-control form-control-md"
-                                placeholder="" disabled/>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Bill</label>
-                                <input type="number" name="bill" 
-                                class="form-control form-control-md"
-                                placeholder="Job Bill" disabled/>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Balance</label>
-                                <input type="number" name="balance" 
-                                class="form-control form-control-md"
-                                placeholder="Balance" disabled/>
-                            </div>
-                            <div class="form-outline form-white mb-2" hidden>
-                            <label for="basic-url" class="form-label fs-5">Job status</label>
-                                <select class="form-select form-select-md" aria-label="JobStatus" name="jobStatus" >
-                                    <option value="">Select Status</option>
-                                    <option value="Booked">Booked</option>
-                                    <option value="Inprogress">In progress</option>
-                                    <option value="Delivered">Delivered</option>
-                                </select>
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Amount paid<span class="text-danger">*</span></label>
-                                <input type="number" name="paid" 
-                                class="form-control form-control-md"
-                                placeholder="Enter amount paid" />
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Date<span class="text-danger">*</span></label>
-                                <input type="date" name="date" max="" pattern="\d{4}-\d{2}-\d{2}"
-                                class="form-control form-control-md"
-                                placeholder="Enter date" />
-                            </div>
-                            <div class="form-outline form-white mb-2">
-                            <label for="basic-url" class="form-label fs-5">Payment method<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-md" aria-label="Paymethod" name="paymethod">
-                                    <option value="">Select Pay Method</option>
-                                        {% for paymethod in paymethods %}
-                                    <option value="{{ paymethod.id }}">{{ paymethod.name }}</option>
-                                        {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-            <div class="modal-footer px-5">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle me-1"></i>
-                    Close
-                </button>
-                <button type="button" class="btn bg-primary text-white paid-job-btn">
-                    <i class="bi bi-check-circle me-1"></i>
-                    Pay
-                </button>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">{{ modal.title }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Client</label>
+					<input type="text" name="client" id="client-id" required class="form-control form-control-md" placeholder="Search Client Name" disabled/>
+					<datalist name="client" type="text" class="decoration-none bg-white" style='background: white;'></datalist>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Mobile No.</label>
+					<input type="tel" name="number" class="form-control form-control-md" placeholder="Phone No." disabled/>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Job type</label>
+					<select class="form-select form-select-md" aria-label="JobType" name="jobType" disabled>
+						<option value="">Select Job Type</option>
+						{% for jobType in jobTypes %}
+							<option value="{{ jobType.id }}">{{ jobType.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Details</label>
+					<textarea type="text" name="details" class="form-control" aria-label="Details" placeholder="Details" disabled></textarea>
+				</div>
+				<div class="form-outline form-white mb-2 dueDate">
+					<label for="basic-url" class="form-label fs-5">Due date</label>
+					<input type="datetime-local" name="dueDate" class="form-control form-control-md" placeholder="" disabled/>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Bill</label>
+					<input type="number" name="bill" class="form-control form-control-md" placeholder="Job Bill" disabled/>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Balance</label>
+					<input type="number" name="balance" class="form-control form-control-md" placeholder="Balance" disabled/>
+				</div>
+				<div class="form-outline form-white mb-2" hidden>
+					<label for="basic-url" class="form-label fs-5">Job status</label>
+					<select class="form-select form-select-md" aria-label="JobStatus" name="jobStatus">
+						<option value="">Select Status</option>
+						<option value="Booked">Booked</option>
+						<option value="Inprogress">In progress</option>
+						<option value="Delivered">Delivered</option>
+					</select>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Amount paid<span class="text-danger">*</span>
+					</label>
+					<input type="number" name="paid" class="form-control form-control-md" placeholder="Enter amount paid"/>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Date<span class="text-danger">*</span>
+					</label>
+					<input type="date" name="date" max="" pattern="\d{4}-\d{2}-\d{2}" class="form-control form-control-md" placeholder="Enter date"/>
+				</div>
+				<div class="form-outline form-white mb-2">
+					<label for="basic-url" class="form-label fs-5">Payment method<span class="text-danger">*</span>
+					</label>
+					<select class="form-select form-select-md" aria-label="Paymethod" name="paymethod">
+						<option value="">Select Pay Method</option>
+						{% for paymethod in paymethods %}
+							<option value="{{ paymethod.id }}">{{ paymethod.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="modal-footer px-5">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+					<i class="bi bi-x-circle me-1"></i>
+					Close
+				</button>
+				<button type="button" class="btn bg-primary text-white paid-job-btn">
+					<i class="bi bi-check-circle me-1"></i>
+					Pay
+				</button>
+			</div>
+		</div>
+	</div>
 </div>

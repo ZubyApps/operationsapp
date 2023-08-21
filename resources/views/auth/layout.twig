@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Expennies Auth{% endblock %}</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            {{ encore_entry_link_tags('auth') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}Expennies Auth
+			{% endblock %}
+		</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			{{ encore_entry_link_tags('auth') }}
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('auth') }}
-        {% endblock %}
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a href="/" class="navbar-brand">
-                    <img src="{{ asset('build/images/tripple a logo.jpg') }}" width="64" height="64" alt="OperationsApp Logo" />
-                    <span class="fs-1 text-secondary fw-bold">Operations<span class="text-primary">App</span></span>
-                </a>
-            </div>
-        </nav>
-        <div class="container-fluid">
-        {% block content %}{% endblock %}
-        </div>
-    </body>
-</html>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('auth') }}
+		{% endblock %}
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a href="/" class="navbar-brand">
+					<img src="{{ asset('build/images/tripple a logo.jpg') }}" width="64" height="64" alt="OperationsApp Logo"/>
+					<span class="fs-1 text-secondary fw-bold">Operations<span class="text-primary">App</span>
+					</span>
+				</a>
+			</div>
+		</nav>
+		<div class="container-fluid"> {% block content %}{% endblock %}
+			</div>
+		</body>
+	</html>

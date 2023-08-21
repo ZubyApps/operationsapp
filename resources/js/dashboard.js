@@ -1,7 +1,6 @@
 import "../css/dashboard.scss"
 import { Modal }          from "bootstrap"
 import DataTables from "datatables.net"
-import 'datatables.net-responsive-dt'
 import { get } from "./ajax";
 import { clearValues, getPaymentDetails, getPayStatus } from "./helpers"
 
