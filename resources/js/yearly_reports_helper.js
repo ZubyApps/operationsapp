@@ -153,7 +153,7 @@ function getMonthlyJobTotalsChart(chart, data, year, reportBtn){
         data: data.data.map(row => row.paid),
         borderWidth: 4,
         backgroundColor: 
-        ["rgba(96, 243, 22, 0.76)"]
+        ["rgba(200, 043, 122, 0.76)"]
         },
             {
         label: `Months & Outstandings Chart ${year}`,

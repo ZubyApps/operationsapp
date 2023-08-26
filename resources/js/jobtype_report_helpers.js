@@ -113,15 +113,15 @@ function getJobTypesTotalsChart(chart, data, from, to, reportBtn){
         labels: data.data.map(row => row.jobType),
         datasets: [
             {
-        label: `Jobtypes & Bills Chart (${convertDate(from)} to ${convertDate(to)})`,
+        label: `Jobtypes to Bills Chart (${convertDate(from)} to ${convertDate(to)})`,
         data: data.data.map(row => row.totalBill),
         borderWidth: 4,
         backgroundColor: 
-            ["rgba(37, 254, 192, 0.52)","rgba(254, 243, 37, 0.52)", "rgba(254, 37, 167, 0.52)", "rgba(37, 59, 254, 0.52)", "rgba(254, 37, 37, 0.52)", "rgba(11, 226, 254, 0.65)", "rgba(58, 32, 254, 0.54)", "rgba(127, 1, 1, 0.53)", "rgba(127, 1, 104, 0.55)", "rgba(1, 95, 127, 0.55)", "rgba(127, 62, 1, 0.36)", "rgba(84, 11, 254, 0.64)", "rgba(254, 6, 6, 0.65)", ]
+            ["rgba(254, 243, 37, 0.52)"]
         
         },
             {
-        label: `Jobtypes & Payments Chart (${convertDate(from)} to ${convertDate(to)})`,
+        label: `Jobtyppes to Payments Chart (${convertDate(from)} to ${convertDate(to)})`,
         data: data.data.map(row => row.totalPaid),
         borderWidth: 4,
         backgroundColor: 
