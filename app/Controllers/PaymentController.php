@@ -10,6 +10,7 @@ use App\Entity\Payment;
 use App\RequestValidators\PaymentRequestValidator;
 use App\ResponseFormatter;
 use App\Services\ClientService;
+use App\Services\JobService;
 use App\Services\PaymentService;
 use App\Services\PayMethodService;
 use App\Services\PayStatusService;
@@ -31,7 +32,8 @@ class PaymentController
         private readonly ClientService $clientService,
         private readonly UserService $userService,
         private readonly PayMethodService $payMethodService,
-        private readonly PayStatusService $payStatusService
+        private readonly PayStatusService $payStatusService,
+        private readonly JobService $jobService
     ) {
     }
 
@@ -65,7 +67,10 @@ class PaymentController
     public function delete(Request $request, Response $response, array $args): Response
     {
         $this->paymentService->delete((int) $args['id']);
-        $this->payStatusService->populate($request->getParsedBody()['job'], $request->getAttribute('user'));
+        $this->payStatusService->populate(
+            $this->jobService->getById((int)$request->getParsedBody()['job']), 
+            $request->getAttribute('user')
+        );
 
         return $response;
     }
