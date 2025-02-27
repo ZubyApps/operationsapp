@@ -129,12 +129,12 @@ return [
         failureHandler: $csrf->failureHandler(),
         persistentTokenMode: true
     ),
-    Clockwork::class => function (EntityManager $entityManager) {
-        $clockwork = new Clockwork();
+    // Clockwork::class => function (EntityManager $entityManager) {
+    //     $clockwork = new Clockwork();
 
-        $clockwork->storage(new FileStorage(STORAGE_PATH . '/clockwork'));
-        $clockwork->addDataSource(new DoctrineDataSource($entityManager));
+    //     $clockwork->storage(new FileStorage(STORAGE_PATH . '/clockwork'));
+    //     $clockwork->addDataSource(new DoctrineDataSource($entityManager));
 
-        return $clockwork;
-    }
+    //     return $clockwork;
+    // }
 ];
