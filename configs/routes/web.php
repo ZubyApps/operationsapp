@@ -16,6 +16,7 @@ use App\Controllers\PayStatusController;
 use App\Controllers\ReportController;
 use App\Controllers\SettingsController;
 use App\Controllers\SponsorController;
+use App\Controllers\TaskController;
 use App\Controllers\UserController;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
@@ -120,7 +121,7 @@ return function (App $app) {
     })->add(AuthMiddleware::class);
 
     $app->group('/settings', function (RouteCollectorProxy $settings) {
-        $settings->get('', [SettingsController::class, 'index']);
+        // $settings->get('', [SettingsController::class, 'index']);
         $settings->group('/paymethod', function(RouteCollectorProxy $payMethod){
             $payMethod->get('', [PayMethodController::class, 'index']);
             $payMethod->get('/load', [PayMethodController::class, 'load']);
@@ -176,5 +177,15 @@ return function (App $app) {
         $sponsor->delete('/{id:[0-9]+}', [SponsorController::class, 'delete']);
         $sponsor->get('/{id:[0-9]+}', [SponsorController::class, 'get']);
         $sponsor->post('/{id:[0-9]+}', [SponsorController::class, 'update']);
+    })->add(AuthMiddleware::class);
+
+    $app->group('/tasks', function (RouteCollectorProxy $task) {
+        $task->get('', [TaskController::class, 'index']);
+        $task->get('/load', [TaskController::class, 'load']);
+        $task->post('/{id:[0-9]+}', [TaskController::class, 'store']);
+        $task->get('/list', [TaskController::class, 'sponsorList']);
+        $task->delete('/{id:[0-9]+}', [TaskController::class, 'delete']);
+        $task->get('/{id:[0-9]+}', [TaskController::class, 'get']);
+        $task->post('/status/{id:[0-9]+}', [TaskController::class, 'updateTaskStatusOnly']);
     })->add(AuthMiddleware::class);
 };

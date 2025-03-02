@@ -31,12 +31,13 @@ class JobService
         $query = $this->entityManager
             ->getRepository(Job::class)
             ->createQueryBuilder('j')
-            ->select('j', 'c', 'u', 'jt', 'pm', 'ps')
+            ->select('j', 'c', 'u', 'jt', 'pm', 'ps', 't')
             ->leftJoin('j.client', 'c')
             ->leftJoin('j.user', 'u')
             ->leftJoin('j.jobType', 'jt')
             ->leftJoin('j.payments', 'pm')
             ->leftJoin('j.paystatus', 'ps')
+            ->leftJoin('j.tasks', 't')
             ->setFirstResult($params->start)
             ->setMaxResults($params->length);
 

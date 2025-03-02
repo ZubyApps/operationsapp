@@ -137,7 +137,7 @@ window.addEventListener('DOMContentLoaded', function () {
         .then(response => {
             paidJobBtn.removeAttribute('disabled')
             if (response.ok) {
-                table.draw()
+                table.draw(false)
                 payJobModal.hide()
                 clearValues(payJobModal)
             }
@@ -165,7 +165,7 @@ window.addEventListener('DOMContentLoaded', function () {
     })
 
     detailsPaystatusModal._element.addEventListener('hidden.bs.modal', function() {
-        table.draw()
+        table.draw(false)
     })
 
     document.querySelector('#payDetails').addEventListener('click', function () {

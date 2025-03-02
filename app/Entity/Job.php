@@ -57,30 +57,25 @@ class Job
     #[OneToMany(mappedBy: 'job', targetEntity: Payment::class)]
     private Collection $payments;
 
+    #[OneToMany(mappedBy: 'job', targetEntity: Task::class)]
+    private Collection $tasks;
+
     public function __construct()
     {
         $this->payments  = new ArrayCollection();
+        $this->tasks  = new ArrayCollection();
     }
 
-    /**
-     * Get the value of id
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of jobType
-     */
     public function getJobType(): JobType|null
     {
         return $this->jobType;
     }
 
-    /**
-     * Set the value of jobType
-     */
     public function setJobType(JobType $jobType): Job
     {
         $jobType->addJob($this);
@@ -90,17 +85,11 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the value of details
-     */
     public function getDetails(): string
     {
         return $this->details;
     }
 
-    /**
-     * Set the value of details
-     */
     public function setDetails(string $details): Job
     {
         $this->details = $details;
@@ -108,9 +97,6 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the value of dueDate
-     */
     public function getDueDate(): ?DateTime
     {
         return $this->dueDate;
@@ -125,9 +111,6 @@ class Job
         
     }
 
-    /**
-     * Set the value of dueDate
-     */
     public function setDueDate(?DateTime $dueDate): Job
     {
         $this->dueDate = $dueDate;
@@ -135,17 +118,11 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the value of amountDue
-     */
     public function getAmountDue(): ?float
     {
         return $this->amountDue;
     }
 
-    /**
-     * Set the value of amountDue
-     */
     public function setAmountDue(?float $amountDue): Job
     {
         $this->amountDue = $amountDue;
@@ -153,17 +130,11 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the value of user
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * Set the value of user
-     */
     public function setUser(User $user): Job
     {
         $user->addJob($this);
@@ -173,17 +144,11 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the value of client
-     */
     public function getClient(): Client
     {
         return $this->client;
     }
 
-    /**
-     * Set the value of client
-     */
     public function setClient(Client $client): Job
     {
         $client->addJob($this);
@@ -193,17 +158,11 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the value of payments
-     */
     public function getPayments(): ArrayCollection|Collection
     {
         return $this->payments;
     }
 
-    /**
-     * Set the value of payments
-     */
     public function addPayments(Payment $payments): Job
     {
         $this->payments->add($payments);
@@ -211,9 +170,6 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the sum value of payments
-     */
     public function getPaymentsTotal(): float
     {
         $total = 0;
@@ -224,18 +180,11 @@ class Job
         return $total;
     }
 
-
-    /**
-     * Get the value of jobStatus
-     */
     public function getJobStatus(): JobStatus
     {
         return $this->jobStatus;
     }
 
-    /**
-     * Set the value of jobStatus
-     */
     public function setJobStatus(JobStatus $jobStatus): Job
     {
         $this->jobStatus = $jobStatus;
@@ -243,20 +192,26 @@ class Job
         return $this;
     }
 
-    /**
-     * Get the value of paystatus
-     */
     public function getPaystatus(): ?Paystatus
     {
         return $this->paystatus;
     }
 
-    /**
-     * Set the value of paystatus
-     */
     public function setPaystatus(?Paystatus $paystatus): Job
     {
         $this->paystatus = $paystatus;
+
+        return $this;
+    }
+
+    public function getTasks(): ArrayCollection|Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTasks(Task $tasks): Job
+    {
+        $this->tasks->add($tasks);
 
         return $this;
     }

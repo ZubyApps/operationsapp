@@ -1,0 +1,72 @@
+{% extends 'layout.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('tasks') }}
+{% endblock %}
+
+{% block title %}Tasks Table
+{% endblock %}
+
+{% block content %}
+	<div class="Task container content-body">
+		<h2 class="bold mb-2 text-primary d-flex justify-content-center align-items-center my-5">Tasks Table</h2>
+
+		{% include 'tasks/payment_modal.twig' with {modal: {title: 'Record Payment', id: 'newPaymentModal', isEdit: false}} %}
+		{% include 'tasks/payment_modal.twig' with {modal: {title: 'Edit Payment', id: 'editPaymentModal', isEdit: true}} %}
+
+		<div class="my-5">
+		{% if auth.role is same as ('Admin') or  auth.role is same as ('Reception') %}
+			<div class="col-md-4 pt-2 themed-grid-col">
+				<div class="input-group mb-2">
+					<span class="input-group-text" id="filterTasksLabel">Filter Tasks</span>
+					<select class="form-select form-select-md" name="allTasks" id="allTasks">
+						<option value="Unfinished">All Unfinished Tasks </option>
+						<option value="Finished">All Finished Tasks</option>
+						<option value="All">All Tasks</option>
+					</select>
+				</div>
+			</div>
+		{% else %}
+			<div class="col-md-4 pt-2 themed-grid-col">
+				<div class="input-group mb-2">
+					<span class="input-group-text" id="filterTasksLabel">Filter Tasks</span>
+					<select class="form-select form-select-md" name="myTasks" id="myTasks">
+						<option value="Unfinished">My Unfinished Tasks </option>
+						<option value="Finished">My Finished Tasks</option>
+						<option value="All">All My Tasks</option>
+					</select>
+				</div>
+			</div>
+		{% endif %} 
+			<table id="taskTable" class="row-border hover compact order-column stripe mt-3">
+				<thead>
+					<tr>
+						<th>Created At</th>
+						<th>Client</th>
+						<th>Description</th>
+						<th>Task Comment</th>
+						<th>Deadline</th>
+						<th>Status</th>
+						<th>Assigned To</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				{# <tfoot class="fw-bolder text-primary">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tfoot> #}
+			</table>
+		</div>
+	</div>
+{% endblock %}

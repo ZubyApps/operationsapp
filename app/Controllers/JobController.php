@@ -6,8 +6,13 @@ namespace App\Controllers;
 
 use App\Contracts\RequestValidatorFactoryInterface;
 use App\DataObjects\JobData;
-use App\Entity\Job;;
+use App\DataObjects\TaskData;
+use App\Entity\Job;
+use App\Entity\Task;
+
+;
 use App\Enum\JobStatus;
+use App\Enum\TaskStatus;
 use App\RequestValidators\CreateJobRequestValidator;
 use App\RequestValidators\UpdateJobRequestValidator;
 use App\ResponseFormatter;
@@ -15,9 +20,12 @@ use App\Services\JobService;
 use App\Services\JobTypeService;
 use App\Services\PayStatusService;
 use App\Services\RequestService;
+use App\Services\TaskService;
+use App\Services\UserProviderService;
 use App\Services\UserService;
 use DateTime;
 use DateTimeImmutable;
+use DateTimeZone;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
@@ -32,7 +40,9 @@ class JobController
         private readonly JobService $jobService,
         private readonly JobTypeService $jobTypeService,
         private readonly UserService $userService,
-        private readonly PayStatusService $payStatusService
+        private readonly PayStatusService $payStatusService,
+        private readonly TaskService $taskService,
+        private readonly UserProviderService $userProviderService
         
     ) {
     }
@@ -43,7 +53,8 @@ class JobController
             $response, 
             'jobs/index.twig',
             [
-                'jobTypes' => $this->jobTypeService->getJobTypes()
+                'jobTypes' => $this->jobTypeService->getJobTypes(),
+                'users'    => $this->userService->getActive()
                 ]
         );
     }
@@ -145,6 +156,20 @@ class JobController
                 'jobStatus'     => $job->getJobStatus(),
                 'count'         => $job->getPayments()->count(),
                 'activeUser'    => $this->userService->getActiveUserRole(),
+                'tasks1'        => $job->getTasks()->count(),
+                'tasks'         => $job->getTasks()->map(function(Task $task) {
+                    return [
+                    'id'            => $task->getId(),
+                    'createdAt'     => $task->getCreatedAt()->format('d-M-Y'),
+                    'createdBy'     => $task->getUser()->getFirstname(),
+                    'assignedTo'    => $task->getAssignedTo()->getFirstname(),
+                    'taskComment'   => $task->getTaskComment(),
+                    'deadline'      => $task->getDeadline() ? $task->getDeadline()->format('D d-M-y g:ia') : 'N/A',
+                    'deadline2'     => $task->getDeadline() ? $task->getDeadline()->format('Y-m-d H:i:s') : '',
+                    'status'        => $task->getTaskStatus(),
+                    ];
+                    }
+                )->toArray()
             ];
         };
 

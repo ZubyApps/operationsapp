@@ -68,9 +68,6 @@ class Department
         return $this->name;
     }
 
-    /**
-     * Set the value of name
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -78,17 +75,11 @@ class Department
         return $this;
     }
 
-    /**
-     * Get the value of description
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Set the value of description
-     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -96,18 +87,11 @@ class Department
         return $this;
     }
 
-
-    /**
-     * Get the value of user
-     */
     public function getUsers(): ArrayCollection|Collection
     {
         return $this->users;
     }
 
-    /**
-     * Set the value of user
-     */
     public function addUser(User $user): Department
     {
         $this->users->add($user);
@@ -115,9 +99,6 @@ class Department
         return $this;
     }
 
-    /**
-     * Get the value of head
-     */
     public function getHead(): User
     {
         if (! isset($this->head)){
@@ -126,9 +107,6 @@ class Department
         return $this->head;
     }
 
-    /**
-     * Set the value of head
-     */
     public function setHead(User $head): Department
     {
         $head->addDepartment($this);

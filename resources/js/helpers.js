@@ -1,6 +1,7 @@
 import DataTable          from "datatables.net";
 import { del } from "./ajax";
 
+let setTimeIn
 function clearValues(modal) {
         const tagName = modal._element.querySelectorAll('input, select, textarea, #clientOption')
 
@@ -196,4 +197,137 @@ function getReceiptJobDetails(id, modal){
         })
 }
 
-export {clearValues, getPaymentDetails, getJobDetails, getPayStatus, getReceiptPaymentDetails, getReceiptJobDetails, clearClientsList}
+// function getMinsDiff(today, futureDate) {
+//     const minsCoverter = 1000 * 60;
+//     return (Math.floor(futureDate.getTime() - today.getTime())/minsCoverter).toFixed(1);
+// }
+
+function getHoursDiff(today, futureDate) {
+    const hoursConverter = 1000 * 60 * 60; // Convert milliseconds to hours
+    return (Math.floor(futureDate.getTime() - today.getTime()) / hoursConverter).toFixed(1);
+}
+
+const getTimeToDeadline = (args) => {
+    const deadline = args[0]
+    const elementId = args[1]
+    const taskStatus = args[2]
+    console.log(elementId)
+    const timeLeftToDeadline = getHoursDiff(new Date(), new Date(deadline))
+    let setInt
+    const spanEl = document.getElementById(elementId)
+    console.log(spanEl)
+
+    if (spanEl){
+        if (timeLeftToDeadline <= 300 && taskStatus !== 'Finished'){
+            setInt = setInterval(function () {
+                
+                const timeLeftToDeadlineNow = new Date(deadline).getTime() - new Date().getTime()
+                let hourValue = Math.floor(timeLeftToDeadlineNow / (1000 * 60 * 60))
+                let hours = hourValue < 0 ? hourValue + 1 : hourValue
+                let mins = Math.floor((timeLeftToDeadlineNow % (1000 * 60 * 60)) / (1000 * 60))
+                let secs = Math.floor((timeLeftToDeadlineNow % (1000 * 60)) / 1000)
+    
+                if (timeLeftToDeadlineNow > 0){
+                    spanEl.innerHTML = hours + ' hrs ' + mins + ' mins ' + secs + ' secs' + ' left';
+                } else {
+                    spanEl.innerHTML = hours + ' hrs ' + mins + ' mins ' + secs + ' secs' + ' past';
+                }
+    
+            }, 1000)
+        } else {
+            clearInterval(setInt)
+        }
+    } else {
+        clearInterval(setInt)
+    }
+    return ''
+
+}
+
+const debounce = (func, wait) => {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+};
+
+function getTasksTable(id, filter, inputId) {
+    let count = 1
+    const table = new DataTable(id, {
+        serverSide: true,
+        ajax: {url: '/tasks/load', data: {
+            'filter': filter,
+            'inputId': inputId,
+        }},
+        orderMulti: false,
+        columns: [
+            {data: "createdAt"},
+            {data: "client"},
+            {data: "details"},
+            {data: "taskComment"},
+            {
+                data: row => {
+                    const tCount = count++
+                    setTimeIn = setTimeout(() => {
+                        getTimeToDeadline([row.deadline, 'task' + tCount, row.status]);
+                    }, 4000);
+                    return `<span id="task${tCount}"></span>`;
+                }
+
+            },
+            {data: row => function () {
+                if (row.status === 'Pending') {
+                    return `
+                <div class="dropdown">
+                    <button class="btn text-primary dropdown-toggle status-btn" data-id="" type="button" data-bs-toggle="dropdown" aria-expanded="false">${row.status}</button>
+                    <ul class="dropdown-menu p-0">
+                    <li class="dropdown-item ongoing-task-btn" data-id="${ row.id }">Ongoing</li>
+                    <li class="dropdown-item finished-task-btn" data-id="${ row.id }">Finished</li>
+                    </ul>
+                </div>
+                `
+                } else if (row.status === 'Ongoing') {
+                    return `
+                <div class="dropdown">
+                    <button class="btn text-info dropdown-toggle status-btn" data-id="" type="button" data-bs-toggle="dropdown" aria-expanded="false">${row.status}</button>
+                    <ul class="dropdown-menu p-0">
+                    <li class="dropdown-item pending-task-btn" data-id="${ row.id }">Pending</li>
+                    <li class="dropdown-item finished-task-btn" data-id="${ row.id }">Finished</li>
+                    </ul>
+                </div>
+                `
+                } else {
+                    return `
+                <div class="dropdown">
+                    <button class="btn text-success dropdown-toggle status-btn" data-id="" type="button" data-bs-toggle="dropdown" aria-expanded="false">${row.status}</button>
+                    <ul class="dropdown-menu p-0">
+                    <li class="dropdown-item pending-task-btn" data-id="${ row.id }">Pending</li>
+                    <li class="dropdown-item ongoing-task-btn" data-id="${ row.id }">Ongoing</li>
+                    </ul>
+                </div>`
+                }
+                
+            }
+        },
+            {data: "assignedTo"},
+            {
+                sortable: false,
+                data: row => function () {
+                    if (row.activeUser === 'Admin' || row.activeUser === 'Reception') {
+                        return `
+                    <div class="d-flex flex-">
+                    <button type="submit" class="ms-1 btn btn-outline-primary delete-task-btn ${row.status == 'Finished' ? 'd-none' : ''}" data-id="${ row.id }">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
+                    </div>` 
+                } else {return ``}
+                }
+            }
+        ]
+    });
+
+    return table
+}
+
+export {clearValues, getPaymentDetails, getJobDetails, getPayStatus, getReceiptPaymentDetails, getReceiptJobDetails, clearClientsList, getTimeToDeadline, debounce, getTasksTable}

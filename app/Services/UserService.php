@@ -106,6 +106,18 @@ class UserService
             ->getArrayResult();
     }
 
+    public function getActive(): array
+    {
+        return $this->entityManager
+            ->getRepository(User::class)
+            ->createQueryBuilder('u')
+            ->select('u.id', 'u.firstname')
+            ->where('u.userRole != :role')->setParameter('role', 'Unset')
+            ->orderBy('u.' . 'firstname', 'asc')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     public function getActiveUserRole(): UserRole
     {
         return $this->getById($this->auth->user()->getId())->getUserRole();

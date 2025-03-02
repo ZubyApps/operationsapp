@@ -10,4 +10,5 @@ enum UserRole: string
     case Creator    = 'Creator';
     case Editor     = 'Editor';
     case Admin      = 'Admin';
+    case Reception  = 'Reception';
 }

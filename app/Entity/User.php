@@ -19,8 +19,6 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 
-use function PHPUnit\Framework\isEmpty;
-
 #[Entity(), Table('users')]
 #[HasLifecycleCallbacks]
 class User implements UserInterface
@@ -76,6 +74,13 @@ class User implements UserInterface
     #[OneToMany(mappedBy: 'user', targetEntity: Sponsor::class)]
     private Collection $sponsors;
 
+    #[OneToMany(mappedBy: 'user', targetEntity: Task::class)]
+    private Collection $tasks;
+
+    #[OneToMany(mappedBy: 'assignedTo', targetEntity: Task::class, cascade:['remove'])]
+    private Collection $assignedTos;
+
+
     public function __construct()
     {
         $this->clients      = new ArrayCollection();
@@ -85,6 +90,8 @@ class User implements UserInterface
         $this->expenses     = new ArrayCollection();
         $this->categories   = new ArrayCollection();
         $this->sponsors     = new ArrayCollection();
+        $this->tasks        = new ArrayCollection();
+        $this->assignedTos  = new ArrayCollection();
     }
 
     /**
@@ -170,9 +177,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get the value of department
-     */
     public function getDepartment(): ?Department
     {
         if (! isset($this->department)){
@@ -181,9 +185,6 @@ class User implements UserInterface
         return $this->department;
     }
 
-    /**
-     * Set the value of department
-     */
     public function setDepartment(?Department $department): User
     {
         if (!$department) {
@@ -199,17 +200,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get the value of clients
-     */
     public function getDepartments(): ArrayCollection|Collection
     {
         return $this->departments;
     }
 
-    /**
-     * Set the value of clients
-     */
     public function addDepartment(Department $department): User
     {
         $this->departments->add($department);
@@ -235,17 +230,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get the value of jobs
-     */
     public function getJobs(): Collection
     {
         return $this->jobs;
     }
 
-    /**
-     * Set the value of jobs
-     */
     public function addJob(Job $job): User
     {
         $this->jobs->add($job);
@@ -365,21 +354,40 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get the value of expenses
-     */
     public function getSponsors(): Collection
     {
         return $this->categories;
     }
 
-    /**
-     * Set the value of expenses
-     */
     public function addSponsor(Sponsor $sponsor): User
     {
         $this->sponsors->add($sponsor);
 
         return $this;
     }
+
+    public function getTasks(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addTask(Task $task): User
+    {
+        $this->tasks->add($task);
+
+        return $this;
+    }
+
+    public function getAssigedTos(): ArrayCollection|Collection
+    {
+        return $this->assignedTos;
+    }
+
+    public function addAssignedTo(Task $assignedTo): User
+    {
+        $this->assignedTos->add($assignedTo);
+
+        return $this;
+    }
+
 }
